@@ -7,9 +7,9 @@
 Будет добавлено позже.
 
 ## Sub modules
-- [BookBox-Web](ссылка) — веб-приложение.
-- [BookBox-Server](ссылка) — серверное приложение.
-- [BookBox-Mobile](ссылка) — мобильное приложение.
+- [BookBox-Web](https://github.com/fpmi-hci-2026/BookBox-Web) — веб-приложение.
+- [BookBox-Server](https://github.com/fpmi-hci-2026/BookBox-Server) — серверное приложение.
+- [BookBox-Mobile](https://github.com/fpmi-hci-2026/BookBox-Mobile) — мобильное приложение.
 
 ## Usage
 Будет добавлено позже.
