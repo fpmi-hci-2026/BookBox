@@ -1,0 +1,9 @@
+[submodule "BookBox-Web"]
+	path = BookBox-Web
+	url = https://github.com/fpmi-hci-2026/BookBox-Web.git
+[submodule "BookBox-Server"]
+	path = BookBox-Server
+	url = https://github.com/fpmi-hci-2026/BookBox-Server.git
+[submodule "BookBox-Mobile"]
+	path = BookBox-Mobile
+	url = https://github.com/fpmi-hci-2026/BookBox-Mobile.git
