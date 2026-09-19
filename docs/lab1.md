@@ -563,13 +563,13 @@
 ### 6.7. Связи между задачами
 
 **Гость:**
-![Связи между задачами — Гость](images/task-flow-guest.png)
+![Связи между задачами — Гость](docs/images/task-flow-guest.png)
 
 **Покупатель:**
-![Связи между задачами — Покупатель](images/task-flow-buyer.png)
+![Связи между задачами — Покупатель](docs/images/task-flow-buyer.png)
 
 **Администратор:**
-![Связи между задачами — Администратор](images/task-flow-admin.png)
+![Связи между задачами — Администратор](docs/images/task-flow-admin.png)
 
 
 
