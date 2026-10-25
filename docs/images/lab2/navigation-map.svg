@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1150" height="790" viewBox="0 0 1150 790">
+<rect width="1150" height="790" fill="#FFFFFF"/>
+<text x="40" y="34" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#1F2937">Карта навигации BookBox: 4 уровня навигации и маршруты M1–M6</text>
+<path d="M655,124 L655,160 L385,160 L385,210" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M685,124 L685,210" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M715,124 L715,182 L985,182 L985,210" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M385,254 L385,300 L660,300 L660,340" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M685,254 L685,340" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M985,254 L985,320 L750,320 L750,340" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M790,365 L900,365" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M695,390 L695,470" fill="none" stroke="#B87333" stroke-width="1.4" stroke-dasharray="6 5" marker-end="url(#arrow-B87333)"/>
+<path d="M985,384 L985,440 L745,440 L745,495" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M695,520 L695,560 L385,560 L385,600" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<path d="M385,644 L385,700" fill="none" stroke="#B9B3A7" stroke-width="1.4" marker-end="url(#arrow-B9B3A7)"/>
+<defs>
+<marker id="arrow-B9B3A7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#B9B3A7"/></marker>
+<marker id="arrow-B87333" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#B87333"/></marker>
+</defs>
+<rect x="471.9" y="143.75" width="56.2" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="500" y="155.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">Подборки</text>
+<rect x="671.7875" y="163.75" width="50.425000000000004" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="697" y="175.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">Каталог</text>
+<rect x="820.5625" y="173.75" width="38.875" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="840" y="185.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">Поиск</text>
+<rect x="509.225" y="283.75" width="21.55" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="520" y="295.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">M3</text>
+<rect x="686.225" y="287.75" width="21.55" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="697" y="299.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">M1</text>
+<rect x="869.225" y="303.75" width="21.55" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="880" y="315.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">M1</text>
+<rect x="814.0125" y="346.75" width="61.975" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="845" y="358.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">В корзину</text>
+<rect x="638.025" y="421.75" width="113.95" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="695" y="433.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">M2 · Купить сейчас</text>
+<rect x="841.9" y="413.75" width="56.2" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="870" y="425.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">Оформить</text>
+<rect x="494.575" y="543.75" width="90.85000000000001" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="540" y="555.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">Заказ оформлен</text>
+<rect x="389.225" y="663.75" width="21.55" height="16.5" rx="3" fill="#FFFFFF" opacity="0.94"/>
+<text x="400" y="675.625" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#6B7280">M4</text>
+<rect x="40" y="80" width="250" height="500" rx="7" fill="#FAF9F6" stroke="#DDD7CB" stroke-width="1.3"/>
+<text x="165" y="334.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#4B5563"></text>
+<rect x="56" y="96" width="218" height="92" rx="7" fill="#FFFFFF" stroke="#9C968A" stroke-width="1.3"/>
+<text x="165" y="131.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Глобальная</text>
+<text x="165" y="147.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">header (6 пунктов + каскад) и</text>
+<text x="165" y="161.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">footer (5 колонок)</text>
+<rect x="56" y="208" width="218" height="92" rx="7" fill="#FFFFFF" stroke="#9C968A" stroke-width="1.3"/>
+<text x="165" y="243.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Локальная</text>
+<text x="165" y="259.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">табы раздела, фасеты, степпер</text>
+<text x="165" y="273.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">checkout</text>
+<rect x="56" y="320" width="218" height="92" rx="7" fill="#FFFFFF" stroke="#9C968A" stroke-width="1.3"/>
+<text x="165" y="355.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Контекстная</text>
+<text x="165" y="371.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">«Похожие», «Другие книги</text>
+<text x="165" y="385.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">автора», «Из этой серии»</text>
+<rect x="56" y="432" width="218" height="92" rx="7" fill="#FFFFFF" stroke="#9C968A" stroke-width="1.3"/>
+<text x="165" y="467.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Вспомогательная</text>
+<text x="165" y="483.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">крошки, карта сайта, указатель,</text>
+<text x="165" y="497.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">пагинация, «наверх»</text>
+<rect x="600" y="80" width="170" height="44" rx="7" fill="#E8F1F2" stroke="#2F5D62" stroke-width="1.3"/>
+<text x="685" y="106.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1F3E42">Главная</text>
+<rect x="300" y="210" width="170" height="44" rx="7" fill="#F4E3C1" stroke="#B08D57" stroke-width="1.3"/>
+<text x="385" y="236.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B4E1F">Подборки</text>
+<rect x="600" y="210" width="170" height="44" rx="7" fill="#E8F1F2" stroke="#2F5D62" stroke-width="1.3"/>
+<text x="685" y="236.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1F3E42">Каталог</text>
+<rect x="900" y="210" width="170" height="44" rx="7" fill="#EEF7F0" stroke="#3F7D58" stroke-width="1.3"/>
+<text x="985" y="236.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#274F37">Поиск</text>
+<rect x="600" y="340" width="190" height="50" rx="7" fill="#FDF3E7" stroke="#B87333" stroke-width="1.3"/>
+<text x="695" y="369.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B4416">Страница книги</text>
+<rect x="900" y="340" width="170" height="44" rx="7" fill="#FDF3E7" stroke="#B87333" stroke-width="1.3"/>
+<text x="985" y="366.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B4416">Корзина</text>
+<rect x="600" y="470" width="190" height="50" rx="7" fill="#FDF3E7" stroke="#B87333" stroke-width="1.3"/>
+<text x="695" y="499.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B4416">Оформление заказа</text>
+<rect x="300" y="600" width="170" height="44" rx="7" fill="#EDF2FB" stroke="#3B5BA5" stroke-width="1.3"/>
+<text x="385" y="626.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#243A6B">Личный кабинет</text>
+<rect x="300" y="700" width="170" height="44" rx="7" fill="#EDF2FB" stroke="#3B5BA5" stroke-width="1.3"/>
+<text x="385" y="726.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#243A6B">Заказ (статус)</text>
+<rect x="900" y="600" width="190" height="60" rx="7" fill="#FBEFEF" stroke="#A44A4A" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="995" y="626" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B2C2C">Админ-панель</text>
+<text x="995" y="642" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5B6472">отдельный layout /admin</text>
+</svg>
