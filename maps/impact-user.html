@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — Impact Map (пользователь)</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="maps.css">
+</head>
+<body>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — Impact Map (пользователь)</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="maps.css">
+</head>
+<body>
+<h1>Карта влияния: с точки зрения пользователя</h1>
+<p class="sub">Цель пользователя → поведение → ответ продукта → метрика. Для каждого персонажа — своя цель и свой критерий успеха.</p>
+<table class="utable">
+  <thead><tr><th>Персонаж</th><th>Цель</th><th>Поведение</th><th>Что даёт BookBox</th><th>Метрика успеха</th></tr></thead>
+  <tbody>
+    <tr><td><b>Аня</b></td><td>Найти учебник дешевле 30 BYN</td><td>Ищет, фильтрует по цене, читает отзывы</td><td>Фасеты, скидки студентам, быстрый checkout</td><td>заказ ≤ 3 минут</td></tr>
+    <tr><td><b>Дмитрий</b></td><td>Купить подарок без лишних шагов</td><td>Смотрит подборки, сравнивает рейтинг</td><td>Подборки, упаковка, «Купить в 1 клик»</td><td>заказ ≤ 2 минут</td></tr>
+    <tr><td><b>Ольга Петровна</b></td><td>Найти редкое издание</td><td>Расширенный поиск по автору и издательству</td><td>Расширенный поиск, предзаказ, подписка</td><td>находит за ≤ 5 минут</td></tr>
+    <tr><td><b>Сергей</b></td><td>Обновить каталог без ошибок</td><td>Добавляет и правит книги</td><td>Валидация полей, импорт CSV, массовые действия</td><td>0 ошибок в данных</td></tr>
+    <tr><td><b>Ирина</b></td><td>Понять, что продаётся</td><td>Открывает отчёт за период</td><td>Дашборд, топы, экспорт CSV</td><td>отчёт за 1 минуту</td></tr>
+    <tr><td><b>Виктор</b></td><td>Купить без онлайн-оплаты</td><td>Ищет способ оплаты</td><td>Оплата при получении, гарантии</td><td>не уходит с сайта</td></tr>
+  </tbody>
+</table>
+<div class="note"><b>Что не делаем:</b> не убеждаем аудиторию, которая в принципе не доверяет онлайн-покупкам; не добавляем функции «на всякий случай» — только те, что снимают боль конкретного персонажа.</div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>
+
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

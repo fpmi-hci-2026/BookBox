@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — раскадровка: Сергей</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="storyboards.css">
+</head>
+<body>
+<h1>Раскадровка: Сергей</h1>
+<p class="sub">администратор, 33 года · админ-панель · каталог и заказы</p>
+<div class="meta"><span>Два монитора</span><span>Офис</span><span>Плотный поток</span></div>
+
+<div class="path">
+    <div class="step">
+      <div class="screen screen--admin">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>/admin</b><span>вход</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--admin">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Книги</b><span>список</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Добавить</b><span>поля и обложка</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Валидация</b><span>жанр, ISBN, цена</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--success">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-check">✓</div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Сохранено</b><span>книга в каталоге</span></div>
+    </div>
+</div>
+
+<div class="branches">
+  <h3>Альтернативы и исключения</h3>
+  <div class="branch">
+      <span class="badge badge--alt">Альтернатива</span>
+      <span class="from">из «/admin»</span>
+      <div class="b-step"><div class="screen screen--admin">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Заказы</span></div><div class="arrow">→</div><div class="b-step"><div class="screen screen--admin">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Заказ</span></div><div class="arrow">→</div><div class="b-step"><div class="screen screen--admin">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Подтвердить</span></div><div class="arrow">→</div><div class="b-step"><div class="screen screen--success">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-check">✓</div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">В доставку</span></div>
+      <span class="note">вторая ветка — обработка заказов.</span>
+    </div>
+  <div class="branch">
+      <span class="badge badge--exc">Исключение</span>
+      <span class="from">из «Валидация»</span>
+      <div class="b-step"><div class="screen screen--error">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-cross">✕</div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Ошибка</span></div><div class="arrow">→</div><div class="b-step"><div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Подсветка поля</span></div>
+      <span class="note">исправляет и сохраняет повторно.</span>
+    </div>
+</div>
+
+<div class="legend"><span><b>→</b> основной путь</span><span><b>Альтернатива</b> — другой путь к цели</span><span><b>Исключение</b> — что делать, если что-то пошло не так</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

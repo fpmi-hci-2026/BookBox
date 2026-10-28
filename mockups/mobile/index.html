@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox Mobile — главная</title>
+  <link rel="stylesheet" href="../fonts.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../wireframe.css">
+  <link rel="stylesheet" href="../hifi.css">
+  <link rel="stylesheet" href="../mobile.css">
+  <link rel="stylesheet" href="../dark.css">
+</head>
+<body class="theme-wire mobile" data-page="home">
+<!--ICONS-->
+<!--HEADER-MOBILE-->
+
+<div class="m-search">
+  <svg class="icon"><use href="#i-search"/></svg>
+  <span>Название, автор или ISBN</span>
+  <span class="scan"><svg class="icon"><use href="#i-camera"/></svg><svg class="icon"><use href="#i-mic"/></svg></span>
+</div>
+
+<section class="m-hero">
+  <h2>Книги для любого настроения</h2>
+  <button class="btn">В каталог</button>
+</section>
+
+<section class="m-section">
+  <div class="m-section-head"><h2>Новинки</h2><a href="#">Все →</a></div>
+  <div class="m-grid" style="padding:0">
+    <article class="book-card">
+      <div class="cover cover--4">Тень горы<span class="book-badge">новинка</span></div>
+      <div class="book-title">Тень горы</div>
+      <div class="book-author">Г. Д. Робертс</div>
+      <div class="book-rating"><span class="star">★</span><b>4.5</b><span>· 37</span></div>
+      <div class="book-price"><span class="price">32,00 <small>BYN</small></span></div>
+      <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+    </article>
+    <article class="book-card">
+      <div class="cover cover--5">Цветы для Элджернона</div>
+      <div class="book-title">Цветы для Элджернона</div>
+      <div class="book-author">Дэниел Киз</div>
+      <div class="book-rating"><span class="star">★</span><b>4.9</b><span>· 163</span></div>
+      <div class="book-price"><span class="price">21,00 <small>BYN</small></span></div>
+      <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+    </article>
+  </div>
+</section>
+
+<!--TABBAR-->
+<!--INIT-->
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — раскадровка: Ольга Петровна</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="storyboards.css">
+</head>
+<body>
+<h1>Раскадровка: Ольга Петровна</h1>
+<p class="sub">преподаватель, 48 лет · веб-версия · точный поиск и предзаказ</p>
+<div class="meta"><span>Ноутбук</span><span>Проводной интернет</span><span>Есть время</span></div>
+
+<div class="path">
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Главная</b><span>открывает веб</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Расширенный поиск</b><span>автор</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Фильтры</b><span>издательство и год</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Выдача</b><span>список</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Карточка</b><span>характеристики</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Предзаказ</b><span>нет в наличии</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Уведомление</b><span>о поступлении</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--success">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-check">✓</div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Оплата</b><span>и получение</span></div>
+    </div>
+</div>
+
+<div class="branches">
+  <h3>Альтернативы и исключения</h3>
+  <div class="branch">
+      <span class="badge badge--exc">Исключение</span>
+      <span class="from">из «Карточка»</span>
+      <div class="b-step"><div class="screen screen--error">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-cross">✕</div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Не издаётся</span></div><div class="arrow">→</div><div class="b-step"><div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Электронная версия</span></div>
+      <span class="note">предлагаем доступную альтернативу.</span>
+    </div>
+  <div class="branch">
+      <span class="badge badge--alt">Альтернатива</span>
+      <span class="from">из «Карточка»</span>
+      <div class="b-step"><div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Подписка</span></div>
+      <span class="note">подписка на новинки жанра вместо разового заказа.</span>
+    </div>
+</div>
+
+<div class="legend"><span><b>→</b> основной путь</span><span><b>Альтернатива</b> — другой путь к цели</span><span><b>Исключение</b> — что делать, если что-то пошло не так</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

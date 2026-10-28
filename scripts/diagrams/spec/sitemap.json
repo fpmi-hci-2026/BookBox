@@ -1,0 +1,194 @@
+{
+  "name": "sitemap",
+  "type": "tree",
+  "title": "Карта сайта BookBox (sitemap), 4 уровня вложенности",
+  "layout": { "nodeW": 190, "gapX": 68, "gapY": 4, "padY": 100 },
+  "root": {
+    "label": "BookBox",
+    "style": "root",
+    "bold": true,
+    "fontSize": 14,
+    "w": 150,
+    "children": [
+      { "label": "Главная", "style": "aux" },
+      {
+        "label": "Каталог",
+        "style": "catalog",
+        "bold": true,
+        "children": [
+          {
+            "label": "Художественная литература",
+            "style": "catalog",
+            "bold": true,
+            "children": [
+              { "label": "Классика", "style": "catalog" },
+              { "label": "Фэнтези", "style": "catalog" },
+              { "label": "Детективы", "style": "catalog" },
+              { "label": "… ещё 9 жанров", "style": "catalog", "dashed": true }
+            ]
+          },
+          {
+            "label": "Научная и учебная",
+            "style": "catalog",
+            "children": [
+              { "label": "Математика", "style": "catalog" },
+              { "label": "Физика", "style": "catalog" },
+              { "label": "… ещё 9 жанров", "style": "catalog", "dashed": true }
+            ]
+          },
+          { "label": "Детская литература", "style": "catalog" },
+          { "label": "Бизнес и саморазвитие", "style": "catalog" },
+          { "label": "Психология", "style": "catalog" },
+          { "label": "Компьютерная литература", "style": "catalog" },
+          { "label": "История и публицистика", "style": "catalog" },
+          { "label": "Подарочные издания", "style": "catalog" },
+          { "label": "Комиксы и манга", "style": "catalog" }
+        ]
+      },
+      {
+        "label": "Книга (карточка)",
+        "style": "book",
+        "bold": true,
+        "children": [
+          { "label": "Описание", "style": "book" },
+          { "label": "Характеристики", "style": "book" },
+          { "label": "Отзывы", "style": "book" },
+          { "label": "Похожие книги", "style": "book" },
+          { "label": "Другие книги автора", "style": "book" }
+        ]
+      },
+      {
+        "label": "Авторы",
+        "style": "catalog",
+        "children": [
+          {
+            "label": "Автор",
+            "style": "catalog",
+            "children": [{ "label": "Книги автора", "style": "catalog" }]
+          }
+        ]
+      },
+      {
+        "label": "Издательства",
+        "style": "catalog",
+        "children": [
+          {
+            "label": "Издательство",
+            "style": "catalog",
+            "children": [{ "label": "Книги издательства", "style": "catalog" }]
+          }
+        ]
+      },
+      {
+        "label": "Серии",
+        "style": "catalog",
+        "children": [{ "label": "Серия", "style": "catalog" }]
+      },
+      {
+        "label": "Подборки",
+        "style": "accent",
+        "bold": true,
+        "children": [
+          { "label": "Скидки студентам", "style": "accent" },
+          { "label": "Новинки месяца", "style": "accent" },
+          { "label": "Топ-10", "style": "accent" },
+          { "label": "Книжный клуб", "style": "accent" },
+          { "label": "Подарки", "style": "accent" }
+        ]
+      },
+      { "label": "Поиск", "style": "search" },
+      { "label": "Корзина", "style": "book" },
+      {
+        "label": "Оформление заказа",
+        "style": "book",
+        "bold": true,
+        "children": [
+          { "label": "1. Адрес", "style": "book" },
+          { "label": "2. Доставка", "style": "book" },
+          { "label": "3. Оплата", "style": "book" },
+          { "label": "4. Подтверждение", "style": "book" }
+        ]
+      },
+      {
+        "label": "Личный кабинет",
+        "style": "profile",
+        "bold": true,
+        "children": [
+          { "label": "Профиль", "style": "profile" },
+          { "label": "Адреса доставки", "style": "profile" },
+          {
+            "label": "Мои заказы",
+            "style": "profile",
+            "children": [{ "label": "Заказ", "style": "profile" }]
+          },
+          { "label": "Избранное", "style": "profile" },
+          { "label": "Мои отзывы", "style": "profile" },
+          { "label": "Подписки", "style": "profile" },
+          { "label": "Уведомления", "style": "profile" }
+        ]
+      },
+      {
+        "label": "Помощь",
+        "style": "help",
+        "bold": true,
+        "children": [
+          { "label": "Доставка", "style": "help" },
+          { "label": "Оплата", "style": "help" },
+          { "label": "Возврат и обмен", "style": "help" },
+          { "label": "FAQ", "style": "help" },
+          { "label": "Контакты", "style": "help" }
+        ]
+      },
+      {
+        "label": "О нас",
+        "style": "help",
+        "children": [
+          { "label": "О компании", "style": "help" },
+          { "label": "Блог", "style": "help" },
+          { "label": "Вакансии", "style": "help" }
+        ]
+      },
+      {
+        "label": "Админ-панель",
+        "style": "admin",
+        "bold": true,
+        "children": [
+          {
+            "label": "Каталог",
+            "style": "admin",
+            "children": [
+              {
+                "label": "Книги",
+                "style": "admin",
+                "children": [
+                  { "label": "Добавить книгу", "style": "admin" },
+                  { "label": "Редактирование", "style": "admin" }
+                ]
+              },
+              { "label": "Жанры", "style": "admin" },
+              { "label": "Авторы", "style": "admin" },
+              { "label": "Издательства", "style": "admin" },
+              { "label": "Серии", "style": "admin" }
+            ]
+          },
+          { "label": "Заказы", "style": "admin" },
+          { "label": "Пользователи", "style": "admin" },
+          { "label": "Отзывы", "style": "admin" },
+          { "label": "Подборки и акции", "style": "admin" },
+          { "label": "Аналитика", "style": "admin" },
+          { "label": "Настройки", "style": "admin" }
+        ]
+      },
+      {
+        "label": "Служебные страницы",
+        "style": "aux",
+        "children": [
+          { "label": "Карта сайта", "style": "aux" },
+          { "label": "Политика конфиденциальности", "style": "aux" },
+          { "label": "Пользовательское соглашение", "style": "aux" },
+          { "label": "404 / 500", "style": "aux" }
+        ]
+      }
+    ]
+  }
+}

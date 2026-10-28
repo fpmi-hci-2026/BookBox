@@ -1,0 +1,25 @@
+<script>
+  (function () {
+    var theme = new URLSearchParams(location.search).get('theme') || 'wire';
+    document.body.classList.remove('theme-wire', 'theme-hifi', 'theme-dark');
+    document.body.classList.add('theme-' + theme);
+    if (new URLSearchParams(location.search).get('measure') === '1') {
+      window.addEventListener('load', function () {
+        document.title = 'H=' + document.documentElement.scrollHeight + ' W=' + document.documentElement.scrollWidth + ' IW=' + window.innerWidth;
+      });
+    }
+    var page = document.body.getAttribute('data-page');
+    document.querySelectorAll('[data-nav]').forEach(function (el) {
+      if (el.getAttribute('data-nav') === page) el.classList.add('is-active');
+    });
+    if (new URLSearchParams(location.search).get('grid') === '1') {
+      var overlay = document.createElement('div');
+      overlay.className = 'grid-overlay';
+      var inner = document.createElement('div');
+      inner.className = 'grid-inner';
+      for (var i = 0; i < 12; i++) inner.appendChild(document.createElement('i'));
+      overlay.appendChild(inner);
+      document.body.appendChild(overlay);
+    }
+  })();
+</script>

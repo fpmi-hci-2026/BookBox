@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — личный кабинет</title>
+  <link rel="stylesheet" href="../fonts.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../wireframe.css">
+  <link rel="stylesheet" href="../hifi.css">
+  <link rel="stylesheet" href="../tablet.css">
+  <link rel="stylesheet" href="../dark.css">
+</head>
+<body class="theme-wire" data-page="profile">
+<!--ICONS-->
+<!--HEADER-->
+
+<main class="container">
+  <div class="page-head"><h1>Личный кабинет</h1><span class="count">Анна Ковалёва</span></div>
+
+  <div class="account-layout">
+    <nav class="side-nav">
+      <a href="#">Профиль</a>
+      <a href="#">Адреса доставки</a>
+      <a class="is-active" href="#">Мои заказы</a>
+      <a href="#">Избранное · 6</a>
+      <a href="#">Мои отзывы</a>
+      <a href="#">Подписки</a>
+      <a href="#">Уведомления</a>
+    </nav>
+
+    <section>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <h2 class="section-title" style="font-size:22px">Мои заказы</h2>
+        <span class="select">Все статусы <svg class="icon"><use href="#i-chevron-down"/></svg></span>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr><th>Заказ</th><th>Дата</th><th>Состав</th><th>Сумма</th><th>Статус</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>№10245</b></td><td>24.10.2026</td><td>Мастер и Маргарита, 1984</td><td>69,70 BYN</td><td><span class="status status--wait">Передан курьеру</span></td></tr>
+          <tr><td><b>№10198</b></td><td>11.10.2026</td><td>Имя розы</td><td>29,90 BYN</td><td><span class="status status--ok">Доставлен</span></td></tr>
+          <tr><td><b>№10120</b></td><td>28.09.2026</td><td>Цветы для Элджернона</td><td>21,00 BYN</td><td><span class="status status--ok">Доставлен</span></td></tr>
+          <tr><td><b>№10074</b></td><td>05.09.2026</td><td>Тихий Дон</td><td>34,50 BYN</td><td><span class="status status--bad">Отменён</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="tile" style="margin-top:24px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <h3>Подписка на новинки</h3>
+          <p>Жанры: классика, современная проза. Письма раз в две недели.</p>
+        </div>
+        <button class="btn btn--ghost">Настроить</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!--FOOTER-->
+<!--INIT-->
+</body>
+</html>

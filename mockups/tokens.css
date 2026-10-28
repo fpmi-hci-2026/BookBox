@@ -1,0 +1,29 @@
+/* BookBox — дизайн-токены */
+:root {
+  --font-ui: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e6e0d4;
+  --paper: #f7f4ee;
+  --white: #ffffff;
+
+  --deep: #2f5d62;
+  --deep-dark: #24494d;
+  --gold: #b08d57;
+  --gold-soft: #f4e3c1;
+  --sale: #a44a4a;
+  --sale-soft: #fbefef;
+  --ok: #3f7d58;
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(31, 41, 55, 0.06);
+  --shadow: 0 1px 2px rgba(31, 41, 55, 0.06), 0 8px 24px rgba(31, 41, 55, 0.07);
+
+  --container: 1200px;
+  --header-h: 80px;
+  --gap: 24px;
+}

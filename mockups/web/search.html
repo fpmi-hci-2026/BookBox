@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — поиск</title>
+  <link rel="stylesheet" href="../fonts.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../wireframe.css">
+  <link rel="stylesheet" href="../hifi.css">
+  <link rel="stylesheet" href="../tablet.css">
+  <link rel="stylesheet" href="../dark.css">
+</head>
+<body class="theme-wire" data-page="catalog">
+<!--ICONS-->
+<!--HEADER-->
+
+<main class="container">
+  <div class="page-head">
+    <h1>Результаты: «мастер и маргарита»</h1>
+    <span class="count">12 книг</span>
+  </div>
+
+  <div class="catalog">
+    <aside class="filters">
+      <div class="filter-head"><span>Фильтры</span><svg class="icon"><use href="#i-sliders-horizontal"/></svg></div>
+      <div class="filter-group">
+        <h3>Раздел</h3>
+        <label class="check"><span class="box is-on"></span>Художественная<span class="num">9</span></label>
+        <label class="check"><span class="box"></span>Подарочные издания<span class="num">2</span></label>
+        <label class="check"><span class="box"></span>Аудиокниги<span class="num">1</span></label>
+      </div>
+      <div class="filter-group">
+        <h3>Автор</h3>
+        <label class="check"><span class="box is-on"></span>Булгаков<span class="num">8</span></label>
+        <label class="check"><span class="box"></span>Достоевский<span class="num">1</span></label>
+      </div>
+      <div class="filter-group">
+        <h3>Цена, BYN</h3>
+        <div class="range"><input value="10" aria-label="Цена от"><span class="muted">—</span><input value="40" aria-label="Цена до"></div>
+      </div>
+      <div class="filter-group">
+        <h3>Формат</h3>
+        <label class="check"><span class="box is-on"></span>Бумажная<span class="num">10</span></label>
+        <label class="check"><span class="box"></span>Электронная<span class="num">1</span></label>
+        <label class="check"><span class="box"></span>Аудио<span class="num">1</span></label>
+      </div>
+      <div class="filter-actions">
+        <button class="btn">Применить</button>
+        <button class="btn btn--ghost">Сбросить</button>
+      </div>
+    </aside>
+
+    <section class="results">
+      <div class="chips">
+        <span class="chip">Бумажная <svg class="icon"><use href="#i-x"/></svg></span>
+        <span class="chip">Булгаков <svg class="icon"><use href="#i-x"/></svg></span>
+        <span class="chip is-clear">Сбросить всё</span>
+      </div>
+      <div class="toolbar">
+        <span>1–12 из 12</span>
+        <span class="spacer"></span>
+        <span class="select">Сначала релевантные <svg class="icon"><use href="#i-chevron-down"/></svg></span>
+        <span class="view-toggle">
+          <span class="is-active"><svg class="icon"><use href="#i-layout-grid"/></svg></span>
+          <span><svg class="icon"><use href="#i-menu"/></svg></span>
+        </span>
+      </div>
+
+      <div class="book-grid">
+        <article class="book-card">
+          <div class="cover cover--1">Мастер и Маргарита<span class="book-badge">−20%</span><span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Мастер и Маргарита</div>
+          <div class="book-author">Михаил Булгаков</div>
+          <div class="book-rating"><span class="star">★</span><b>4.9</b><span>· 128 отзывов</span></div>
+          <div class="book-price"><span class="price">24,90 <small>BYN</small></span><span class="price-old">31,50</span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+        <article class="book-card">
+          <div class="cover cover--2">Мастер и Маргарита<span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Мастер и Маргарита</div>
+          <div class="book-author">Михаил Булгаков · подарочное</div>
+          <div class="book-rating"><span class="star">★</span><b>4.8</b><span>· 14 отзывов</span></div>
+          <div class="book-price"><span class="price">58,00 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+        <article class="book-card">
+          <div class="cover cover--9">Мастер и Маргарита<span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Мастер и Маргарита</div>
+          <div class="book-author">Михаил Булгаков · аудио</div>
+          <div class="book-rating"><span class="star">★</span><b>4.7</b><span>· 9 отзывов</span></div>
+          <div class="book-price"><span class="price">18,00 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+        <article class="book-card">
+          <div class="cover cover--3">Белая гвардия<span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Белая гвардия</div>
+          <div class="book-author">Михаил Булгаков</div>
+          <div class="book-rating"><span class="star">★</span><b>4.6</b><span>· 21 отзыв</span></div>
+          <div class="book-price"><span class="price">19,80 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+      </div>
+
+      <div class="tile" style="margin-top:24px">
+        <h3>Не нашли нужную книгу?</h3>
+        <p>Оставьте заявку — сообщим, когда издание появится в продаже.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!--FOOTER-->
+<!--INIT-->
+</body>
+</html>

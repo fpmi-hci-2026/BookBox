@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — UI-kit</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="hifi.css">
+  <style>
+    body { width: 1440px; padding: 36px 48px 48px; }
+    h1 { margin: 0 0 6px; font-family: var(--font-display); font-size: 34px; }
+    .sub { margin: 0 0 26px; color: var(--muted); font-size: 13.5px; }
+    .kit { column-count: 2; column-gap: 20px; }
+    .panel { break-inside: avoid; margin-bottom: 20px; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; background: #fff; }
+    .panel h2 { margin: 0 0 16px; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+    .swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .swatch { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .swatch i { display: block; height: 54px; }
+    .swatch span { display: block; padding: 7px 9px; font-size: 10.5px; color: var(--muted); }
+    .type div { margin-bottom: 10px; }
+    .t1 { font-family: var(--font-display); font-size: 40px; line-height: 1.1; }
+    .t2 { font-family: var(--font-display); font-size: 28px; line-height: 1.15; }
+    .t3 { font-size: 18px; font-weight: 800; }
+    .t4 { font-size: 15px; }
+    .t5 { font-size: 12px; color: var(--muted); }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .kit .btn { height: 40px; padding: 0 18px; }
+    .kit .btn--ghost { background: #fff; }
+    .kit .btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+    .kit .field { margin-bottom: 12px; }
+    .kit .field input { height: 40px; }
+    .is-focus { outline: 3px solid rgba(47, 93, 98, 0.18); border-color: var(--deep) !important; }
+    .is-error { border-color: var(--sale) !important; }
+    .err { margin-top: 5px; font-size: 11px; color: var(--sale); }
+    .statuses { display: flex; flex-wrap: wrap; gap: 8px; }
+    .kit .book-card { width: 180px; }
+    .kit .book-card .cover { font-size: 13px; }
+    .icons { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px 10px; }
+    .icons div { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 9.5px; color: var(--muted); }
+    .icons .icon { width: 22px; height: 22px; color: var(--deep); }
+    .radii { display: flex; gap: 14px; }
+    .radii div { width: 84px; height: 64px; background: var(--paper); border: 1px solid var(--line); display: grid; place-items: center; font-size: 10.5px; color: var(--muted); }
+  </style>
+</head>
+<body class="theme-hifi">
+<!--ICONS-->
+
+<h1>UI-kit BookBox</h1>
+<p class="sub">Палитра, типографика, компоненты и состояния. Цветная тема используется в дизайн-макетах веб и мобильного приложения.</p>
+
+<div class="kit">
+  <section class="panel">
+    <h2>Палитра</h2>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#2F5D62"></i><span>Deep · #2F5D62</span></div>
+      <div class="swatch"><i style="background:#B08D57"></i><span>Gold · #B08D57</span></div>
+      <div class="swatch"><i style="background:#1F2937"></i><span>Ink · #1F2937</span></div>
+      <div class="swatch"><i style="background:#F7F4EE"></i><span>Paper · #F7F4EE</span></div>
+      <div class="swatch"><i style="background:#A44A4A"></i><span>Sale · #A44A4A</span></div>
+      <div class="swatch"><i style="background:#3F7D58"></i><span>Ok · #3F7D58</span></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Типографика</h2>
+    <div class="type">
+      <div class="t1">Мастер и Маргарита</div>
+      <div class="t2">Художественная литература</div>
+      <div class="t3">Новинки месяца</div>
+      <div class="t4">Source Serif 4 — заголовки, Manrope — интерфейс и текст.</div>
+      <div class="t5">Подпись · 12 px · muted</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Кнопки</h2>
+    <div class="row" style="margin-bottom:12px">
+      <button class="btn">В корзину</button>
+      <button class="btn btn--gold">Купить сейчас</button>
+      <button class="btn btn--ghost">Сбросить</button>
+      <button class="btn" disabled>Нет в наличии</button>
+    </div>
+    <div class="row">
+      <button class="fav"><svg class="icon"><use href="#i-heart"/></svg></button>
+      <button class="fav"><svg class="icon"><use href="#i-shopping-cart"/></svg></button>
+      <span class="chip">Классика ×</span>
+      <span class="chip is-clear">Сбросить всё</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Поля</h2>
+    <div class="field"><label>Обычное</label><input value="Анна Ковалёва"></div>
+    <div class="field"><label>Фокус</label><input class="is-focus" value="+375 29 123-45-67"></div>
+    <div class="field"><label>Ошибка</label><input class="is-error" value="anna@"><div class="err">Проверьте адрес почты</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Бейджи и статусы</h2>
+    <div class="statuses" style="margin-bottom:14px">
+      <span class="book-badge" style="position:static">−20%</span>
+      <span class="book-badge" style="position:static">новинка</span>
+    </div>
+    <div class="statuses">
+      <span class="status status--ok">Доставлен</span>
+      <span class="status status--wait">Передан курьеру</span>
+      <span class="status status--bad">Отменён</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Карточка книги</h2>
+    <article class="book-card">
+      <div class="cover cover--1">Мастер и Маргарита<span class="book-badge">−20%</span></div>
+      <div class="book-title">Мастер и Маргарита</div>
+      <div class="book-author">Михаил Булгаков</div>
+      <div class="book-rating"><span class="star">★</span><b>4.9</b><span>· 128</span></div>
+      <div class="book-price"><span class="price">24,90 <small>BYN</small></span><span class="price-old">31,50</span></div>
+      <div class="book-actions"><button class="btn">В корзину</button><button class="fav"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>Иконки</h2>
+    <div class="icons">
+      <div><svg class="icon"><use href="#i-search"/></svg>поиск</div>
+      <div><svg class="icon"><use href="#i-shopping-cart"/></svg>корзина</div>
+      <div><svg class="icon"><use href="#i-heart"/></svg>избранное</div>
+      <div><svg class="icon"><use href="#i-user-round"/></svg>профиль</div>
+      <div><svg class="icon"><use href="#i-layout-grid"/></svg>каталог</div>
+      <div><svg class="icon"><use href="#i-sliders-horizontal"/></svg>фильтры</div>
+      <div><svg class="icon"><use href="#i-star"/></svg>рейтинг</div>
+      <div><svg class="icon"><use href="#i-truck"/></svg>доставка</div>
+      <div><svg class="icon"><use href="#i-bell"/></svg>уведомления</div>
+      <div><svg class="icon"><use href="#i-camera"/></svg>ISBN</div>
+      <div><svg class="icon"><use href="#i-mic"/></svg>голос</div>
+      <div><svg class="icon"><use href="#i-circle-check"/></svg>наличие</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Радиусы и тени</h2>
+    <div class="radii">
+      <div style="border-radius:6px">6 px</div>
+      <div style="border-radius:10px">10 px</div>
+      <div style="border-radius:14px">14 px</div>
+      <div style="border-radius:10px;box-shadow:var(--shadow)">shadow</div>
+    </div>
+  </section>
+</div>
+
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

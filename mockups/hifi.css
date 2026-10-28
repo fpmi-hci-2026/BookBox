@@ -1,0 +1,55 @@
+/* BookBox — брендовая тема для цветных макетов */
+
+.theme-hifi {
+  background: #ffffff;
+}
+
+.theme-hifi .site-header {
+  box-shadow: 0 1px 0 rgba(31, 41, 55, 0.04);
+}
+
+.theme-hifi .logo {
+  color: var(--deep);
+}
+
+.theme-hifi .cover {
+  border: 0;
+  box-shadow: var(--shadow);
+  font-size: 18px;
+}
+
+.theme-hifi .book-card:hover .cover {
+  transform: translateY(-2px);
+  transition: transform 0.15s ease;
+}
+
+.theme-hifi .btn {
+  background: var(--deep);
+  border-color: var(--deep);
+}
+
+.theme-hifi .btn--gold {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.theme-hifi .row-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0 0;
+  padding: 14px 18px;
+  border: 1px solid var(--gold-soft);
+  border-radius: var(--radius);
+  background: #fdf8ee;
+  font-size: 13.5px;
+}
+
+.theme-hifi .row-cta b {
+  color: var(--gold);
+}
+
+.theme-hifi .btn--ghost {
+  background: transparent;
+  color: var(--deep);
+}

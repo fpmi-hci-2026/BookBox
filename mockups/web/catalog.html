@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookBox — каталог</title>
+  <link rel="stylesheet" href="../fonts.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../wireframe.css">
+  <link rel="stylesheet" href="../hifi.css">
+  <link rel="stylesheet" href="../tablet.css">
+  <link rel="stylesheet" href="../dark.css">
+  <link rel="stylesheet" href="../grid.css">
+</head>
+<body class="theme-wire">
+<!--ICONS-->
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="#">Book<span>Box</span></a>
+    <nav class="main-nav">
+      <a class="is-active" href="#">Каталог <svg class="icon"><use href="#i-chevron-down"/></svg></a>
+      <a href="#">Новинки</a>
+      <a href="#">Скидки</a>
+      <a href="#">Подборки</a>
+      <a href="#">Доставка</a>
+      <a href="#">О нас</a>
+    </nav>
+    <div class="header-search">
+      <svg class="icon"><use href="#i-search"/></svg>
+      <span>Название, автор или ISBN</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Избранное"><svg class="icon"><use href="#i-heart"/></svg></button>
+      <button class="icon-btn" aria-label="Корзина">
+        <svg class="icon"><use href="#i-shopping-cart"/></svg><span class="counter">2</span>
+      </button>
+      <button class="icon-btn" aria-label="Профиль"><svg class="icon"><use href="#i-user-round"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="crumbs">
+  <div class="container">
+    <a href="#">Главная</a>
+    <span class="sep">›</span>
+    <a href="#">Каталог</a>
+    <span class="sep">›</span>
+    <span>Художественная литература</span>
+  </div>
+</div>
+
+<main class="container">
+  <div class="page-head">
+    <h1>Художественная литература</h1>
+    <span class="count">248 книг</span>
+  </div>
+
+  <div class="catalog">
+    <aside class="filters">
+      <div class="filter-head">
+        <span>Фильтры</span>
+        <svg class="icon"><use href="#i-sliders-horizontal"/></svg>
+      </div>
+
+      <div class="filter-group">
+        <h3>Раздел</h3>
+        <label class="check"><span class="box is-on"></span>Художественная<span class="num">248</span></label>
+        <label class="check"><span class="box"></span>Научная и учебная<span class="num">412</span></label>
+        <label class="check"><span class="box"></span>Детская<span class="num">96</span></label>
+        <label class="check"><span class="box"></span>Бизнес<span class="num">74</span></label>
+      </div>
+
+      <div class="filter-group">
+        <h3>Жанр</h3>
+        <label class="check"><span class="box is-on"></span>Классика<span class="num">64</span></label>
+        <label class="check"><span class="box"></span>Фэнтези<span class="num">38</span></label>
+        <label class="check"><span class="box"></span>Детективы<span class="num">42</span></label>
+        <label class="check"><span class="box"></span>Фантастика<span class="num">51</span></label>
+        <label class="check"><span class="box"></span>Поэзия<span class="num">23</span></label>
+      </div>
+
+      <div class="filter-group">
+        <h3>Цена, BYN</h3>
+        <div class="range">
+          <input value="10" aria-label="Цена от">
+          <span class="muted">—</span>
+          <input value="30" aria-label="Цена до">
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Автор</h3>
+        <label class="check"><span class="box is-on"></span>Булгаков<span class="num">8</span></label>
+        <label class="check"><span class="box"></span>Достоевский<span class="num">11</span></label>
+        <label class="check"><span class="box"></span>Оруэлл<span class="num">4</span></label>
+        <label class="check"><span class="box"></span>Маркес<span class="num">3</span></label>
+      </div>
+
+      <div class="filter-group">
+        <h3>Наличие</h3>
+        <label class="check"><span class="box is-on"></span>В наличии<span class="num">201</span></label>
+        <label class="check"><span class="box"></span>Под заказ<span class="num">47</span></label>
+      </div>
+
+      <div class="filter-actions">
+        <button class="btn">Применить</button>
+        <button class="btn btn--ghost">Сбросить</button>
+      </div>
+    </aside>
+
+    <section class="results">
+      <div class="chips">
+        <span class="chip">Классика <svg class="icon"><use href="#i-x"/></svg></span>
+        <span class="chip">Цена до 30 <svg class="icon"><use href="#i-x"/></svg></span>
+        <span class="chip">В наличии <svg class="icon"><use href="#i-x"/></svg></span>
+        <span class="chip is-clear">Сбросить всё</span>
+      </div>
+
+      <div class="toolbar">
+        <span>1–8 из 248</span>
+        <span class="spacer"></span>
+        <span class="select">Сначала популярные <svg class="icon"><use href="#i-chevron-down"/></svg></span>
+        <span class="view-toggle">
+          <span class="is-active"><svg class="icon"><use href="#i-layout-grid"/></svg></span>
+          <span><svg class="icon"><use href="#i-menu"/></svg></span>
+        </span>
+      </div>
+
+      <div class="book-grid">
+        <article class="book-card">
+          <div class="cover cover--1">Мастер и Маргарита<span class="book-badge">−20%</span><span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Мастер и Маргарита</div>
+          <div class="book-author">Михаил Булгаков</div>
+          <div class="book-rating"><span class="star">★</span><b>4.9</b><span>· 128 отзывов</span></div>
+          <div class="book-price"><span class="price">24,90 <small>BYN</small></span><span class="price-old">31,50</span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="book-card">
+          <div class="cover cover--2">Преступление и наказание<span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Преступление и наказание</div>
+          <div class="book-author">Фёдор Достоевский</div>
+          <div class="book-rating"><span class="star">★</span><b>4.8</b><span>· 96 отзывов</span></div>
+          <div class="book-price"><span class="price">22,40 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="book-card">
+          <div class="cover cover--3">Сто лет одиночества<span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Сто лет одиночества</div>
+          <div class="book-author">Габриэль Гарсиа Маркес</div>
+          <div class="book-rating"><span class="star">★</span><b>4.7</b><span>· 74 отзыва</span></div>
+          <div class="book-price"><span class="price">28,00 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="book-card">
+          <div class="cover cover--4">1984<span class="book-badge">хит</span><span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">1984</div>
+          <div class="book-author">Джордж Оруэлл</div>
+          <div class="book-rating"><span class="star">★</span><b>4.8</b><span>· 210 отзывов</span></div>
+          <div class="book-price"><span class="price">19,90 <small>BYN</small></span><span class="price-old">25,00</span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="book-card">
+          <div class="cover cover--5">Тихий Дон<span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Тихий Дон</div>
+          <div class="book-author">Михаил Шолохов</div>
+          <div class="book-rating"><span class="star">★</span><b>4.6</b><span>· 41 отзыв</span></div>
+          <div class="book-price"><span class="price">34,50 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="book-card">
+          <div class="cover cover--6">Имя розы<span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Имя розы</div>
+          <div class="book-author">Умберто Эко</div>
+          <div class="book-rating"><span class="star">★</span><b>4.7</b><span>· 58 отзывов</span></div>
+          <div class="book-price"><span class="price">29,90 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="book-card">
+          <div class="cover cover--1">Цветы для Элджернона<span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Цветы для Элджернона</div>
+          <div class="book-author">Дэниел Киз</div>
+          <div class="book-rating"><span class="star">★</span><b>4.9</b><span>· 163 отзыва</span></div>
+          <div class="book-price"><span class="price">21,00 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="book-card">
+          <div class="cover cover--2">Тень горы<span class="book-badge">новинка</span><span class="cover-note">обложка 3:4</span></div>
+          <div class="book-title">Тень горы</div>
+          <div class="book-author">Грегори Дэвид Робертс</div>
+          <div class="book-rating"><span class="star">★</span><b>4.5</b><span>· 37 отзывов</span></div>
+          <div class="book-price"><span class="price">32,00 <small>BYN</small></span></div>
+          <div class="book-actions"><button class="btn">В корзину</button><button class="fav" aria-label="В избранное"><svg class="icon"><use href="#i-heart"/></svg></button></div>
+        </article>
+      </div>
+
+      <div class="pagination">
+        <span>‹</span>
+        <span class="is-active">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>…</span>
+        <span>31</span>
+        <span>›</span>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div>
+        <a class="logo" href="#">Book<span>Box</span></a>
+        <p class="muted" style="margin-top:10px">Книжный магазин с доставкой по Беларуси.</p>
+      </div>
+      <div>
+        <h4>Каталог</h4>
+        <a href="#">Художественная</a>
+        <a href="#">Научная и учебная</a>
+        <a href="#">Детская</a>
+        <a href="#">Бизнес</a>
+      </div>
+      <div>
+        <h4>Покупателям</h4>
+        <a href="#">Доставка</a>
+        <a href="#">Оплата</a>
+        <a href="#">Возврат и обмен</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div>
+        <h4>Компания</h4>
+        <a href="#">О нас</a>
+        <a href="#">Блог</a>
+        <a href="#">Контакты</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BookBox. Учебный проект.</span>
+      <span>Минск · +375 29 000-00-00</span>
+    </div>
+  </div>
+</footer>
+
+<!--INIT-->
+</body>
+</html>

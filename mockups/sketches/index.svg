@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">
+<rect width="1000" height="700" fill="#ffffff"/>
+<text x="42" y="46" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="26" fill="#1f2937">Эскиз 1. Главная</text>
+<g transform="rotate(-0.01 500 98)">
+  <rect x="40" y="70" width="920" height="56" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="500" y="102.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">шапка: логотип · меню · поиск · корзина · профиль</text>
+</g>
+<g transform="rotate(0.07 300 255)">
+  <rect x="40" y="150" width="520" height="210" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="300" y="260.25" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="15" fill="#4b5563">баннер: заголовок + кнопка</text>
+</g>
+<g transform="rotate(-0.46 645 255)">
+  <rect x="590" y="150" width="110" height="210" rx="6" fill="none" stroke="#6b7280" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="645" y="259.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">обложка</text>
+</g>
+<g transform="rotate(-0.31 765 255)">
+  <rect x="710" y="150" width="110" height="210" rx="6" fill="none" stroke="#6b7280" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="765" y="259.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">обложка</text>
+</g>
+<g transform="rotate(-0.07 895 255)">
+  <rect x="830" y="150" width="130" height="210" rx="6" fill="none" stroke="#6b7280" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="895" y="259.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">обложка</text>
+</g>
+<g transform="rotate(0.01 500 407)">
+  <rect x="40" y="390" width="920" height="34" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="500" y="411.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">Подборки — 3 плитки</text>
+</g>
+<g transform="rotate(-0.51 185 500)">
+  <rect x="40" y="440" width="290" height="120" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="185" y="504.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">плитка</text>
+</g>
+<g transform="rotate(0.45 500 500)">
+  <rect x="355" y="440" width="290" height="120" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="500" y="504.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">плитка</text>
+</g>
+<g transform="rotate(0.11 815 500)">
+  <rect x="670" y="440" width="290" height="120" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="815" y="504.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">плитка</text>
+</g>
+<g transform="rotate(-0.11 500 597)">
+  <rect x="40" y="580" width="920" height="34" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="500" y="601.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">Новинки — 4 карточки</text>
+</g>
+<g transform="rotate(-0.26 145 652)">
+  <rect x="40" y="630" width="210" height="44" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="145" y="656.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">карточка</text>
+</g>
+<g transform="rotate(0.34 375 652)">
+  <rect x="270" y="630" width="210" height="44" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="375" y="656.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">карточка</text>
+</g>
+<g transform="rotate(0.19 605 652)">
+  <rect x="500" y="630" width="210" height="44" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="605" y="656.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">карточка</text>
+</g>
+<g transform="rotate(-0.51 845 652)">
+  <rect x="730" y="630" width="230" height="44" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="845" y="656.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">карточка</text>
+</g>
+</svg>

@@ -1,0 +1,448 @@
+{
+  "name": "navigation-map",
+  "type": "flow",
+  "title": "Карта навигации BookBox: 4 уровня навигации и маршруты M1–M6",
+  "width": 1150,
+  "height": 790,
+  "nodes": [
+    {
+      "id": "panel",
+      "x": 40,
+      "y": 80,
+      "w": 250,
+      "h": 500,
+      "label": "",
+      "style": "aux",
+      "fill": "#FAF9F6",
+      "stroke": "#DDD7CB",
+      "bold": false,
+      "fontSize": 12,
+      "container": true
+    },
+    {
+      "id": "lv0",
+      "x": 56,
+      "y": 96,
+      "w": 218,
+      "h": 92,
+      "label": "Глобальная",
+      "desc": "header (6 пунктов + каскад) и footer (5 колонок)",
+      "style": "plain",
+      "fill": "#FFFFFF",
+      "stroke": "#9C968A",
+      "color": "#1F2937",
+      "fontSize": 12,
+      "descColor": "#5B6472"
+    },
+    {
+      "id": "lv1",
+      "x": 56,
+      "y": 208,
+      "w": 218,
+      "h": 92,
+      "label": "Локальная",
+      "desc": "табы раздела, фасеты, степпер checkout",
+      "style": "plain",
+      "fill": "#FFFFFF",
+      "stroke": "#9C968A",
+      "color": "#1F2937",
+      "fontSize": 12,
+      "descColor": "#5B6472"
+    },
+    {
+      "id": "lv2",
+      "x": 56,
+      "y": 320,
+      "w": 218,
+      "h": 92,
+      "label": "Контекстная",
+      "desc": "«Похожие», «Другие книги автора», «Из этой серии»",
+      "style": "plain",
+      "fill": "#FFFFFF",
+      "stroke": "#9C968A",
+      "color": "#1F2937",
+      "fontSize": 12,
+      "descColor": "#5B6472"
+    },
+    {
+      "id": "lv3",
+      "x": 56,
+      "y": 432,
+      "w": 218,
+      "h": 92,
+      "label": "Вспомогательная",
+      "desc": "крошки, карта сайта, указатель, пагинация, «наверх»",
+      "style": "plain",
+      "fill": "#FFFFFF",
+      "stroke": "#9C968A",
+      "color": "#1F2937",
+      "fontSize": 12,
+      "descColor": "#5B6472"
+    },
+    {
+      "id": "home",
+      "x": 600,
+      "y": 80,
+      "w": 170,
+      "h": 44,
+      "label": "Главная",
+      "style": "catalog"
+    },
+    {
+      "id": "collections",
+      "x": 300,
+      "y": 210,
+      "w": 170,
+      "h": 44,
+      "label": "Подборки",
+      "style": "accent"
+    },
+    {
+      "id": "catalog",
+      "x": 600,
+      "y": 210,
+      "w": 170,
+      "h": 44,
+      "label": "Каталог",
+      "style": "catalog"
+    },
+    {
+      "id": "search",
+      "x": 900,
+      "y": 210,
+      "w": 170,
+      "h": 44,
+      "label": "Поиск",
+      "style": "search"
+    },
+    {
+      "id": "book",
+      "x": 600,
+      "y": 340,
+      "w": 190,
+      "h": 50,
+      "label": "Страница книги",
+      "style": "book"
+    },
+    {
+      "id": "cart",
+      "x": 900,
+      "y": 340,
+      "w": 170,
+      "h": 44,
+      "label": "Корзина",
+      "style": "book"
+    },
+    {
+      "id": "checkout",
+      "x": 600,
+      "y": 470,
+      "w": 190,
+      "h": 50,
+      "label": "Оформление заказа",
+      "style": "book"
+    },
+    {
+      "id": "account",
+      "x": 300,
+      "y": 600,
+      "w": 170,
+      "h": 44,
+      "label": "Личный кабинет",
+      "style": "profile"
+    },
+    {
+      "id": "order",
+      "x": 300,
+      "y": 700,
+      "w": 170,
+      "h": 44,
+      "label": "Заказ (статус)",
+      "style": "profile"
+    },
+    {
+      "id": "admin",
+      "x": 900,
+      "y": 600,
+      "w": 190,
+      "h": 60,
+      "label": "Админ-панель",
+      "desc": "отдельный layout /admin",
+      "style": "admin",
+      "dashed": true
+    }
+  ],
+  "edges": [
+    {
+      "from": "home",
+      "to": "collections",
+      "label": "Подборки",
+      "labelAt": [
+        500,
+        152
+      ],
+      "arrow": true,
+      "points": [
+        [
+          655,
+          124
+        ],
+        [
+          655,
+          160
+        ],
+        [
+          385,
+          160
+        ],
+        [
+          385,
+          210
+        ]
+      ]
+    },
+    {
+      "from": "home",
+      "to": "catalog",
+      "label": "Каталог",
+      "labelAt": [
+        697,
+        172
+      ],
+      "labelColor": "#6B7280",
+      "arrow": true,
+      "points": [
+        [
+          685,
+          124
+        ],
+        [
+          685,
+          210
+        ]
+      ]
+    },
+    {
+      "from": "home",
+      "to": "search",
+      "label": "Поиск",
+      "labelAt": [
+        840,
+        182
+      ],
+      "arrow": true,
+      "points": [
+        [
+          715,
+          124
+        ],
+        [
+          715,
+          182
+        ],
+        [
+          985,
+          182
+        ],
+        [
+          985,
+          210
+        ]
+      ]
+    },
+    {
+      "from": "collections",
+      "to": "book",
+      "label": "M3",
+      "labelAt": [
+        520,
+        292
+      ],
+      "arrow": true,
+      "points": [
+        [
+          385,
+          254
+        ],
+        [
+          385,
+          300
+        ],
+        [
+          660,
+          300
+        ],
+        [
+          660,
+          340
+        ]
+      ]
+    },
+    {
+      "from": "catalog",
+      "to": "book",
+      "label": "M1",
+      "labelAt": [
+        697,
+        296
+      ],
+      "arrow": true,
+      "points": [
+        [
+          685,
+          254
+        ],
+        [
+          685,
+          340
+        ]
+      ]
+    },
+    {
+      "from": "search",
+      "to": "book",
+      "label": "M1",
+      "labelAt": [
+        880,
+        312
+      ],
+      "arrow": true,
+      "points": [
+        [
+          985,
+          254
+        ],
+        [
+          985,
+          320
+        ],
+        [
+          750,
+          320
+        ],
+        [
+          750,
+          340
+        ]
+      ]
+    },
+    {
+      "from": "book",
+      "to": "cart",
+      "label": "В корзину",
+      "labelAt": [
+        845,
+        355
+      ],
+      "arrow": true,
+      "points": [
+        [
+          790,
+          365
+        ],
+        [
+          900,
+          365
+        ]
+      ]
+    },
+    {
+      "from": "book",
+      "to": "checkout",
+      "label": "M2 · Купить сейчас",
+      "labelAt": [
+        695,
+        430
+      ],
+      "arrow": true,
+      "dashed": true,
+      "color": "#B87333",
+      "points": [
+        [
+          695,
+          390
+        ],
+        [
+          695,
+          470
+        ]
+      ]
+    },
+    {
+      "from": "cart",
+      "to": "checkout",
+      "label": "Оформить",
+      "labelAt": [
+        870,
+        422
+      ],
+      "arrow": true,
+      "points": [
+        [
+          985,
+          384
+        ],
+        [
+          985,
+          440
+        ],
+        [
+          745,
+          440
+        ],
+        [
+          745,
+          495
+        ]
+      ]
+    },
+    {
+      "from": "checkout",
+      "to": "account",
+      "label": "Заказ оформлен",
+      "labelAt": [
+        540,
+        552
+      ],
+      "arrow": true,
+      "points": [
+        [
+          695,
+          520
+        ],
+        [
+          695,
+          560
+        ],
+        [
+          385,
+          560
+        ],
+        [
+          385,
+          600
+        ]
+      ]
+    },
+    {
+      "from": "account",
+      "to": "order",
+      "label": "M4",
+      "labelAt": [
+        400,
+        672
+      ],
+      "arrow": true,
+      "points": [
+        [
+          385,
+          644
+        ],
+        [
+          385,
+          700
+        ]
+      ]
+    }
+  ]
+}

@@ -1,3 +1,10 @@
 labs/
 .DS_Store
+node_modules/
 docs/lab2-plan.md
+AGENTS.md
+.opencode/
+
+mockups/preview/
+**/.*.html
+mockups/.build/

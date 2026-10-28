@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">
+<rect width="1000" height="700" fill="#ffffff"/>
+<text x="42" y="46" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="26" fill="#1f2937">Эскиз 5. Оформление заказа</text>
+<g transform="rotate(0.46 500 94)">
+  <rect x="40" y="70" width="920" height="48" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="500" y="98.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">шапка (упрощённая)</text>
+</g>
+<g transform="rotate(-0.04 350 160)">
+  <rect x="40" y="140" width="620" height="40" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="350" y="164.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">степпер: 1 адрес → 2 доставка → 3 оплата → 4 подтверждение</text>
+</g>
+<g transform="rotate(-0.32 350 290)">
+  <rect x="40" y="200" width="620" height="180" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="350" y="294.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">форма адреса: имя · телефон · город · улица · дом</text>
+</g>
+<g transform="rotate(0.12 350 445)">
+  <rect x="40" y="395" width="620" height="100" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="350" y="449.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">доставка: курьер / самовывоз / почта</text>
+</g>
+<g transform="rotate(-0.12 350 560)">
+  <rect x="40" y="510" width="620" height="100" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="350" y="564.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">оплата: карта / ЕРИП / при получении</text>
+</g>
+<g transform="rotate(0.31 820 405)">
+  <rect x="680" y="200" width="280" height="410" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="820" y="373.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">итог заказа:</text><text x="820" y="391.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">2 книги</text><text x="820" y="409.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">доставка</text><text x="820" y="427.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">итого</text><text x="820" y="445.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">«Перейти к оплате»</text>
+</g>
+</svg>

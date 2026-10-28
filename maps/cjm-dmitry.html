@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — CJM: Дмитрий</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="maps.css">
+</head>
+<body>
+<h1>CJM: Дмитрий</h1>
+<p class="sub">Путь клиента по этапам: действия, точки контакта, мысли, эмоции, боли и решения BookBox.</p>
+<div class="cjm">
+  <div class="cjm-head">
+    <div>
+      <h2>Дмитрий</h2>
+      <div class="goal">менеджер, 30 лет · веб-версия</div>
+      <div class="goal" style="margin-top:8px;max-width:620px"><b>Цель:</b> Купить книгу в подарок коллеге за пару минут, с упаковкой.</div>
+    </div>
+    <div class="cjm-meta"><span class="chip">Ноутбук</span><span class="chip">Вечер дома</span><span class="chip">Готов платить за удобство</span></div>
+  </div>
+  <div class="cjm-grid">
+    <div class="row-label stage-row-label">Этап</div><div class="cell stage">Осознание</div><div class="cell stage">Поиск</div><div class="cell stage">Выбор</div><div class="cell stage">Заказ</div><div class="cell stage">Доставка</div><div class="cell stage">После покупки</div>
+    <div class="row-label">Действия</div><div class="cell ">Нужен подарок коллеге</div><div class="cell ">Открывает подборки</div><div class="cell ">Читает отзывы и рейтинг</div><div class="cell ">Добавляет упаковку и адрес</div><div class="cell ">Следит за доставкой</div><div class="cell ">Повторяет заказ</div>
+    <div class="row-label">Точки контакта</div><div class="cell ">Поиск в Google</div><div class="cell ">Подборки</div><div class="cell ">Карточка книги</div><div class="cell ">Checkout</div><div class="cell ">Email и push</div><div class="cell ">Личный кабинет</div>
+    <div class="row-label">Мысли</div><div class="cell "><span class="thought">«Что подарить?»</span></div><div class="cell "><span class="thought">«Нужно быстро»</span></div><div class="cell "><span class="thought">«Хороший ли рейтинг?»</span></div><div class="cell "><span class="thought">«Пусть будет красиво»</span></div><div class="cell "><span class="thought">«Успеет ли?»</span></div><div class="cell "><span class="thought">«Снова здесь»</span></div>
+    <div class="row-label">Эмоции</div>
+    <div class="emotion-wrap"><svg viewBox="0 0 600 100" preserveAspectRatio="none">
+      <polygon points="50,100 50,54 150,37 250,37 350,37 450,37 550,20 550,100" fill="rgba(176,141,87,0.10)"/>
+      <polyline points="50,54 150,37 250,37 350,37 450,37 550,20" fill="none" stroke="#B08D57" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+    </svg><div class="emotion-dot" style="left:8.333333333333332%;top:54%">🙂</div><div class="emotion-dot" style="left:25%;top:37%">😊</div><div class="emotion-dot" style="left:41.66666666666667%;top:37%">😊</div><div class="emotion-dot" style="left:58.333333333333336%;top:37%">😊</div><div class="emotion-dot" style="left:75%;top:37%">😊</div><div class="emotion-dot" style="left:91.66666666666666%;top:20%">🤩</div></div>
+    <div class="row-label">Боли</div><div class="cell pain">Нет идей</div><div class="cell pain">Долгий выбор</div><div class="cell pain">Мало отзывов</div><div class="cell pain">Нет упаковки</div><div class="cell pain">Нет уведомлений</div><div class="cell pain">Забыл адрес</div>
+    <div class="row-label">Решения BookBox</div><div class="cell solution">Подборки «Подарки»</div><div class="cell solution">Рейтинг и отзывы</div><div class="cell solution">Фото и аннотации</div><div class="cell solution">Подарочная упаковка</div><div class="cell solution">Статус доставки</div><div class="cell solution">Сохранённые адреса</div>
+  </div>
+</div>
+<div class="legend"><span><b>Эмоции:</b> 😞 плохо · 😐 нейтрально · 🙂 нормально · 😊 хорошо · 🤩 отлично</span><span><b>Красные</b> — боли, <b>зелёные</b> — решения.</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

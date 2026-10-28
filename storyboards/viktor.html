@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — раскадровка: Виктор</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="storyboards.css">
+</head>
+<body>
+<h1>Раскадровка: Виктор</h1>
+<p class="sub">инженер, 38 лет · анти-персонаж · без онлайн-оплаты</p>
+<div class="meta"><span>Старый компьютер</span><span>Недоверие</span><span>Оплата при получении</span></div>
+
+<div class="path">
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Сайт</b><span>заходит</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Поиск</b><span>книга</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Карточка</b><span>цена</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Оплата</b><span>способы</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Заказ</b><span>оплата при получении</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--success">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-check">✓</div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Получение</b><span>платит курьеру</span></div>
+    </div>
+</div>
+
+<div class="branches">
+  <h3>Альтернативы и исключения</h3>
+  <div class="branch">
+      <span class="badge badge--exc">Исключение</span>
+      <span class="from">из «Оплата»</span>
+      <div class="b-step"><div class="screen screen--error">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-cross">✕</div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Нет оплаты при получении</span></div><div class="arrow">→</div><div class="b-step"><div class="screen screen--exit">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Уход</span></div>
+      <span class="note">ищет другой магазин — единственная точка удержания.</span>
+    </div>
+  <div class="branch">
+      <span class="badge badge--alt">Альтернатива</span>
+      <span class="from">из «Заказ»</span>
+      <div class="b-step"><div class="screen screen--success">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-check">✓</div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Получение</span></div>
+      <span class="note">без онлайн-оплаты заказ завершается.</span>
+    </div>
+</div>
+
+<div class="legend"><span><b>→</b> основной путь</span><span><b>Альтернатива</b> — другой путь к цели</span><span><b>Исключение</b> — что делать, если что-то пошло не так</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

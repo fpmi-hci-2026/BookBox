@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — раскадровка: Аня</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="storyboards.css">
+</head>
+<body>
+<h1>Раскадровка: Аня</h1>
+<p class="sub">студентка, 20 лет · мобильное приложение · цена и скорость</p>
+<div class="meta"><span>Мобильное приложение</span><span>Ограниченное время</span><span>Бюджет 30 BYN</span></div>
+
+<div class="path">
+    <div class="step">
+      <div class="screen screen--mobile">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Приложение</b><span>запускает</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--mobile">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Главная</b><span>поиск и скидки</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--mobile">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Поиск</b><span>«математический анализ»</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--mobile">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Выдача</b><span>фильтр до 30 BYN</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--mobile">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Карточка</b><span>описание и отзывы</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--mobile">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Корзина</b><span>1 книга</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--mobile">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Checkout</b><span>адрес и карта</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--success screen--mobile">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-check">✓</div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Заказ принят</b><span>номер заказа</span></div>
+    </div>
+</div>
+
+<div class="branches">
+  <h3>Альтернативы и исключения</h3>
+  <div class="branch">
+      <span class="badge badge--alt">Альтернатива</span>
+      <span class="from">из «Выдача»</span>
+      <div class="b-step"><div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Скидки студентам</span></div><div class="arrow">→</div><div class="b-step"><div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Карточка</span></div>
+      <span class="note">если книги до 30 BYN нет — смотрит подборку со скидкой.</span>
+    </div>
+  <div class="branch">
+      <span class="badge badge--exc">Исключение</span>
+      <span class="from">из «Карточка»</span>
+      <div class="b-step"><div class="screen screen--error">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-cross">✕</div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Нет в наличии</span></div><div class="arrow">→</div><div class="b-step"><div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Подписка</span></div>
+      <span class="note">сообщим, когда книга появится.</span>
+    </div>
+  <div class="branch">
+      <span class="badge badge--exc">Исключение</span>
+      <span class="from">из «Checkout»</span>
+      <div class="b-step"><div class="screen screen--error">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-cross">✕</div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Нет интернета</span></div><div class="arrow">→</div><div class="b-step"><div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Офлайн-корзина</span></div>
+      <span class="note">заказ можно завершить позже.</span>
+    </div>
+</div>
+
+<div class="legend"><span><b>→</b> основной путь</span><span><b>Альтернатива</b> — другой путь к цели</span><span><b>Исключение</b> — что делать, если что-то пошло не так</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

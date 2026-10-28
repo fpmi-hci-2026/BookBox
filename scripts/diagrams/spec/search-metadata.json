@@ -1,0 +1,105 @@
+{
+  "name": "search-metadata",
+  "type": "cards",
+  "title": "Схема метаданных поиска: поля, веса и фильтры по типам контента",
+  "width": 1190,
+  "height": 680,
+  "busX": 250,
+  "busY": 545,
+  "index": {
+    "x": 40,
+    "y": 570,
+    "w": 420,
+    "h": 70,
+    "label": "Полнотекстовый индекс + фасетный индекс",
+    "desc": "Взвешенный поиск по полям · подсветка совпадений · опечатки 1–2 · синонимы"
+  },
+  "cards": [
+    {
+      "id": "bookCard",
+      "x": 40,
+      "y": 90,
+      "w": 330,
+      "title": "Книга",
+      "style": "book",
+      "lines": [
+        "title — 10 · isbn — 10 · author — 8",
+        "publisher — 4 · series — 3 · genres — 3",
+        "tags — 2 · year — 2 · description — 1",
+        "",
+        "Фильтры: жанр, автор, издательство, язык,",
+        "формат, переплёт, возраст, цена, год,",
+        "наличие, рейтинг, скидка, новинка",
+        "Сортировка: цена, новизна, рейтинг"
+      ]
+    },
+    {
+      "id": "authorCard",
+      "x": 400,
+      "y": 90,
+      "w": 250,
+      "title": "Автор",
+      "style": "catalog",
+      "lines": ["name — 10", "bio — 1", "books_count → сортировка"]
+    },
+    {
+      "id": "genreCard",
+      "x": 680,
+      "y": 90,
+      "w": 220,
+      "title": "Жанр",
+      "style": "catalog",
+      "lines": ["name — 8", "parent → иерархия", "description — 1"]
+    },
+    {
+      "id": "publisherCard",
+      "x": 930,
+      "y": 90,
+      "w": 220,
+      "title": "Издательство",
+      "style": "catalog",
+      "lines": ["name — 8", "country, site → фильтр"]
+    },
+    {
+      "id": "seriesCard",
+      "x": 40,
+      "y": 350,
+      "w": 250,
+      "title": "Серия",
+      "style": "accent",
+      "lines": ["name — 6", "publisher → фильтр", "books_count → сортировка"]
+    },
+    {
+      "id": "reviewCard",
+      "x": 320,
+      "y": 350,
+      "w": 250,
+      "title": "Отзыв",
+      "style": "help",
+      "lines": ["text — 1", "rating, created_at", "book.title — 2", "поиск только в админ-модерации"]
+    },
+    {
+      "id": "orderCard",
+      "x": 600,
+      "y": 350,
+      "w": 250,
+      "title": "Заказ",
+      "style": "admin",
+      "lines": [
+        "number — 10 (точное)",
+        "email — 8 · phone — 8",
+        "status → фильтр",
+        "created_at → сортировка"
+      ]
+    },
+    {
+      "id": "collectionCard",
+      "x": 880,
+      "y": 350,
+      "w": 250,
+      "title": "Подборка",
+      "style": "accent",
+      "lines": ["title — 6", "description — 2", "books → связи"]
+    }
+  ]
+}

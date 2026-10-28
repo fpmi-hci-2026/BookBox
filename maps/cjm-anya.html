@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — CJM: Аня</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="maps.css">
+</head>
+<body>
+<h1>CJM: Аня</h1>
+<p class="sub">Путь клиента по этапам: действия, точки контакта, мысли, эмоции, боли и решения BookBox.</p>
+<div class="cjm">
+  <div class="cjm-head">
+    <div>
+      <h2>Аня</h2>
+      <div class="goal">студентка, 20 лет · мобильное приложение</div>
+      <div class="goal" style="margin-top:8px;max-width:620px"><b>Цель:</b> Купить учебник по математическому анализу дешевле 30 BYN между парами.</div>
+    </div>
+    <div class="cjm-meta"><span class="chip">Смартфон</span><span class="chip">Мобильный интернет</span><span class="chip">Ограниченное время</span></div>
+  </div>
+  <div class="cjm-grid">
+    <div class="row-label stage-row-label">Этап</div><div class="cell stage">Осознание</div><div class="cell stage">Поиск</div><div class="cell stage">Выбор</div><div class="cell stage">Заказ</div><div class="cell stage">Доставка</div><div class="cell stage">После покупки</div>
+    <div class="row-label">Действия</div><div class="cell ">Нужен учебник к сессии</div><div class="cell ">Открывает приложение и ищет</div><div class="cell ">Сравнивает цены и отзывы</div><div class="cell ">Оформляет заказ между парами</div><div class="cell ">Ждёт доставку</div><div class="cell ">Пишет отзыв</div>
+    <div class="row-label">Точки контакта</div><div class="cell ">Реклама в соцсетях</div><div class="cell ">Поиск + фильтр</div><div class="cell ">Карточка книги</div><div class="cell ">Корзина, checkout</div><div class="cell ">Push и курьер</div><div class="cell ">Страница книги</div>
+    <div class="row-label">Мысли</div><div class="cell "><span class="thought">«Где дешевле?»</span></div><div class="cell "><span class="thought">«Нужно до 30 BYN»</span></div><div class="cell "><span class="thought">«Подойдёт ли издание?»</span></div><div class="cell "><span class="thought">«Быстрее бы»</span></div><div class="cell "><span class="thought">«Когда привезут?»</span></div><div class="cell "><span class="thought">«Стоит своих денег»</span></div>
+    <div class="row-label">Эмоции</div>
+    <div class="emotion-wrap"><svg viewBox="0 0 600 100" preserveAspectRatio="none">
+      <polygon points="50,100 50,54 150,37 250,37 350,54 450,37 550,20 550,100" fill="rgba(176,141,87,0.10)"/>
+      <polyline points="50,54 150,37 250,37 350,54 450,37 550,20" fill="none" stroke="#B08D57" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+    </svg><div class="emotion-dot" style="left:8.333333333333332%;top:54%">🙂</div><div class="emotion-dot" style="left:25%;top:37%">😊</div><div class="emotion-dot" style="left:41.66666666666667%;top:37%">😊</div><div class="emotion-dot" style="left:58.333333333333336%;top:54%">🙂</div><div class="emotion-dot" style="left:75%;top:37%">😊</div><div class="emotion-dot" style="left:91.66666666666666%;top:20%">🤩</div></div>
+    <div class="row-label">Боли</div><div class="cell pain">Ограниченный бюджет</div><div class="cell pain">Сложный поиск</div><div class="cell pain">Нет фильтра по цене</div><div class="cell pain">Много полей в форме</div><div class="cell pain">Нет статуса</div><div class="cell pain">Забывает про отзыв</div>
+    <div class="row-label">Решения BookBox</div><div class="cell solution">Скидки студентам</div><div class="cell solution">Подсказки и фасеты</div><div class="cell solution">Фильтр цены и наличия</div><div class="cell solution">Адрес и карта сохранены</div><div class="cell solution">Push о статусе</div><div class="cell solution">Напоминание об отзыве</div>
+  </div>
+</div>
+<div class="legend"><span><b>Эмоции:</b> 😞 плохо · 😐 нейтрально · 🙂 нормально · 😊 хорошо · 🤩 отлично</span><span><b>Красные</b> — боли, <b>зелёные</b> — решения.</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

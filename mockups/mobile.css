@@ -1,0 +1,496 @@
+/* BookBox — мобильные каркасы 375×670 */
+
+body.mobile {
+  width: 375px;
+  margin: 0 auto;
+  padding-bottom: 56px;
+  background: var(--white);
+}
+
+.m-header {
+  height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.m-header .logo {
+  font-size: 20px;
+}
+
+.m-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.m-actions .icon-btn {
+  padding: 4px;
+}
+
+.m-actions .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.m-search {
+  margin: 12px 16px 0;
+  height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.m-search .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.m-search .scan {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.m-chips {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 0;
+  overflow: hidden;
+}
+
+.m-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11.5px;
+  white-space: nowrap;
+  background: var(--white);
+}
+
+.m-chip.is-active {
+  background: var(--deep);
+  border-color: var(--deep);
+  color: #fff;
+  font-weight: 700;
+}
+
+.m-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 4px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.m-toolbar .m-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.m-toolbar .spacer {
+  margin-left: auto;
+}
+
+.m-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 12px;
+  padding: 10px 16px 20px;
+}
+
+.m-grid .cover {
+  font-size: 12px;
+  padding: 10px;
+}
+
+.m-grid .book-title {
+  font-size: 12.5px;
+}
+
+.m-grid .book-author {
+  font-size: 11px;
+}
+
+.m-grid .book-rating {
+  font-size: 11px;
+}
+
+.m-grid .price {
+  font-size: 13px;
+}
+
+.m-grid .price-old {
+  font-size: 10.5px;
+}
+
+.m-grid .book-actions .btn {
+  height: 30px;
+  font-size: 10.5px;
+  padding: 0 6px;
+}
+
+.m-grid .fav {
+  width: 30px;
+  height: 30px;
+}
+
+.m-grid .fav .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.m-grid .book-badge {
+  font-size: 8.5px;
+  padding: 2px 6px;
+}
+
+.m-grid .cover-note {
+  display: none;
+}
+
+.m-section {
+  padding: 18px 16px 0;
+}
+
+.m-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.m-title {
+  margin: 16px 16px 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.m-section-head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.m-section-head a {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.m-hero {
+  margin: 12px 16px 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--deep);
+  color: #fff;
+}
+
+.m-hero h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.m-hero p {
+  margin: 0 0 14px;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.m-hero .btn {
+  height: 34px;
+  font-size: 12px;
+  background: #fff;
+  border-color: #fff;
+  color: var(--deep);
+}
+
+/* Filters sheet */
+
+.m-sheet {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 375px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+}
+
+.m-sheet-head {
+  height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+}
+
+.m-sheet-head .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.m-sheet-body {
+  flex: 1;
+  overflow: hidden;
+  padding: 0 16px;
+}
+
+.m-sheet-body .filter-group {
+  padding: 14px 0;
+}
+
+.m-sheet-body .check {
+  padding: 7px 0;
+  font-size: 13px;
+}
+
+.m-sheet-foot {
+  padding: 12px 16px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.m-sheet-foot .btn {
+  width: 100%;
+  height: 46px;
+}
+
+/* Book page */
+
+.m-book {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 14px;
+  padding: 16px;
+}
+
+.m-book .cover {
+  font-size: 12px;
+  padding: 10px;
+}
+
+.m-book h1 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.m-book .m-author {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.m-book .m-rating {
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.m-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.m-price-row .price {
+  font-size: 20px;
+}
+
+.m-buy {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.m-buy .btn {
+  flex: 1;
+  height: 44px;
+}
+
+.m-buy .fav {
+  height: 44px;
+  width: 44px;
+}
+
+.m-tabs {
+  display: flex;
+  gap: 18px;
+  padding: 18px 16px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.m-tabs span {
+  padding-bottom: 10px;
+  border-bottom: 2px solid transparent;
+}
+
+.m-tabs span.is-active {
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom-color: var(--gold);
+}
+
+.m-prose {
+  padding: 14px 16px;
+  font-size: 12.5px;
+  color: #374151;
+}
+
+/* Search */
+
+.m-suggest {
+  padding: 8px 16px;
+}
+
+.m-suggest-label {
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 0 6px;
+}
+
+.m-suggest-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  font-size: 13px;
+  border-bottom: 1px solid var(--line);
+}
+
+.m-suggest-row .icon {
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+}
+
+/* Cart */
+
+.m-cart-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.m-cart-row .cover {
+  font-size: 9px;
+  padding: 5px;
+}
+
+.m-cart-row .book-title {
+  font-size: 12.5px;
+}
+
+.m-cart-row .book-author {
+  font-size: 11px;
+}
+
+.m-summary {
+  margin: 14px 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.tabbar {
+  display: grid;
+}
+
+/* фиксируем мобильные оверлеи по ширине 375 (headless Chrome шире) */
+.tabbar {
+  left: 50%;
+  right: auto;
+  width: 375px;
+  transform: translateX(-50%);
+  display: grid;
+}
+
+.m-sheet {
+  left: 50%;
+  right: auto;
+  width: 375px;
+  transform: translateX(-50%);
+}
+
+/* компактная главная: чтобы CTA карточек попадал в первый экран */
+body[data-page="home"] .m-hero {
+  margin: 4px 16px 0;
+  padding: 12px 14px;
+}
+
+body[data-page="home"] .m-hero h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+body[data-page="home"] .m-section {
+  padding-top: 8px;
+}
+
+body[data-page="home"] .m-grid {
+  gap: 8px;
+}
+
+body[data-page="home"] .book-card {
+  gap: 6px;
+}
+
+body[data-page="home"] .m-grid .book-title {
+  font-size: 12px;
+}
+
+body[data-page="home"] .m-grid .book-author {
+  font-size: 10.5px;
+}
+
+body[data-page="home"] .m-grid .book-rating {
+  font-size: 10.5px;
+}
+
+/* плотнее лист фильтров, чтобы все группы влезли в 670 */
+.m-sheet-body .filter-group {
+  padding: 10px 0;
+}
+
+.m-sheet-body .check {
+  padding: 5px 0;
+}
+
+.m-sheet-body .filter-group h3 {
+  margin-bottom: 6px;
+}

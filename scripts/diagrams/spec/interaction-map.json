@@ -1,0 +1,807 @@
+{
+  "name": "interaction-map",
+  "type": "flow",
+  "title": "Совокупная диаграмма взаимодействия: ключевые и проверочные сценарии",
+  "width": 1640,
+  "height": 1020,
+  "nodes": [
+    {
+      "id": "home",
+      "x": 40,
+      "y": 90,
+      "w": 220,
+      "h": 64,
+      "style": "catalog",
+      "label": "Главная"
+    },
+    {
+      "id": "catalog",
+      "x": 300,
+      "y": 90,
+      "w": 220,
+      "h": 64,
+      "style": "catalog",
+      "label": "Каталог"
+    },
+    {
+      "id": "search",
+      "x": 300,
+      "y": 190,
+      "w": 220,
+      "h": 64,
+      "style": "search",
+      "label": "Поиск"
+    },
+    {
+      "id": "collections",
+      "x": 300,
+      "y": 290,
+      "w": 220,
+      "h": 64,
+      "style": "accent",
+      "label": "Подборки"
+    },
+    {
+      "id": "advanced",
+      "x": 300,
+      "y": 390,
+      "w": 220,
+      "h": 64,
+      "style": "search",
+      "label": "Расширенный поиск"
+    },
+    {
+      "id": "book",
+      "x": 560,
+      "y": 190,
+      "w": 240,
+      "h": 70,
+      "style": "book",
+      "label": "Карточка книги"
+    },
+    {
+      "id": "cart",
+      "x": 840,
+      "y": 90,
+      "w": 220,
+      "h": 64,
+      "style": "book",
+      "label": "Корзина"
+    },
+    {
+      "id": "preorder",
+      "x": 840,
+      "y": 290,
+      "w": 220,
+      "h": 64,
+      "style": "accent",
+      "label": "Предзаказ"
+    },
+    {
+      "id": "checkout",
+      "x": 1100,
+      "y": 190,
+      "w": 220,
+      "h": 70,
+      "style": "book",
+      "label": "Checkout"
+    },
+    {
+      "id": "ordered",
+      "x": 1360,
+      "y": 90,
+      "w": 220,
+      "h": 64,
+      "style": "root",
+      "label": "Заказ оформлен"
+    },
+    {
+      "id": "courier",
+      "x": 1360,
+      "y": 190,
+      "w": 220,
+      "h": 64,
+      "style": "book",
+      "label": "Передан курьеру"
+    },
+    {
+      "id": "delivered",
+      "x": 1360,
+      "y": 290,
+      "w": 220,
+      "h": 64,
+      "style": "book",
+      "label": "Доставлен"
+    },
+    {
+      "id": "review",
+      "x": 1360,
+      "y": 390,
+      "w": 220,
+      "h": 64,
+      "style": "profile",
+      "label": "Отзыв"
+    },
+    {
+      "id": "account",
+      "x": 1360,
+      "y": 490,
+      "w": 220,
+      "h": 64,
+      "style": "profile",
+      "label": "Личный кабинет"
+    },
+    {
+      "id": "admin",
+      "x": 40,
+      "y": 660,
+      "w": 220,
+      "h": 64,
+      "style": "admin",
+      "label": "/admin"
+    },
+    {
+      "id": "bookform",
+      "x": 300,
+      "y": 660,
+      "w": 220,
+      "h": 64,
+      "style": "admin",
+      "label": "Форма книги"
+    },
+    {
+      "id": "saved",
+      "x": 560,
+      "y": 660,
+      "w": 220,
+      "h": 64,
+      "style": "root",
+      "label": "Книга в каталоге"
+    },
+    {
+      "id": "orders",
+      "x": 300,
+      "y": 760,
+      "w": 220,
+      "h": 64,
+      "style": "admin",
+      "label": "Заказы"
+    },
+    {
+      "id": "handed",
+      "x": 560,
+      "y": 760,
+      "w": 220,
+      "h": 64,
+      "style": "root",
+      "label": "Передан в доставку"
+    },
+    {
+      "id": "analytics",
+      "x": 300,
+      "y": 860,
+      "w": 220,
+      "h": 64,
+      "style": "admin",
+      "label": "Аналитика"
+    },
+    {
+      "id": "report",
+      "x": 560,
+      "y": 860,
+      "w": 220,
+      "h": 64,
+      "style": "admin",
+      "label": "Отчёт"
+    },
+    {
+      "id": "export",
+      "x": 820,
+      "y": 860,
+      "w": 220,
+      "h": 64,
+      "style": "root",
+      "label": "Экспорт CSV"
+    },
+    {
+      "id": "vtitle",
+      "x": 1100,
+      "y": 600,
+      "w": 420,
+      "h": 36,
+      "style": "aux",
+      "label": "Проверочные сценарии",
+      "bold": true
+    },
+    {
+      "id": "v1",
+      "x": 1100,
+      "y": 660,
+      "w": 200,
+      "h": 76,
+      "style": "help",
+      "dashed": true,
+      "label": "Нет в наличии\nиз «Карточки»"
+    },
+    {
+      "id": "v2",
+      "x": 1320,
+      "y": 660,
+      "w": 200,
+      "h": 76,
+      "style": "help",
+      "dashed": true,
+      "label": "Ошибка оплаты\nиз «Checkout»"
+    },
+    {
+      "id": "v3",
+      "x": 1100,
+      "y": 760,
+      "w": 200,
+      "h": 76,
+      "style": "help",
+      "dashed": true,
+      "label": "Пустая выдача\nиз «Поиска»"
+    },
+    {
+      "id": "v4",
+      "x": 1320,
+      "y": 760,
+      "w": 200,
+      "h": 76,
+      "style": "help",
+      "dashed": true,
+      "label": "Обрыв сессии\nиз «Checkout»"
+    },
+    {
+      "id": "v5",
+      "x": 1100,
+      "y": 860,
+      "w": 200,
+      "h": 76,
+      "style": "help",
+      "dashed": true,
+      "label": "Офлайн\nиз «Карточки»"
+    },
+    {
+      "id": "v6",
+      "x": 1320,
+      "y": 860,
+      "w": 200,
+      "h": 76,
+      "style": "help",
+      "dashed": true,
+      "label": "Отмена заказа\nиз «ЛК»"
+    },
+    {
+      "id": "legend",
+      "x": 40,
+      "y": 950,
+      "w": 980,
+      "h": 36,
+      "style": "aux",
+      "fontSize": 11,
+      "label": "Цвета путей: Аня — зелёный · Дмитрий — оранжевый · Ольга — синий · Сергей — красный · Ирина — золотой · пунктир — альтернатива"
+    }
+  ],
+  "edges": [
+    {
+      "from": "home",
+      "to": "catalog",
+      "arrow": true,
+      "points": [
+        [
+          260,
+          122
+        ],
+        [
+          300,
+          122
+        ]
+      ]
+    },
+    {
+      "from": "home",
+      "to": "search",
+      "arrow": true,
+      "color": "#2F5D62",
+      "label": "Аня · Виктор",
+      "labelAt": [
+        222,
+        178
+      ],
+      "points": [
+        [
+          260,
+          130
+        ],
+        [
+          280,
+          130
+        ],
+        [
+          280,
+          222
+        ],
+        [
+          300,
+          222
+        ]
+      ]
+    },
+    {
+      "from": "home",
+      "to": "collections",
+      "arrow": true,
+      "color": "#B87333",
+      "label": "Дмитрий",
+      "labelAt": [
+        222,
+        318
+      ],
+      "points": [
+        [
+          260,
+          140
+        ],
+        [
+          270,
+          140
+        ],
+        [
+          270,
+          322
+        ],
+        [
+          300,
+          322
+        ]
+      ]
+    },
+    {
+      "from": "home",
+      "to": "advanced",
+      "arrow": true,
+      "color": "#3B5BA5",
+      "label": "Ольга",
+      "labelAt": [
+        222,
+        418
+      ],
+      "points": [
+        [
+          260,
+          150
+        ],
+        [
+          260,
+          422
+        ],
+        [
+          300,
+          422
+        ]
+      ]
+    },
+    {
+      "from": "catalog",
+      "to": "book",
+      "arrow": true,
+      "points": [
+        [
+          520,
+          122
+        ],
+        [
+          540,
+          122
+        ],
+        [
+          540,
+          225
+        ],
+        [
+          560,
+          225
+        ]
+      ]
+    },
+    {
+      "from": "search",
+      "to": "book",
+      "arrow": true,
+      "points": [
+        [
+          520,
+          222
+        ],
+        [
+          560,
+          222
+        ]
+      ]
+    },
+    {
+      "from": "collections",
+      "to": "book",
+      "arrow": true,
+      "points": [
+        [
+          520,
+          322
+        ],
+        [
+          540,
+          322
+        ],
+        [
+          540,
+          240
+        ],
+        [
+          560,
+          240
+        ]
+      ]
+    },
+    {
+      "from": "advanced",
+      "to": "book",
+      "arrow": true,
+      "points": [
+        [
+          520,
+          422
+        ],
+        [
+          540,
+          422
+        ],
+        [
+          540,
+          250
+        ],
+        [
+          560,
+          250
+        ]
+      ]
+    },
+    {
+      "from": "book",
+      "to": "cart",
+      "arrow": true,
+      "points": [
+        [
+          800,
+          225
+        ],
+        [
+          820,
+          225
+        ],
+        [
+          820,
+          122
+        ],
+        [
+          840,
+          122
+        ]
+      ]
+    },
+    {
+      "from": "book",
+      "to": "preorder",
+      "arrow": true,
+      "dashed": true,
+      "color": "#3B5BA5",
+      "label": "предзаказ",
+      "labelAt": [
+        826,
+        280
+      ],
+      "points": [
+        [
+          800,
+          240
+        ],
+        [
+          820,
+          240
+        ],
+        [
+          820,
+          322
+        ],
+        [
+          840,
+          322
+        ]
+      ]
+    },
+    {
+      "from": "book",
+      "to": "checkout",
+      "arrow": true,
+      "dashed": true,
+      "color": "#B87333",
+      "label": "1 клик",
+      "labelAt": [
+        1010,
+        247
+      ],
+      "points": [
+        [
+          800,
+          255
+        ],
+        [
+          1040,
+          255
+        ],
+        [
+          1040,
+          225
+        ],
+        [
+          1100,
+          225
+        ]
+      ]
+    },
+    {
+      "from": "cart",
+      "to": "checkout",
+      "arrow": true,
+      "points": [
+        [
+          1060,
+          122
+        ],
+        [
+          1080,
+          122
+        ],
+        [
+          1080,
+          225
+        ],
+        [
+          1100,
+          225
+        ]
+      ]
+    },
+    {
+      "from": "preorder",
+      "to": "checkout",
+      "arrow": true,
+      "points": [
+        [
+          1060,
+          322
+        ],
+        [
+          1080,
+          322
+        ],
+        [
+          1080,
+          255
+        ],
+        [
+          1100,
+          255
+        ]
+      ]
+    },
+    {
+      "from": "checkout",
+      "to": "ordered",
+      "arrow": true,
+      "points": [
+        [
+          1320,
+          225
+        ],
+        [
+          1340,
+          225
+        ],
+        [
+          1340,
+          122
+        ],
+        [
+          1360,
+          122
+        ]
+      ]
+    },
+    {
+      "from": "ordered",
+      "to": "courier",
+      "arrow": true,
+      "points": [
+        [
+          1470,
+          154
+        ],
+        [
+          1470,
+          190
+        ]
+      ]
+    },
+    {
+      "from": "courier",
+      "to": "delivered",
+      "arrow": true,
+      "points": [
+        [
+          1470,
+          254
+        ],
+        [
+          1470,
+          290
+        ]
+      ]
+    },
+    {
+      "from": "delivered",
+      "to": "review",
+      "arrow": true,
+      "points": [
+        [
+          1470,
+          354
+        ],
+        [
+          1470,
+          390
+        ]
+      ]
+    },
+    {
+      "from": "review",
+      "to": "account",
+      "arrow": true,
+      "points": [
+        [
+          1470,
+          454
+        ],
+        [
+          1470,
+          490
+        ]
+      ]
+    },
+    {
+      "from": "admin",
+      "to": "bookform",
+      "arrow": true,
+      "color": "#A44A4A",
+      "points": [
+        [
+          260,
+          692
+        ],
+        [
+          300,
+          692
+        ]
+      ]
+    },
+    {
+      "from": "bookform",
+      "to": "saved",
+      "arrow": true,
+      "color": "#A44A4A",
+      "points": [
+        [
+          520,
+          692
+        ],
+        [
+          560,
+          692
+        ]
+      ]
+    },
+    {
+      "from": "admin",
+      "to": "orders",
+      "arrow": true,
+      "color": "#A44A4A",
+      "points": [
+        [
+          260,
+          700
+        ],
+        [
+          280,
+          700
+        ],
+        [
+          280,
+          792
+        ],
+        [
+          300,
+          792
+        ]
+      ]
+    },
+    {
+      "from": "orders",
+      "to": "handed",
+      "arrow": true,
+      "color": "#A44A4A",
+      "points": [
+        [
+          520,
+          792
+        ],
+        [
+          560,
+          792
+        ]
+      ]
+    },
+    {
+      "from": "admin",
+      "to": "analytics",
+      "arrow": true,
+      "color": "#B08D57",
+      "points": [
+        [
+          260,
+          712
+        ],
+        [
+          260,
+          892
+        ],
+        [
+          300,
+          892
+        ]
+      ]
+    },
+    {
+      "from": "analytics",
+      "to": "report",
+      "arrow": true,
+      "color": "#B08D57",
+      "points": [
+        [
+          520,
+          892
+        ],
+        [
+          560,
+          892
+        ]
+      ]
+    },
+    {
+      "from": "report",
+      "to": "export",
+      "arrow": true,
+      "color": "#B08D57",
+      "points": [
+        [
+          780,
+          892
+        ],
+        [
+          820,
+          892
+        ]
+      ]
+    }
+  ]
+}

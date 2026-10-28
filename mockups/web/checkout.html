@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — оформление заказа</title>
+  <link rel="stylesheet" href="../fonts.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../wireframe.css">
+  <link rel="stylesheet" href="../hifi.css">
+  <link rel="stylesheet" href="../tablet.css">
+  <link rel="stylesheet" href="../dark.css">
+</head>
+<body class="theme-wire" data-page="cart">
+<!--ICONS-->
+<!--HEADER-->
+
+<main class="container">
+  <div class="page-head"><h1>Оформление заказа</h1></div>
+
+  <div class="stepper">
+    <div class="step is-active"><span class="num">1</span>Адрес</div>
+    <span class="line"></span>
+    <div class="step"><span class="num">2</span>Доставка</div>
+    <span class="line"></span>
+    <div class="step"><span class="num">3</span>Оплата</div>
+    <span class="line"></span>
+    <div class="step"><span class="num">4</span>Подтверждение</div>
+  </div>
+
+  <div class="checkout-layout">
+    <section>
+      <h3 style="margin:0 0 14px">Куда доставить</h3>
+      <div class="field-row">
+        <div class="field"><label>Имя и фамилия</label><input value="Анна Ковалёва"></div>
+        <div class="field"><label>Телефон</label><input value="+375 29 123-45-67"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Город</label><input value="Минск"></div>
+        <div class="field"><label>Индекс</label><input value="220000"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Улица</label><input value="ул. Кальварийская"></div>
+        <div class="field"><label>Дом, квартира</label><input value="12, кв. 45"></div>
+      </div>
+
+      <h3 style="margin:26px 0 14px">Способ доставки</h3>
+      <div class="radio-card is-active"><span class="box" style="width:16px;height:16px;border:1px solid var(--line);border-radius:50%;background:var(--deep)"></span><div><b>Курьер, 1–2 дня</b><small>5,00 BYN · по Минску</small></div></div>
+      <div class="radio-card"><span class="box" style="width:16px;height:16px;border:1px solid var(--line);border-radius:50%"></span><div><b>Самовывоз</b><small>0,00 BYN · пункт на Немиге</small></div></div>
+      <div class="radio-card"><span class="box" style="width:16px;height:16px;border:1px solid var(--line);border-radius:50%"></span><div><b>Почта по Беларуси</b><small>4,00 BYN · 3–5 дней</small></div></div>
+
+      <h3 style="margin:26px 0 14px">Оплата</h3>
+      <div class="radio-card is-active"><span class="box" style="width:16px;height:16px;border:1px solid var(--line);border-radius:50%;background:var(--deep)"></span><div><b>Картой онлайн</b><small>Visa, Mastercard, БЕЛКАРТ</small></div></div>
+      <div class="radio-card"><span class="box" style="width:16px;height:16px;border:1px solid var(--line);border-radius:50%"></span><div><b>ЕРИП</b><small>Оплата по коду в приложении банка</small></div></div>
+      <div class="radio-card"><span class="box" style="width:16px;height:16px;border:1px solid var(--line);border-radius:50%"></span><div><b>При получении</b><small>Курьеру картой или наличными</small></div></div>
+    </section>
+
+    <aside class="summary">
+      <h3>Ваш заказ</h3>
+      <div class="cart-row" style="grid-template-columns:54px 1fr auto;padding:10px 0">
+        <div class="cover cover--1" style="width:54px;font-size:8px">Мастер</div>
+        <div><div class="book-title" style="font-size:13px">Мастер и Маргарита</div><div class="book-author">× 1</div></div>
+        <div class="price" style="font-size:13px">24,90</div>
+      </div>
+      <div class="cart-row" style="grid-template-columns:54px 1fr auto;padding:10px 0">
+        <div class="cover cover--2" style="width:54px;font-size:8px">1984</div>
+        <div><div class="book-title" style="font-size:13px">1984</div><div class="book-author">× 2</div></div>
+        <div class="price" style="font-size:13px">39,80</div>
+      </div>
+      <div class="summary-row"><span>Товары</span><span>64,70 BYN</span></div>
+      <div class="summary-row"><span>Доставка</span><span>5,00 BYN</span></div>
+      <div class="summary-total"><span>Итого</span><span>69,70 BYN</span></div>
+      <button class="btn" style="width:100%;height:46px;margin-top:16px">Перейти к оплате</button>
+      <a href="cart.html" style="display:block;text-align:center;margin-top:12px;font-size:13px;color:var(--muted)">Вернуться в корзину</a>
+    </aside>
+  </div>
+</main>
+
+<!--FOOTER-->
+<!--INIT-->
+</body>
+</html>

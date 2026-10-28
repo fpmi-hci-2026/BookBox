@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">
+<rect width="1000" height="700" fill="#ffffff"/>
+<text x="42" y="46" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="26" fill="#1f2937">Эскиз 4. Корзина</text>
+<g transform="rotate(0.33 500 94)">
+  <rect x="40" y="70" width="920" height="48" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="500" y="98.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">шапка</text>
+</g>
+<g transform="rotate(-0.18 190 157)">
+  <rect x="40" y="140" width="300" height="34" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="190" y="161.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">Корзина · 3 книги</text>
+</g>
+<g transform="rotate(-0.18 350 245)">
+  <rect x="40" y="190" width="620" height="110" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="350" y="249.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">позиция: обложка · название · количество · цена</text>
+</g>
+<g transform="rotate(-0.50 350 365)">
+  <rect x="40" y="310" width="620" height="110" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="350" y="369.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">позиция</text>
+</g>
+<g transform="rotate(0.51 350 485)">
+  <rect x="40" y="430" width="620" height="110" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="350" y="489.55" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="13" fill="#4b5563">позиция</text>
+</g>
+<g transform="rotate(-0.31 820 365)">
+  <rect x="680" y="190" width="280" height="350" rx="6" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="820" y="324.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">итог:</text><text x="820" y="342.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">товары</text><text x="820" y="360.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">скидка</text><text x="820" y="378.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">доставка</text><text x="820" y="396.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">промокод</text><text x="820" y="414.9" text-anchor="middle" font-family="'Bradley Hand', 'Comic Sans MS', 'Segoe Print', cursive" font-size="14" fill="#4b5563">«Оформить заказ»</text>
+</g>
+</svg>

@@ -1,0 +1,363 @@
+/* BookBox — интерактивные раскадровки и диаграмма взаимодействия */
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  width: 1600px;
+  padding: 36px 40px 44px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: -0.01em;
+}
+
+.sub {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+.meta {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.meta span {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------------ */
+/* Путь                                                                */
+/* ------------------------------------------------------------------ */
+
+.path {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 22px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(to bottom, #fcfbf8, #fff);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 160px;
+  flex: none;
+}
+
+.step .cap {
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.3;
+}
+
+.step .cap b {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.step .cap span {
+  color: var(--muted);
+  font-size: 10.5px;
+}
+
+.arrow {
+  flex: none;
+  width: 26px;
+  padding-top: 88px;
+  text-align: center;
+  color: var(--gold);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.arrow em {
+  display: block;
+  margin-top: 4px;
+  font-size: 9px;
+  font-style: normal;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ */
+/* Экран-скелет                                                        */
+/* ------------------------------------------------------------------ */
+
+.screen {
+  width: 154px;
+  height: 188px;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.screen--mobile {
+  width: 104px;
+  height: 188px;
+  border-radius: 13px;
+}
+
+.screen--admin {
+  padding-left: 26px;
+  background:
+    linear-gradient(to right, var(--paper) 0 18px, #fff 18px);
+}
+
+.screen--success {
+  border-color: #bfd8c7;
+  background: #f4f9f5;
+}
+
+.screen--error {
+  border-color: #e3bcbc;
+  background: #fdf4f4;
+}
+
+.screen--exit {
+  border-style: dashed;
+  background: #fafafa;
+}
+
+.s-head {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 12px;
+  flex: none;
+}
+
+.s-head i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #d1d5db;
+}
+
+.s-head b {
+  margin-left: auto;
+  display: block;
+  width: 34px;
+  height: 5px;
+  border-radius: 3px;
+  background: #e5e7eb;
+}
+
+.s-title {
+  height: 8px;
+  width: 70%;
+  border-radius: 3px;
+  background: #cbd5d6;
+  flex: none;
+}
+
+.s-body {
+  flex: 1;
+  border: 1px dashed #d5d5d5;
+  border-radius: 4px;
+  background: repeating-linear-gradient(45deg, #f7f7f7 0 6px, #efefef 6px 12px);
+}
+
+.s-body--lines {
+  border: 0;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 2px;
+}
+
+.s-body--lines i {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: #e8e8e8;
+}
+
+.s-body--lines i:nth-child(2) { width: 82%; }
+.s-body--lines i:nth-child(3) { width: 64%; }
+
+.s-btn {
+  height: 16px;
+  border-radius: 4px;
+  background: #d6d6d6;
+  flex: none;
+}
+
+.screen--success .s-btn { background: #bcd9c5; }
+.screen--error .s-btn { background: #e6bcbc; }
+
+.s-check {
+  margin: auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid #7fb08d;
+  color: #3f7d58;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.s-cross {
+  margin: auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid #c98b8b;
+  color: var(--sale);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ветки                                                               */
+/* ------------------------------------------------------------------ */
+
+.branches {
+  margin-top: 22px;
+  border-top: 1px dashed var(--line);
+  padding-top: 18px;
+}
+
+.branches h3 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.branch {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+}
+
+.badge {
+  flex: none;
+  width: 118px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.badge--alt { background: #fdf3e7; color: #8a5a1f; border: 1px solid #e8d3b7; }
+.badge--exc { background: #fdf1f1; color: #8b3d3d; border: 1px solid #e8c7c7; }
+
+.branch .from {
+  flex: none;
+  width: 130px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.branch .screen {
+  width: 120px;
+  height: 142px;
+}
+
+.b-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+}
+
+.b-cap {
+  max-width: 122px;
+  text-align: center;
+  font-size: 10.5px;
+  line-height: 1.25;
+  color: #374151;
+}
+
+.branch .arrow {
+  width: 26px;
+  padding-top: 58px;
+  font-size: 15px;
+}
+
+.branch .note {
+  flex: 1;
+  font-size: 11.5px;
+  color: #4b5563;
+}
+
+/* ------------------------------------------------------------------ */
+/* Хаб                                                                 */
+/* ------------------------------------------------------------------ */
+
+.hub {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.hub a {
+  display: block;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: inherit;
+  text-decoration: none;
+  background: #fff;
+}
+
+.hub a:hover { border-color: var(--gold); }
+
+.hub h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.hub p {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 16px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.legend b { color: var(--ink); }

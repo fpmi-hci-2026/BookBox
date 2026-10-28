@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — CJM: Сергей</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="maps.css">
+</head>
+<body>
+<h1>CJM: Сергей</h1>
+<p class="sub">Путь клиента по этапам: действия, точки контакта, мысли, эмоции, боли и решения BookBox.</p>
+<div class="cjm">
+  <div class="cjm-head">
+    <div>
+      <h2>Сергей</h2>
+      <div class="goal">администратор, 33 года · админ-панель</div>
+      <div class="goal" style="margin-top:8px;max-width:620px"><b>Цель:</b> Поддерживать каталог актуальным и обрабатывать заказы без ошибок.</div>
+    </div>
+    <div class="cjm-meta"><span class="chip">Два монитора</span><span class="chip">Офис</span><span class="chip">Плотный поток операций</span></div>
+  </div>
+  <div class="cjm-grid">
+    <div class="row-label stage-row-label">Этап</div><div class="cell stage">Осознание</div><div class="cell stage">Поиск</div><div class="cell stage">Выбор</div><div class="cell stage">Заказ</div><div class="cell stage">Доставка</div><div class="cell stage">После покупки</div>
+    <div class="row-label">Действия</div><div class="cell ">Пришла новая поставка</div><div class="cell ">Открывает /admin</div><div class="cell ">Добавляет или правит книгу</div><div class="cell ">Проверяет данные</div><div class="cell ">Обрабатывает заказ</div><div class="cell ">Модерирует отзывы</div>
+    <div class="row-label">Точки контакта</div><div class="cell ">Поставщик</div><div class="cell ">Админ-панель</div><div class="cell ">Форма книги</div><div class="cell ">Валидация</div><div class="cell ">Заказы</div><div class="cell ">Отзывы</div>
+    <div class="row-label">Мысли</div><div class="cell "><span class="thought">«Сколько книг?»</span></div><div class="cell "><span class="thought">«Быстро бы»</span></div><div class="cell "><span class="thought">«Не ошибиться в цене»</span></div><div class="cell "><span class="thought">«Всё сохранилось?»</span></div><div class="cell "><span class="thought">«Клиент ждёт»</span></div><div class="cell "><span class="thought">«Что пишут?»</span></div>
+    <div class="row-label">Эмоции</div>
+    <div class="emotion-wrap"><svg viewBox="0 0 600 100" preserveAspectRatio="none">
+      <polygon points="50,100 50,54 150,54 250,54 350,54 450,37 550,54 550,100" fill="rgba(176,141,87,0.10)"/>
+      <polyline points="50,54 150,54 250,54 350,54 450,37 550,54" fill="none" stroke="#B08D57" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+    </svg><div class="emotion-dot" style="left:8.333333333333332%;top:54%">🙂</div><div class="emotion-dot" style="left:25%;top:54%">🙂</div><div class="emotion-dot" style="left:41.66666666666667%;top:54%">🙂</div><div class="emotion-dot" style="left:58.333333333333336%;top:54%">🙂</div><div class="emotion-dot" style="left:75%;top:37%">😊</div><div class="emotion-dot" style="left:91.66666666666666%;top:54%">🙂</div></div>
+    <div class="row-label">Боли</div><div class="cell pain">Ручной ввод</div><div class="cell pain">Много полей</div><div class="cell pain">Опечатки в цене и ISBN</div><div class="cell pain">Нет массовых действий</div><div class="cell pain">Статусы вручную</div><div class="cell pain">Модерация по одной</div>
+    <div class="row-label">Решения BookBox</div><div class="cell solution">Импорт CSV</div><div class="cell solution">Плотная форма с подсказками</div><div class="cell solution">Валидация полей</div><div class="cell solution">Массовое редактирование</div><div class="cell solution">Фильтры и статусы</div><div class="cell solution">Очередь модерации</div>
+  </div>
+</div>
+<div class="legend"><span><b>Эмоции:</b> 😞 плохо · 😐 нейтрально · 🙂 нормально · 😊 хорошо · 🤩 отлично</span><span><b>Красные</b> — боли, <b>зелёные</b> — решения.</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

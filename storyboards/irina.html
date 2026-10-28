@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — раскадровка: Ирина</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="storyboards.css">
+</head>
+<body>
+<h1>Раскадровка: Ирина</h1>
+<p class="sub">владелец, 41 год · аналитика · решения по ассортименту</p>
+<div class="meta"><span>Ноутбук</span><span>Редкие сессии</span><span>Нужны цифры</span></div>
+
+<div class="path">
+    <div class="step">
+      <div class="screen screen--admin">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>/admin</b><span>вход</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen screen--admin">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Аналитика</b><span>раздел</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body s-body--lines"><i></i><i></i><i></i><i></i></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Период</b><span>месяц</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Отчёт</b><span>продажи и топы</span></div>
+    </div><div class="arrow">→</div>
+    <div class="step">
+      <div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div>
+      <div class="cap"><b>Экспорт</b><span>CSV для команды</span></div>
+    </div>
+</div>
+
+<div class="branches">
+  <h3>Альтернативы и исключения</h3>
+  <div class="branch">
+      <span class="badge badge--alt">Альтернатива</span>
+      <span class="from">из «Отчёт»</span>
+      <div class="b-step"><div class="screen">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-body"></div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Решения</span></div>
+      <span class="note">если экспорт не нужен — сразу решения.</span>
+    </div>
+  <div class="branch">
+      <span class="badge badge--exc">Исключение</span>
+      <span class="from">из «Отчёт»</span>
+      <div class="b-step"><div class="screen screen--error">
+      <div class="s-head"><i></i><i></i><i></i><b></b></div>
+      <div class="s-title"></div>
+      <div class="s-cross">✕</div>
+      <div class="s-btn"></div>
+    </div><span class="b-cap">Нет данных</span></div>
+      <span class="note">сменить период или проверить заказы.</span>
+    </div>
+</div>
+
+<div class="legend"><span><b>→</b> основной путь</span><span><b>Альтернатива</b> — другой путь к цели</span><span><b>Исключение</b> — что делать, если что-то пошло не так</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

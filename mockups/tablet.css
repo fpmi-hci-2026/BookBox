@@ -1,0 +1,65 @@
+/* BookBox — адаптив под планшет 980 px */
+
+@media (max-width: 1100px) {
+  :root {
+    --container: 940px;
+  }
+
+  .site-header .container {
+    gap: 18px;
+  }
+
+  .main-nav {
+    gap: 14px;
+    font-size: 13px;
+  }
+
+  .header-search {
+    width: 200px;
+  }
+
+  .hero {
+    padding: 30px;
+    gap: 24px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero-covers .cover {
+    width: 104px;
+  }
+
+  .catalog {
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+  }
+
+  .book-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product {
+    grid-template-columns: 300px 1fr;
+    gap: 28px;
+  }
+
+  .product h1 {
+    font-size: 30px;
+  }
+
+  .cart-layout,
+  .checkout-layout {
+    grid-template-columns: 1fr 320px;
+  }
+
+  .account-layout,
+  .admin-layout {
+    grid-template-columns: 210px 1fr;
+  }
+
+  .footer-cols {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}

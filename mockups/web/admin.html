@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — админ-панель: каталог</title>
+  <link rel="stylesheet" href="../fonts.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../wireframe.css">
+  <link rel="stylesheet" href="../hifi.css">
+  <link rel="stylesheet" href="../tablet.css">
+  <link rel="stylesheet" href="../dark.css">
+</head>
+<body class="theme-wire" data-page="admin">
+<!--ICONS-->
+<!--HEADER-->
+
+<main class="container">
+  <div class="page-head"><h1>Админ-панель</h1><span class="count">Каталог · 248 книг</span></div>
+
+  <div class="admin-layout">
+    <nav class="side-nav">
+      <a href="#">Каталог</a>
+      <a href="#">Заказы · 7 новых</a>
+      <a href="#">Пользователи</a>
+      <a href="#">Отзывы · 3 на модерации</a>
+      <a href="#">Подборки и акции</a>
+      <a href="#">Аналитика</a>
+      <a href="#">Настройки</a>
+    </nav>
+
+    <section>
+      <div class="toolbar--admin">
+        <input placeholder="Поиск по названию, ISBN или автору">
+        <span class="select">Все жанры <svg class="icon"><use href="#i-chevron-down"/></svg></span>
+        <button class="btn btn--ghost">Экспорт CSV</button>
+        <button class="btn">Добавить книгу</button>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr><th>Книга</th><th>Автор</th><th>ISBN</th><th>Цена</th><th>Склад</th><th>Статус</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Мастер и Маргарита</b></td><td>Булгаков</td><td>978-985-01-1234</td><td>24,90</td><td>14</td><td><span class="status status--ok">В продаже</span></td></tr>
+          <tr><td><b>1984</b></td><td>Оруэлл</td><td>978-985-01-1180</td><td>19,90</td><td>6</td><td><span class="status status--ok">В продаже</span></td></tr>
+          <tr><td><b>Имя розы</b></td><td>Эко</td><td>978-985-01-0977</td><td>29,90</td><td>0</td><td><span class="status status--wait">Под заказ</span></td></tr>
+          <tr><td><b>Тень горы</b></td><td>Робертс</td><td>978-985-01-1311</td><td>32,00</td><td>9</td><td><span class="status status--ok">В продаже</span></td></tr>
+          <tr><td><b>Тихий Дон</b></td><td>Шолохов</td><td>978-985-01-0842</td><td>34,50</td><td>2</td><td><span class="status status--ok">В продаже</span></td></tr>
+          <tr><td><b>Собачье сердце</b></td><td>Булгаков</td><td>978-985-01-0790</td><td>14,50</td><td>0</td><td><span class="status status--bad">Снята с продажи</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="pagination" style="justify-content:flex-start">
+        <span class="is-active">1</span><span>2</span><span>3</span><span>…</span><span>42</span><span>›</span>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!--FOOTER-->
+<!--INIT-->
+</body>
+</html>

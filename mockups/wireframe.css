@@ -1,0 +1,81 @@
+/* BookBox — тема wireframe: только структура, без цвета */
+
+.theme-wire {
+  --ink: #374151;
+  --muted: #8a8f98;
+  --line: #d5d5d5;
+  --paper: #f7f7f7;
+  --white: #ffffff;
+  --deep: #6b7280;
+  --deep-dark: #4b5563;
+  --gold: #9ca3af;
+  --gold-soft: #efefef;
+  --sale: #9ca3af;
+  --sale-soft: #f3f3f3;
+  --ok: #9ca3af;
+  --shadow: none;
+  --shadow-sm: none;
+}
+
+.theme-wire .cover {
+  background: repeating-linear-gradient(45deg, #f5f5f5 0 8px, #ececec 8px 16px);
+  border: 1px dashed #b9b9b9;
+  color: #6b7280;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.theme-wire .cover::after {
+  display: none;
+}
+
+.theme-wire .cover .cover-note {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+  color: #9aa0a6;
+}
+
+.theme-wire .book-badge {
+  background: #ffffff;
+  border: 1px solid #9ca3af;
+  color: #4b5563;
+}
+
+.theme-wire .btn {
+  background: #ffffff;
+  border-color: #9ca3af;
+  color: #374151;
+}
+
+.theme-wire .counter {
+  background: #4b5563;
+}
+
+.theme-wire .header-search {
+  background: #ffffff;
+}
+
+.theme-wire .logo {
+  color: #374151;
+}
+
+.theme-wire .logo span {
+  color: #6b7280;
+}
+
+.theme-wire .star {
+  color: #6b7280;
+}
+
+/* низкая точность: без антиквы, только структура */
+.theme-wire .logo,
+.theme-wire .page-head h1,
+.theme-wire .m-title,
+.theme-wire .section-title {
+  font-family: var(--font-ui);
+  letter-spacing: 0;
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — CJM: Ольга Петровна</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="maps.css">
+</head>
+<body>
+<h1>CJM: Ольга Петровна</h1>
+<p class="sub">Путь клиента по этапам: действия, точки контакта, мысли, эмоции, боли и решения BookBox.</p>
+<div class="cjm">
+  <div class="cjm-head">
+    <div>
+      <h2>Ольга Петровна</h2>
+      <div class="goal">преподаватель, 48 лет · веб-версия</div>
+      <div class="goal" style="margin-top:8px;max-width:620px"><b>Цель:</b> Найти редкое научное издание и оформить предзаказ.</div>
+    </div>
+    <div class="cjm-meta"><span class="chip">Ноутбук</span><span class="chip">Проводной интернет</span><span class="chip">Есть время на поиск</span></div>
+  </div>
+  <div class="cjm-grid">
+    <div class="row-label stage-row-label">Этап</div><div class="cell stage">Осознание</div><div class="cell stage">Поиск</div><div class="cell stage">Выбор</div><div class="cell stage">Заказ</div><div class="cell stage">Доставка</div><div class="cell stage">После покупки</div>
+    <div class="row-label">Действия</div><div class="cell ">Нужна литература по теме</div><div class="cell ">Открывает расширенный поиск</div><div class="cell ">Проверяет издание и год</div><div class="cell ">Оформляет предзаказ</div><div class="cell ">Ждёт поступления</div><div class="cell ">Подписывается на новинки</div>
+    <div class="row-label">Точки контакта</div><div class="cell ">Конференция, коллеги</div><div class="cell ">Расширенный поиск</div><div class="cell ">Карточка книги</div><div class="cell ">Предзаказ</div><div class="cell ">Email</div><div class="cell ">Личный кабинет</div>
+    <div class="row-label">Мысли</div><div class="cell "><span class="thought">«Есть ли у них?»</span></div><div class="cell "><span class="thought">«Нужен точный фильтр»</span></div><div class="cell "><span class="thought">«То ли это издание?»</span></div><div class="cell "><span class="thought">«Подожду»</span></div><div class="cell "><span class="thought">«Когда будет?»</span></div><div class="cell "><span class="thought">«Нужны новинки»</span></div>
+    <div class="row-label">Эмоции</div>
+    <div class="emotion-wrap"><svg viewBox="0 0 600 100" preserveAspectRatio="none">
+      <polygon points="50,100 50,54 150,54 250,37 350,54 450,37 550,37 550,100" fill="rgba(176,141,87,0.10)"/>
+      <polyline points="50,54 150,54 250,37 350,54 450,37 550,37" fill="none" stroke="#B08D57" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+    </svg><div class="emotion-dot" style="left:8.333333333333332%;top:54%">🙂</div><div class="emotion-dot" style="left:25%;top:54%">🙂</div><div class="emotion-dot" style="left:41.66666666666667%;top:37%">😊</div><div class="emotion-dot" style="left:58.333333333333336%;top:54%">🙂</div><div class="emotion-dot" style="left:75%;top:37%">😊</div><div class="emotion-dot" style="left:91.66666666666666%;top:37%">😊</div></div>
+    <div class="row-label">Боли</div><div class="cell pain">Нет редких книг</div><div class="cell pain">Слабый поиск</div><div class="cell pain">Мало характеристик</div><div class="cell pain">Нет предзаказа</div><div class="cell pain">Нет уведомления</div><div class="cell pain">Нет подписки</div>
+    <div class="row-label">Решения BookBox</div><div class="cell solution">Каталог и издательства</div><div class="cell solution">Расширенный поиск</div><div class="cell solution">Полные характеристики</div><div class="cell solution">Предзаказ из карточки</div><div class="cell solution">Уведомление о поступлении</div><div class="cell solution">Подписка на жанр</div>
+  </div>
+</div>
+<div class="legend"><span><b>Эмоции:</b> 😞 плохо · 😐 нейтрально · 🙂 нормально · 😊 хорошо · 🤩 отлично</span><span><b>Красные</b> — боли, <b>зелёные</b> — решения.</span></div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>

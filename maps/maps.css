@@ -1,0 +1,323 @@
+/* BookBox — Impact Map и CJM */
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  width: 1600px;
+  padding: 40px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  letter-spacing: -0.01em;
+}
+
+.sub {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.section-label {
+  margin: 26px 0 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------------ */
+/* Impact Map                                                          */
+/* ------------------------------------------------------------------ */
+
+.board {
+  display: grid;
+  gap: 18px;
+  align-items: start;
+}
+
+.board--4 { grid-template-columns: repeat(4, 1fr); }
+
+.goal {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.goal-head {
+  padding: 14px 16px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.goal-head h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.goal-head p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.card {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.card:last-child { border-bottom: 0; }
+
+.card .who {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 12.5px;
+  font-weight: 800;
+}
+
+.card .who span {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.card p {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+  color: #374151;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.chip {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 10.5px;
+  color: var(--deep);
+  white-space: nowrap;
+}
+
+.chip--gold { background: var(--gold-soft); border-color: #e2cfa5; color: #6b4e1f; }
+
+.note {
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--gold);
+  background: #fdf8ee;
+  font-size: 12.5px;
+  color: #6b4e1f;
+}
+
+/* Impact map — user table */
+
+.utable {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.utable th {
+  padding: 10px 14px;
+  text-align: left;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.utable td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  vertical-align: top;
+}
+
+.utable tr:last-child td { border-bottom: 0; }
+
+.utable td b { font-size: 13.5px; }
+
+/* ------------------------------------------------------------------ */
+/* CJM                                                                 */
+/* ------------------------------------------------------------------ */
+
+.cjm {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.cjm-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 20px 26px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.cjm-head h2 {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: 26px;
+}
+
+.cjm-head .goal {
+  font-size: 12.5px;
+  color: var(--muted);
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.cjm-meta {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 620px;
+}
+
+.cjm-meta .chip { font-size: 11px; padding: 4px 10px; }
+
+.cjm-grid {
+  display: grid;
+  grid-template-columns: 190px repeat(6, 1fr);
+}
+
+.row-label {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  background: #fff;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cell {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  font-size: 12.5px;
+  color: #374151;
+}
+
+.cell ul {
+  margin: 0;
+  padding-left: 15px;
+}
+
+.cell li { margin: 0 0 3px; }
+
+.stage-row .cell {
+  background: var(--deep);
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  border-left-color: rgba(255, 255, 255, 0.15);
+}
+
+.stage-row .row-label {
+  background: var(--deep-dark);
+  color: #fff;
+  border-top-color: var(--deep-dark);
+}
+
+.thought { font-style: italic; color: #4b5563; }
+
+.pain { background: #fdf4f4; }
+
+.solution {
+  background: #f2f8f4;
+  font-weight: 600;
+  color: #274f37;
+}
+
+/* Emotions */
+
+.emotion-row { display: contents; }
+
+.emotion-wrap {
+  grid-column: span 6;
+  position: relative;
+  height: 112px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  background: linear-gradient(to bottom, #fcfbf8, #fff);
+}
+
+.emotion-wrap svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.emotion-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  box-shadow: 0 1px 2px rgba(31, 41, 55, 0.08);
+}
+
+.legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.legend b { color: var(--ink); }
+
+/* этап в CJM */
+.cell.stage {
+  background: var(--deep);
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+  border-left-color: rgba(255, 255, 255, 0.15);
+}
+
+.row-label.stage-row-label {
+  background: var(--deep-dark);
+  color: #fff;
+  border-top-color: var(--deep-dark);
+}

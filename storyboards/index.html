@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>BookBox — раскадровки</title>
+  <link rel="stylesheet" href="../mockups/fonts.css">
+  <link rel="stylesheet" href="../mockups/tokens.css">
+  <link rel="stylesheet" href="storyboards.css">
+</head>
+<body>
+<h1>Интерактивные раскадровки</h1>
+<p class="sub">Шесть ключевых сценариев по персонажам. Каждый экран связан с соседним переходом; альтернативы и исключения показаны отдельными ветками. Исходники кликабельны.</p>
+<div class="hub">
+<a href="anya.html"><h3>Аня</h3><p>студентка, 20 лет · мобильное приложение · цена и скорость</p></a>
+<a href="dmitry.html"><h3>Дмитрий</h3><p>менеджер, 30 лет · веб-версия · подарок за пару минут</p></a>
+<a href="olga.html"><h3>Ольга Петровна</h3><p>преподаватель, 48 лет · веб-версия · точный поиск и предзаказ</p></a>
+<a href="sergey.html"><h3>Сергей</h3><p>администратор, 33 года · админ-панель · каталог и заказы</p></a>
+<a href="irina.html"><h3>Ирина</h3><p>владелец, 41 год · аналитика · решения по ассортименту</p></a>
+<a href="viktor.html"><h3>Виктор</h3><p>инженер, 38 лет · анти-персонаж · без онлайн-оплаты</p></a>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("measure") === "1") {
+    window.addEventListener("load", function () {
+      document.title = "H=" + document.documentElement.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>
