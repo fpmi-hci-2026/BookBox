@@ -1,0 +1,59 @@
+@startuml
+!include https://raw.githubusercontent.com/tmorin/plantuml-libs/v13.0.0/distribution/eventstorming/single.puml
+!pragma layout smetana
+skinparam defaultFontName Arial
+skinparam shadowing false
+title BookBox — EventStorming Big Picture
+
+package "Каталог и выбор" {
+  DomainEvent(bookPublished, "Карточка книги опубликована")
+  DomainEvent(added, "Книга добавлена в корзину")
+  DomainEvent(preorder, "Предзаказ принят")
+  DomainEvent(restocked, "Поступление книги учтено")
+  DomainEvent(preorderReady, "Предзаказ доступен к покупке")
+  DomainEvent(notified, "Уведомление о поступлении создано")
+
+  bookPublished -down-> added : покупка из наличия
+  bookPublished -right-> preorder : предзаказ при отсутствии
+  preorder -[hidden]down-> restocked
+  restocked -down-> preorderReady : есть активная заявка
+  preorder -[hidden]down-> preorderReady
+  preorderReady -down-> notified
+  notified -left-> added : покупатель решил купить
+}
+
+package "Оформление и оплата" {
+  DomainEvent(shortage, "Обнаружена нехватка экземпляров")
+  DomainEvent(order, "Заказ оформлен для оплаты")
+  DomainEvent(rejected, "Попытка оплаты отклонена")
+  DomainEvent(paid, "Оплата подтверждена")
+  DomainEvent(confirmed, "Заказ подтверждён")
+
+  order -down-> paid : успешная попытка
+  order -right-> rejected : отказ
+  rejected --> paid : новая попытка успешна
+  paid -down-> confirmed
+}
+
+package "Выполнение заказа и отчётность" {
+  DomainEvent(dispatched, "Заказ передан в доставку")
+  DomainEvent(delivered, "Доставка подтверждена")
+  DomainEvent(included, "Продажа учтена в отчёте")
+
+  dispatched -down-> delivered
+}
+
+Comment(stockWindow, "H1 · Как удерживать остаток\nмежду проверкой и оплатой?")
+Comment(deliverySource, "H2 · Кто подтверждает доставку\nи как BookBox узнаёт об этом?")
+added -down-> order : остаток достаточен
+added --> shortage : при проверке
+shortage --> added : корзина исправлена
+order .. stockWindow
+confirmed -down-> dispatched : заказ готов к передаче
+confirmed -right-> included
+delivered .. deliverySource
+legend bottom
+  Оранжевый — свершившееся событие · H — открытый вопрос
+  Стрелки показывают порядок и переходы между ветками.
+endlegend
+@enduml

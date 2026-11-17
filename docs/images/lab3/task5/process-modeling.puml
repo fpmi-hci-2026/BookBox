@@ -1,0 +1,48 @@
+@startuml
+!include https://raw.githubusercontent.com/tmorin/plantuml-libs/v13.0.0/distribution/eventstorming/single.puml
+!pragma layout smetana
+skinparam defaultFontName Arial
+skinparam shadowing false
+title BookBox — EventStorming Process Modeling · UC-02
+
+Person(buyer, "Покупатель")
+ReadModel(checkout, "Состав корзины, адрес,\nдоставка и итог в BYN")
+Command(submit, "Оформить заказ")
+Policy(stockCheck, "Перед оплатой проверить\nактуальный остаток")
+DomainEvent(shortage, "Обнаружена нехватка\nэкземпляров")
+Command(updateCart, "Исправить корзину")
+DomainEvent(order, "Заказ оформлен\nдля оплаты")
+Command(pay, "Начать оплату")
+DomainEvent(paymentStarted, "Попытка оплаты открыта")
+System(provider, "Платёжный сервис")
+DomainEvent(rejected, "Попытка оплаты\nотклонена")
+Command(retryPay, "Повторить оплату")
+DomainEvent(paid, "Оплата подтверждена")
+Policy(confirmRule, "После оплаты подтвердить\nзаказ один раз")
+Command(confirm, "Подтвердить заказ")
+DomainEvent(confirmed, "Заказ подтверждён")
+ReadModel(orderView, "Номер и статус заказа")
+
+buyer -down-> submit
+checkout -right-> submit : данные для решения
+submit -down-> stockCheck
+stockCheck -down-> order : остаток достаточен
+stockCheck -right-> shortage : есть недоступные позиции
+shortage -up-> updateCart : покупатель видит позиции
+updateCart --> submit : повторная проверка
+order -down-> pay : покупатель подтверждает итог
+pay -down-> paymentStarted
+paymentStarted -down-> provider : сумма и attemptId
+provider -down-> paid : списание подтверждено
+provider -right-> rejected : отказ
+rejected -up-> retryPay : адрес и доставка сохранены
+retryPay --> paymentStarted : новый attemptId, тот же orderId
+paid -down-> confirmRule
+confirmRule -down-> confirm
+confirm -down-> confirmed
+confirmed -right-> orderView
+legend bottom
+  Синий — команда · Оранжевый — событие · Фиолетовый — правило
+  Зелёный — модель чтения · Розовый — внешняя система
+endlegend
+@enduml
