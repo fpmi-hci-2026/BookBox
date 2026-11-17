@@ -1,0 +1,27 @@
+flowchart LR
+  Guest["Гость"]
+  Buyer["Покупатель"]
+  Admin["Администратор"]
+  Analyst["Аналитик"]
+
+  subgraph BookBox["BookBox"]
+    Search(["Найти книгу"])
+    ViewBook(["Просмотреть карточку книги"])
+    Cart(["Управлять корзиной"])
+    Checkout(["Оформить заказ"])
+    Preorder(["Оформить предзаказ"])
+    AddBook(["Добавить книгу в каталог"])
+    ManageOrder(["Обработать заказ"])
+    Sales(["Просмотреть статистику продаж"])
+  end
+
+  Guest --- Search
+  Guest --- ViewBook
+  Buyer --- Search
+  Buyer --- ViewBook
+  Buyer --- Cart
+  Buyer --- Checkout
+  Buyer --- Preorder
+  Admin --- AddBook
+  Admin --- ManageOrder
+  Analyst --- Sales

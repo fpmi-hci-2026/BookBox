@@ -1,0 +1,73 @@
+@startuml
+!include https://raw.githubusercontent.com/tmorin/plantuml-libs/v13.0.0/distribution/eventstorming/single.puml
+!pragma layout smetana
+skinparam defaultFontName Arial
+skinparam shadowing false
+title BookBox — EventStorming Software Design
+
+package "Каталог" {
+  Aggregate(book, "Книга\nbookId")
+  DomainEvent(restock, "Поступление книги учтено")
+  ReadModel(stockView, "Доступность и цена")
+  book -down-> restock
+  book --> stockView
+}
+
+package "Заказы" {
+  Command(create, "Оформить заказ")
+  Policy(paymentRule, "По успешной оплате\nподтвердить заказ")
+  Aggregate(order, "Заказ\norderId")
+  DomainEvent(awaiting, "Заказ оформлен для оплаты")
+  DomainEvent(confirmed, "Заказ подтверждён")
+  DomainEvent(dispatched, "Заказ передан в доставку")
+  ReadModel(details, "Детали заказа")
+  create -down-> order
+  paymentRule --> order
+  order --> awaiting
+  order -down-> confirmed
+  confirmed --> details
+  order --> dispatched
+  dispatched --> details
+}
+
+package "Оплата" {
+  Command(start, "Начать или повторить оплату")
+  Aggregate(attempt, "Попытка оплаты\nattemptId")
+  DomainEvent(paid, "Оплата подтверждена")
+  DomainEvent(rejected, "Попытка оплаты отклонена")
+  start -down-> attempt
+  attempt -down-> paid
+  attempt --> rejected
+}
+System(provider, "Платёжный сервис")
+
+package "Предзаказы" {
+  Policy(availabilityRule, "По поступлению проверить\nактивные предзаказы")
+  Aggregate(preorder, "Предзаказ\npreorderId")
+  DomainEvent(available, "Предзаказ доступен к покупке")
+  availabilityRule -down-> preorder
+  preorder -down-> available
+}
+
+package "Уведомления" {
+  Policy(notifyOnce, "Создать одно уведомление\nна переход предзаказа")
+  ReadModel(inbox, "Уведомления покупателя")
+  notifyOnce -down-> inbox
+}
+package "Аналитика" {
+  ReadModel(report, "Продажи по периоду")
+}
+
+stockView -right-> create : проверка наличия
+awaiting -right-> start : после подтверждения покупателем
+attempt -right-> provider : запрос с attemptId
+provider ..> attempt : результат попытки
+paid --> paymentRule : orderId и attemptId
+restock -down-> availabilityRule : bookId
+available -right-> notifyOnce : preorderId и переход
+confirmed -down-> report : один вклад на orderId
+legend bottom
+  Пакеты — предлагаемые границы модулей BookBox-Server.
+  Подписи на стрелках фиксируют данные и условия перехода.
+endlegend
+@enduml

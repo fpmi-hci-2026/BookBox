@@ -1,0 +1,64 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+hide empty methods
+title Предметная модель оформления заказа
+
+class "Покупатель" as Customer {
+  id: UUID
+  имя: String
+  email: String
+}
+
+class "Книга" as Book {
+  id: UUID
+  название: String
+  ISBN: String
+  цена: Decimal
+  остаток: Integer
+}
+
+class "Корзина" as Cart {
+  id: UUID
+}
+
+class "Позиция корзины" as CartItem {
+  количество: Integer
+}
+
+class "Заказ" as Order {
+  id: UUID
+  дата: DateTime
+  статус: String
+  сумма: Decimal
+}
+
+class "Позиция заказа" as OrderItem {
+  количество: Integer
+  ценаНаМоментЗаказа: Decimal
+}
+
+class "Адрес доставки" as Address {
+  получатель: String
+  город: String
+  улица: String
+  дом: String
+}
+
+class "Попытка оплаты" as PaymentAttempt {
+  id: UUID
+  дата: DateTime
+  сумма: Decimal
+  статус: String
+}
+
+Customer "1" -- "1" Cart
+Customer "1" -- "0..*" Order
+Cart "1" *-- "0..*" CartItem
+CartItem "0..*" -- "1" Book
+Order "1" *-- "1..*" OrderItem
+OrderItem "0..*" -- "1" Book
+Order "1" *-- "1" Address
+Order "1" *-- "0..*" PaymentAttempt
+@enduml

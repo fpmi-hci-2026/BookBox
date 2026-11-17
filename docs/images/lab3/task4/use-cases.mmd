@@ -1,0 +1,16 @@
+flowchart LR
+  Buyer["Покупатель"]
+  Admin["Администратор"]
+  Analyst["Аналитик"]
+  subgraph BookBox["BookBox"]
+    UC01(["Найти учебник"])
+    UC02(["Оформить и оплатить заказ"])
+    UC03(["Оформить предзаказ"])
+    UC04(["Добавить книгу"])
+    UC05(["Посмотреть статистику"])
+  end
+  Buyer --- UC01
+  Buyer --- UC02
+  Buyer --- UC03
+  Admin --- UC04
+  Analyst --- UC05

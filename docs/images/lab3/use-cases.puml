@@ -1,0 +1,33 @@
+@startuml
+!pragma layout smetana
+left to right direction
+skinparam defaultFontName Arial
+title Варианты использования BookBox
+
+actor "Гость" as Guest
+actor "Покупатель" as Buyer
+actor "Администратор" as Admin
+actor "Аналитик" as Analyst
+
+rectangle "BookBox" {
+  usecase "Найти книгу" as Search
+  usecase "Просмотреть карточку книги" as ViewBook
+  usecase "Управлять корзиной" as Cart
+  usecase "Оформить заказ" as Checkout
+  usecase "Оформить предзаказ" as Preorder
+  usecase "Добавить книгу в каталог" as AddBook
+  usecase "Обработать заказ" as ManageOrder
+  usecase "Просмотреть статистику продаж" as Sales
+}
+
+Guest -- Search
+Guest -- ViewBook
+Buyer -- Search
+Buyer -- ViewBook
+Buyer -- Cart
+Buyer -- Checkout
+Buyer -- Preorder
+Admin -- AddBook
+Admin -- ManageOrder
+Analyst -- Sales
+@enduml

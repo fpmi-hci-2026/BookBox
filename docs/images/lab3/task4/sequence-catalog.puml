@@ -1,0 +1,20 @@
+@startuml
+skinparam defaultFontName Arial
+title UC-04. Добавление книги
+actor "Администратор" as User
+participant "Веб-админ-панель" as UI
+participant "Сервер BookBox" as API
+database "База данных" as Store
+User -> UI: Отправляет карточку книги
+UI -> API: Передаёт поля книги
+API -> API: Проверяет роль и обязательные поля
+alt Роль и поля корректны
+  API -> Store: Сохраняет книгу
+  Store --> API: Возвращает идентификатор книги
+  API --> UI: Возвращает опубликованную карточку
+  UI --> User: Подтверждает появление книги в каталоге
+else Ошибка доступа или полей
+  API --> UI: Возвращает ошибку доступа или поля
+  UI --> User: Показывает сообщение об ошибке
+end
+@enduml

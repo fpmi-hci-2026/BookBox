@@ -1,0 +1,19 @@
+flowchart LR
+  subgraph Device["Устройство пользователя"]
+    Browser["Браузер"]
+    Mobile["Мобильное приложение"]
+  end
+  subgraph WebHost["Хост веб-приложения"]
+    Web["BookBox-Web"]
+  end
+  subgraph APIHost["Сервер приложений"]
+    API["BookBox-Server"]
+  end
+  subgraph DataHost["Узел данных"]
+    DB[("Реляционная БД")]
+  end
+  Browser -->|HTTPS| Web
+  Browser -->|HTTPS API| API
+  Mobile -->|HTTPS API| API
+  API -->|Закрытая сеть| DB
+  API -->|HTTPS| Pay["Внешний платёжный сервис"]

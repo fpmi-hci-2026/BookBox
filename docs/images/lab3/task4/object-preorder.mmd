@@ -1,0 +1,19 @@
+classDiagram
+  class Olga["покупательО8 — Покупатель"]
+  class Olga {
+    <<instance>>
+    id = O8
+  }
+  class Book["издание62 — Книга"]
+  class Book {
+    <<instance>>
+    доступенПредзаказ = true
+  }
+  class Booking["предзаказ73 — Предзаказ"]
+  class Booking {
+    <<instance>>
+    статус = Ожидает поступления
+    ожидаемоеПоступление = не объявлено
+  }
+  Olga -- Booking
+  Book -- Booking

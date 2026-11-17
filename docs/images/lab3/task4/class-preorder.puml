@@ -1,0 +1,27 @@
+@startuml
+skinparam defaultFontName Arial
+title Классы предзаказа
+!pragma layout smetana
+skinparam classAttributeIconSize 0
+hide empty methods
+class "Покупатель" as Buyer {
+  id: UUID
+}
+class "Книга" as Book {
+  id: UUID
+  доступенПредзаказ: Boolean
+}
+class "Предзаказ" as Preorder {
+  номер: String
+  создан: DateTime
+  ожидаемоеПоступление: Date?
+  статус: String
+}
+class "Уведомление" as Notification {
+  тип: String
+  отправлено: DateTime
+}
+Buyer "1" -- "0..*" Preorder
+Book "1" -- "0..*" Preorder
+Preorder "1" -- "0..*" Notification
+@enduml

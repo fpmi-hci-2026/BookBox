@@ -1,0 +1,36 @@
+sequenceDiagram
+  actor Buyer as Покупатель
+  participant Client as Интерфейс BookBox
+  participant Server as Сервер BookBox
+  participant Payment as Платёжный сервис
+
+  Buyer->>Client: Переходит к оформлению из корзины
+  Client-->>Buyer: Показывает форму оформления
+  Buyer->>Client: Указывает адрес и способ доставки
+  Client->>Server: Передаёт данные доставки для проверки заказа
+  Server->>Server: Проверяет наличие книг
+
+  alt Все книги в наличии
+    Server-->>Client: Возвращает итоговую сумму
+    Client-->>Buyer: Показывает итоговую сумму
+    loop Первая попытка и повторы до успеха или выхода
+      Buyer->>Client: Подтверждает онлайн-оплату
+      Client->>Server: Запрашивает оплату текущего заказа
+      Server->>Payment: Передаёт запрос на оплату
+      Payment-->>Server: Возвращает результат попытки
+
+      alt Платёж подтверждён
+        Server->>Server: Подтверждает заказ
+        Server-->>Client: Возвращает номер заказа
+        Client-->>Buyer: Показывает подтверждение и номер
+      else Платёж отклонён
+        Server->>Server: Сохраняет данные заказа и результат попытки
+        Server-->>Client: Возвращает ошибку оплаты
+        Client-->>Buyer: Предлагает повторить оплату или выйти
+      end
+    end
+  else Книга недоступна
+    Server-->>Client: Возвращает недоступные позиции
+    Client-->>Buyer: Сообщает, какие книги недоступны
+    Buyer->>Client: Возвращается в корзину
+  end

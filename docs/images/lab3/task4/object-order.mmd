@@ -1,0 +1,46 @@
+classDiagram
+  class Anna["покупательА17 — Покупатель"]
+  class Anna {
+    <<instance>>
+    id = A17
+  }
+  class Order["заказ104 — Заказ"]
+  class Order {
+    <<instance>>
+    статус = Подтверждён
+    сумма = 29.90 BYN
+  }
+  class Line["позиция1 — Позиция заказа"]
+  class Line {
+    <<instance>>
+    количество = 1
+    ценаНаМоментЗаказа = 29.90 BYN
+  }
+  class Book["книга728 — Книга"]
+  class Book {
+    <<instance>>
+    название = Учебник по алгоритмам
+  }
+  class Addr["адрес1 — Адрес доставки"]
+  class Addr {
+    <<instance>>
+    город = Минск
+  }
+  class Pay1["попытка1 — Попытка оплаты"]
+  class Pay1 {
+    <<instance>>
+    статус = Отклонена
+    сумма = 29.90 BYN
+  }
+  class Pay2["попытка2 — Попытка оплаты"]
+  class Pay2 {
+    <<instance>>
+    статус = Подтверждена
+    сумма = 29.90 BYN
+  }
+  Anna -- Order
+  Order *-- Line
+  Line -- Book
+  Order *-- Addr
+  Order *-- Pay1
+  Order *-- Pay2
