@@ -1,0 +1,42 @@
+@startuml
+!include_once https://raw.githubusercontent.com/chilit-nl/plantuml-event-modeling/1b31726ef8ba902ac24452806c3e87f049a1a00c/event-modeling-lib.iuml
+skinparam defaultFontName Arial
+skinparam shadowing false
+$enableAutoSpacing()
+title BookBox · Event Modeling · Предзаказ и уведомление
+$configureWireframeLane("buyer", "Покупатель")
+$configureEventLane("preorders", "Предзаказы")
+$configureEventLane("catalog", "Каталог")
+$configureEventLane("notifications", "Уведомления")
+
+$wireframe("Карточка издания\nи форма предзаказа", "buyer", $alias = "form", $arrow = 0)
+$command("Оформить предзаказ", $alias = "create", $arrow = 0)
+$event("Предзаказ принят\npreorderId, bookId", "preorders", $alias = "created", $arrow = 0)
+$event("Поступление учтено\nbookId, остаток", "catalog", $alias = "restocked", $arrow = 0)
+$view("Активные заявки\nна поступившую книгу", $alias = "eligible", $arrow = 0)
+$extra("Обработчик предзаказов", $alias = "worker", $arrow = 0)
+$command("Открыть покупку\nпо предзаказу", $alias = "enable", $arrow = 0)
+$event("Предзаказ доступен к покупке\npreorderId, transitionId", "preorders", $alias = "available", $arrow = 0)
+$view("Переходы к покупке\nбез уведомления", $alias = "pending", $arrow = 0)
+$extra("Обработчик уведомлений", $alias = "notifier", $arrow = 0)
+$command("Создать уведомление", $alias = "notify", $arrow = 0)
+$event("Уведомление создано\npreorderId, transitionId", "notifications", $alias = "notified", $arrow = 0)
+$view("Уведомления\nи ссылка на предзаказ", $alias = "inbox", $arrow = 0)
+$wireframe("Уведомления\nи детали заявки", "buyer", $alias = "dashboard", $arrow = 0)
+
+$commandarrow("form", "create")
+$eventarrow("create", "created")
+$eventarrow("created", "eligible")
+$eventarrow("restocked", "eligible")
+$arrow("eligible", "worker")
+$commandarrow("worker", "enable")
+$eventarrow("enable", "available")
+$eventarrow("available", "pending")
+$arrow("pending", "notifier")
+$commandarrow("notifier", "notify")
+$eventarrow("notify", "notified")
+$eventarrow("notified", "inbox")
+$arrow("inbox", "dashboard")
+
+$renderEventModelingDiagram()
+@enduml

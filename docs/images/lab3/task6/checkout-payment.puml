@@ -1,0 +1,44 @@
+@startuml
+!include_once https://raw.githubusercontent.com/chilit-nl/plantuml-event-modeling/1b31726ef8ba902ac24452806c3e87f049a1a00c/event-modeling-lib.iuml
+skinparam defaultFontName Arial
+skinparam shadowing false
+$enableAutoSpacing()
+title BookBox · Event Modeling · Оформление и оплата
+$configureWireframeLane("buyer", "Покупатель")
+$configureWireframeLane("provider", "Платёжный сервис")
+$configureEventLane("orders", "Заказы")
+$configureEventLane("payments", "Оплата")
+
+$wireframe("Корзина и доставка\nадрес, упаковка, итог", "buyer", $alias = "checkout", $arrow = 0)
+$command("Оформить заказ", $alias = "submit", $arrow = 0)
+$event("Заказ оформлен для оплаты\norderId, сумма BYN", "orders", $alias = "submitted", $arrow = 0)
+$view("Итог и статус\nожидает оплаты", $alias = "total", $arrow = 0)
+$wireframe("Подтвердить или\nповторить оплату", "buyer", $alias = "payScreen", $arrow = 0)
+$command("Начать попытку оплаты", $alias = "pay", $arrow = 0)
+$event("Попытка оплаты открыта\norderId, attemptId", "payments", $alias = "started", $arrow = 0)
+$wireframe("Результат от провайдера\nproviderRef, статус", "provider", $alias = "gateway", $arrow = 0)
+$command("Учесть результат оплаты", $alias = "record", $arrow = 0)
+$event("Оплата подтверждена\nсумма и attemptId", "payments", $alias = "paid", $arrow = 0)
+$view("Оплаченные заказы\nк подтверждению", $alias = "pending", $arrow = 0)
+$extra("Обработчик заказов", $alias = "worker", $arrow = 0)
+$command("Подтвердить заказ", $alias = "confirm", $arrow = 0)
+$event("Заказ подтверждён\norderId, confirmedAt", "orders", $alias = "confirmed", $arrow = 0)
+$view("Номер и статус заказа", $alias = "summary", $arrow = 0)
+
+$commandarrow("checkout", "submit")
+$eventarrow("submit", "submitted")
+$eventarrow("submitted", "total")
+$arrow("total", "payScreen")
+$commandarrow("payScreen", "pay")
+$eventarrow("pay", "started")
+$arrow("started", "gateway")
+$commandarrow("gateway", "record")
+$eventarrow("record", "paid")
+$eventarrow("paid", "pending")
+$arrow("pending", "worker")
+$commandarrow("worker", "confirm")
+$eventarrow("confirm", "confirmed")
+$eventarrow("confirmed", "summary")
+
+$renderEventModelingDiagram()
+@enduml

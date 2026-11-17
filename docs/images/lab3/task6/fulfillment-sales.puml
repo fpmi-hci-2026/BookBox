@@ -1,0 +1,33 @@
+@startuml
+!include_once https://raw.githubusercontent.com/chilit-nl/plantuml-event-modeling/1b31726ef8ba902ac24452806c3e87f049a1a00c/event-modeling-lib.iuml
+skinparam defaultFontName Arial
+skinparam shadowing false
+$enableAutoSpacing()
+title BookBox · Event Modeling · Передача в доставку и продажи
+$configureWireframeLane("admin", "Администратор")
+$configureWireframeLane("buyer", "Покупатель")
+$configureWireframeLane("analyst", "Аналитик")
+$configureEventLane("orders", "Заказы")
+
+$event("Заказ подтверждён\norderId, позиции, дата", "orders", $alias = "confirmed", $arrow = 0)
+$view("Подтверждённые заказы\nи готовность к передаче", $alias = "adminList", $arrow = 0)
+$wireframe("Админ-панель\nдетали заказа", "admin", $alias = "adminScreen", $arrow = 0)
+$command("Передать в доставку", $alias = "dispatch", $arrow = 0)
+$event("Заказ передан в доставку\norderId, handedOverAt", "orders", $alias = "dispatched", $arrow = 0)
+$view("Номер и статус заказа", $alias = "status", $arrow = 0)
+$wireframe("Детали заказа", "buyer", $alias = "details", $arrow = 0)
+$view("Продажи за период\nсумма, заказы, книги", $alias = "sales", $arrow = 0)
+$wireframe("Отчёт и выгрузка CSV", "analyst", $alias = "report", $arrow = 0)
+
+$eventarrow("confirmed", "adminList")
+$arrow("adminList", "adminScreen")
+$commandarrow("adminScreen", "dispatch")
+$eventarrow("dispatch", "dispatched")
+$eventarrow("confirmed", "status")
+$eventarrow("dispatched", "status")
+$arrow("status", "details")
+$eventarrow("confirmed", "sales")
+$arrow("sales", "report")
+
+$renderEventModelingDiagram()
+@enduml
