@@ -1,0 +1,23 @@
+@startuml
+!include_once https://raw.githubusercontent.com/chilit-nl/plantuml-event-modeling/1b31726ef8ba902ac24452806c3e87f049a1a00c/event-modeling-lib.iuml
+skinparam defaultFontName Arial
+skinparam shadowing false
+$enableAutoSpacing()
+title BookBox · Event Modeling · Каталог и поиск
+$configureWireframeLane("staff", "Администратор")
+$configureWireframeLane("buyer", "Гость / покупатель")
+$configureEventLane("catalog", "Каталог")
+
+$wireframe("Форма книги\nназвание, автор, цена", "staff", $alias = "bookForm", $arrow = 0)
+$command("Опубликовать книгу", $alias = "publish", $arrow = 0)
+$event("Карточка опубликована\nbookId, автор, цена", "catalog", $alias = "published", $arrow = 0)
+$view("Поиск по названию\nи верхней границе цены", $alias = "search", $arrow = 0)
+$wireframe("Мобильный поиск\nкниги или пустая выдача", "buyer", $alias = "results", $arrow = 0)
+
+$commandarrow("bookForm", "publish")
+$eventarrow("publish", "published")
+$eventarrow("published", "search")
+$arrow("search", "results")
+
+$renderEventModelingDiagram()
+@enduml
