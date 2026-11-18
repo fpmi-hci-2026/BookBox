@@ -1,0 +1,82 @@
+@startuml
+skinparam defaultFontName Arial
+title Логическая модель каталога и заказов
+!pragma layout smetana
+hide circle
+entity "Покупатель" as Buyer {
+  id: UUID PK
+  email: String UNIQUE
+}
+entity "Издательство" as Publisher {
+  id: UUID PK
+  name: String
+}
+entity "Книга" as Book {
+  id: UUID PK
+  publisher_id: UUID FK
+  isbn: String
+  title: String
+  publication_year: Integer
+  preorder_enabled: Boolean
+  price: Decimal
+  stock: Integer
+}
+entity "Заказ" as Purchase {
+  id: UUID PK
+  buyer_id: UUID FK
+  delivery_city: String
+  delivery_street: String
+  delivery_house: String
+  recipient: String
+  status: String
+  confirmed_at: DateTime NULL
+  total: Decimal
+}
+entity "Позиция заказа" as OrderItem {
+  order_id: UUID PK FK
+  book_id: UUID PK FK
+  quantity: Integer
+  unit_price: Decimal
+}
+entity "Попытка оплаты" as Attempt {
+  id: UUID PK
+  order_id: UUID FK
+  status: String
+  amount: Decimal
+  provider_ref: String UNIQUE NULL
+}
+entity "Автор" as Author {
+  id: UUID PK
+  name: String
+}
+entity "Жанр" as Genre {
+  id: UUID PK
+  name: String
+}
+entity "Автор книги" as BookAuthor {
+  book_id: UUID PK FK
+  author_id: UUID PK FK
+}
+entity "Жанр книги" as BookGenre {
+  book_id: UUID PK FK
+  genre_id: UUID PK FK
+}
+entity "Предзаказ" as Preorder {
+  id: UUID PK
+  buyer_id: UUID FK
+  book_id: UUID FK
+  status: String
+  expected_at: Date NULL
+}
+Author ||--o{ BookAuthor : связан с
+Book ||--o{ BookAuthor : имеет автора
+Genre ||--o{ BookGenre : связан с
+Book ||--o{ BookGenre : имеет жанр
+Publisher ||--o{ Book : издаёт
+Buyer ||--o{ Purchase : оформляет
+Purchase ||--|{ OrderItem : содержит
+Book ||--o{ OrderItem : входит в
+Purchase ||--o{ Attempt : имеет
+Buyer ||--o{ Preorder : создаёт
+Book ||--o{ Preorder : предзаказывается
+@enduml

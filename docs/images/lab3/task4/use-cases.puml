@@ -1,0 +1,21 @@
+@startuml
+skinparam defaultFontName Arial
+title Пять сценариев BookBox
+!pragma layout smetana
+left to right direction
+actor "Покупатель" as Buyer
+actor "Администратор" as Admin
+actor "Аналитик" as Analyst
+rectangle "BookBox" {
+  usecase "Найти учебник" as UC01
+  usecase "Оформить и оплатить заказ" as UC02
+  usecase "Оформить предзаказ" as UC03
+  usecase "Добавить книгу" as UC04
+  usecase "Посмотреть статистику" as UC05
+}
+Buyer -- UC01
+Buyer -- UC02
+Buyer -- UC03
+Admin -- UC04
+Analyst -- UC05
+@enduml

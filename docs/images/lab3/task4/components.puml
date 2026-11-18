@@ -1,0 +1,25 @@
+@startuml
+skinparam defaultFontName Arial
+title Компоненты BookBox
+!pragma layout smetana
+left to right direction
+component "BookBox-Web" as Web
+component "BookBox-Mobile" as Mobile
+rectangle "BookBox-Server" {
+  component "HTTP API" as API
+  component "Каталог и поиск" as Catalog
+  component "Заказы и предзаказы" as Orders
+  component "Аналитика" as Reports
+}
+database "Реляционная БД" as DB
+component "Платёжный сервис" as Pay <<external>>
+Web --> API
+Mobile --> API
+API --> Catalog
+API --> Orders
+API --> Reports
+Catalog --> DB
+Orders --> DB
+Reports --> DB
+Orders --> Pay
+@enduml

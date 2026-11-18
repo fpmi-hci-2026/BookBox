@@ -1,0 +1,77 @@
+erDiagram
+  Buyer["Покупатель"] {
+    UUID id PK
+    String email UK
+  }
+  Publisher["Издательство"] {
+    UUID id PK
+    String name
+  }
+  Book["Книга"] {
+    UUID id PK
+    UUID publisher_id FK
+    String isbn
+    String title
+    Integer publication_year
+    Boolean preorder_enabled
+    Decimal price
+    Integer stock
+  }
+  Purchase["Заказ"] {
+    UUID id PK
+    UUID buyer_id FK
+    String delivery_city
+    String delivery_street
+    String delivery_house
+    String recipient
+    String status
+    DateTime confirmed_at
+    Decimal total
+  }
+  OrderItem["Позиция заказа"] {
+    UUID order_id PK,FK
+    UUID book_id PK,FK
+    Integer quantity
+    Decimal unit_price
+  }
+  Attempt["Попытка оплаты"] {
+    UUID id PK
+    UUID order_id FK
+    String status
+    Decimal amount
+    String provider_ref UK
+  }
+  Author["Автор"] {
+    UUID id PK
+    String name
+  }
+  Genre["Жанр"] {
+    UUID id PK
+    String name
+  }
+  BookAuthor["Автор книги"] {
+    UUID book_id PK,FK
+    UUID author_id PK,FK
+  }
+  BookGenre["Жанр книги"] {
+    UUID book_id PK,FK
+    UUID genre_id PK,FK
+  }
+  Preorder["Предзаказ"] {
+    UUID id PK
+    UUID buyer_id FK
+    UUID book_id FK
+    String status
+    Date expected_at
+  }
+  Author ||--o{ BookAuthor : "связан с"
+  Book ||--o{ BookAuthor : "имеет автора"
+  Genre ||--o{ BookGenre : "связан с"
+  Book ||--o{ BookGenre : "имеет жанр"
+  Publisher ||--o{ Book : "издаёт"
+  Buyer ||--o{ Purchase : "оформляет"
+  Purchase ||--|{ OrderItem : "содержит"
+  Book ||--o{ OrderItem : "входит в"
+  Purchase ||--o{ Attempt : "имеет"
+  Buyer ||--o{ Preorder : "создаёт"
+  Book ||--o{ Preorder : "предзаказывается"

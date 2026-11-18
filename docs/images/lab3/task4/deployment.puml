@@ -1,0 +1,24 @@
+@startuml
+skinparam defaultFontName Arial
+title Целевая схема развёртывания BookBox
+!pragma layout smetana
+node "Устройство пользователя" {
+  artifact "Браузер" as Browser
+  artifact "Мобильное приложение" as Mobile
+}
+node "Хост веб-приложения" {
+  artifact "BookBox-Web" as Web
+}
+node "Сервер приложений" {
+  artifact "BookBox-Server" as API
+}
+node "Узел данных" {
+  database "Реляционная БД" as DB
+}
+cloud "Платёжный сервис" as Pay
+Browser --> Web : HTTPS
+Browser --> API : HTTPS / API
+Mobile --> API : HTTPS / API
+API --> DB : соединение в закрытой сети
+API --> Pay : HTTPS
+@enduml

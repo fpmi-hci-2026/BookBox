@@ -1,0 +1,38 @@
+@startuml
+skinparam defaultFontName Arial
+title Экземпляры оформленного заказа
+!pragma layout smetana
+skinparam classAttributeIconSize 0
+hide empty methods
+object "покупательА17 — Покупатель" as Anna {
+  id = A17
+}
+object "заказ104 — Заказ" as Order {
+  статус = Подтверждён
+  сумма = 29.90 BYN
+}
+object "позиция1 — Позиция заказа" as Line {
+  количество = 1
+  ценаНаМоментЗаказа = 29.90 BYN
+}
+object "книга728 — Книга" as Book {
+  название = Учебник по алгоритмам
+}
+object "адрес1 — Адрес доставки" as Addr {
+  город = Минск
+}
+object "попытка1 — Попытка оплаты" as Pay1 {
+  статус = Отклонена
+  сумма = 29.90 BYN
+}
+object "попытка2 — Попытка оплаты" as Pay2 {
+  статус = Подтверждена
+  сумма = 29.90 BYN
+}
+Anna -- Order
+Order *-- Line
+Line -- Book
+Order *-- Addr
+Order *-- Pay1
+Order *-- Pay2
+@enduml

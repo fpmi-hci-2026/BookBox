@@ -1,0 +1,28 @@
+@startuml context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Диаграмма контекста системы BookBox
+
+Person(guest, "Гость", "Незарегистрированный пользователь, может просматривать каталог и читать отзывы")
+Person(buyer, "Покупатель", "Зарегистрированный пользователь, может оформлять заказы и предзаказы")
+Person(admin, "Администратор", "Управляет каталогом и обрабатывает заказы")
+Person(analyst, "Аналитик", "Просматривает статистику продаж")
+
+System_Boundary(bookbox, "BookBox") {
+    System(bookbox_system, "BookBox", "Онлайн-магазин книг: каталог, корзина, заказы, предзаказы, аналитика")
+}
+
+System_Ext(payment, "Платёжный сервис", "Обрабатывает онлайн-оплату заказов")
+System_Ext(email, "Email-шлюз", "Отправляет уведомления пользователям")
+
+Rel(guest, bookbox_system, "Просматривает каталог, ищет книги, читает отзывы")
+Rel(buyer, bookbox_system, "Оформляет заказы, создаёт предзаказы, просматривает историю заказов")
+Rel(admin, bookbox_system, "Добавляет книги в каталог, обрабатывает заказы")
+Rel(analyst, bookbox_system, "Просматривает отчёты по продажам")
+Rel(bookbox_system, payment, "Запросы на оплату", "HTTPS")
+Rel(bookbox_system, email, "Уведомления о заказах", "SMTP")
+
+SHOW_LEGEND()
+@enduml

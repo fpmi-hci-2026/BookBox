@@ -1,0 +1,19 @@
+@startuml
+skinparam defaultFontName Arial
+title UC-01. Поиск учебника
+actor "Покупатель" as User
+participant "Мобильное приложение" as UI
+participant "Сервер BookBox" as API
+database "База данных" as Store
+User -> UI: Вводит запрос и предел цены
+UI -> API: Запрашивает выдачу с фильтром цены
+API -> Store: Ищет по названию и цене
+Store --> API: Совпадения или пустой набор
+alt Есть совпадения
+  API --> UI: Карточки с ценой и наличием
+  UI --> User: Показывает результаты
+else Ничего не найдено
+  API --> UI: Пустой список
+  UI --> User: Предлагает изменить запрос или фильтр
+end
+@enduml

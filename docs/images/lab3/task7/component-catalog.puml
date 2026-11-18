@@ -1,0 +1,27 @@
+@startuml component-catalog
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Диаграмма компонентов сервиса каталога BookBox
+
+ContainerDb(db, "База данных", "PostgreSQL", "Хранение книг и данных каталога")
+
+Container(catalog_service, "Сервис каталога", "Node.js", "Управление каталогом книг")
+
+Component(book_controller, "BookController", "REST", "CRUD операции с книгами")
+Component(search_controller, "SearchController", "REST", "Поиск и фильтрация книг")
+Component(book_service, "BookService", "Domain Logic", "Бизнес-логика управления книгами")
+Component(search_service, "SearchService", "Domain Logic", "Логика поиска и фильтрации")
+Component(book_repository, "BookRepository", "Repository", "Доступ к данным книг")
+Component(message_producer, "MessageProducer", "Event Publisher", "Публикация событий")
+
+Rel(book_controller, book_service, "Вызывает")
+Rel(search_controller, search_service, "Вызывает")
+Rel(book_service, book_repository, "Использует")
+Rel(search_service, book_repository, "Использует")
+Rel(book_service, message_producer, "Публикует события")
+Rel(book_repository, db, "JDBC")
+
+SHOW_LEGEND()
+@enduml

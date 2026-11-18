@@ -1,0 +1,10 @@
+flowchart LR
+  API["api"] -.-> Identity["identity"]
+  API -.-> Catalog["catalog"]
+  API -.-> Orders["orders"]
+  API -.-> Analytics["analytics"]
+  Orders -.-> Catalog
+  Catalog -.-> Persistence["persistence"]
+  Orders -.-> Persistence
+  Analytics -.-> Persistence
+  Orders -.-> Integrations["integrations"]

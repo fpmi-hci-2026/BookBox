@@ -1,0 +1,25 @@
+classDiagram
+  class Buyer["Покупатель"]
+  class Buyer {
+    id: UUID
+  }
+  class Book["Книга"]
+  class Book {
+    id: UUID
+    доступенПредзаказ: Boolean
+  }
+  class Preorder["Предзаказ"]
+  class Preorder {
+    номер: String
+    создан: DateTime
+    ожидаемоеПоступление: Date?
+    статус: String
+  }
+  class Notification["Уведомление"]
+  class Notification {
+    тип: String
+    отправлено: DateTime
+  }
+  Buyer "1" -- "0..*" Preorder
+  Book "1" -- "0..*" Preorder
+  Preorder "1" -- "0..*" Notification

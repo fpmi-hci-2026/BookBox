@@ -1,0 +1,12 @@
+flowchart LR
+  Web["BookBox-Web"] --> API
+  Mobile["BookBox-Mobile"] --> API
+  subgraph Server["BookBox-Server"]
+    API["HTTP API"] --> Catalog["Каталог и поиск"]
+    API --> Orders["Заказы и предзаказы"]
+    API --> Reports["Аналитика"]
+  end
+  Catalog --> DB[("Реляционная БД")]
+  Orders --> DB
+  Reports --> DB
+  Orders --> Pay["Внешний платёжный сервис"]

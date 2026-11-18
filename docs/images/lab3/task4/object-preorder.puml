@@ -1,0 +1,19 @@
+@startuml
+skinparam defaultFontName Arial
+title Экземпляры предзаказа
+!pragma layout smetana
+skinparam classAttributeIconSize 0
+hide empty methods
+object "покупательО8 — Покупатель" as Olga {
+  id = O8
+}
+object "издание62 — Книга" as Book {
+  доступенПредзаказ = true
+}
+object "предзаказ73 — Предзаказ" as Booking {
+  статус = Ожидает поступления
+  ожидаемоеПоступление = не объявлено
+}
+Olga -- Booking
+Book -- Booking
+@enduml

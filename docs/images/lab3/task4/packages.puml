@@ -1,0 +1,21 @@
+@startuml
+skinparam defaultFontName Arial
+title Предлагаемые пакеты BookBox-Server
+!pragma layout smetana
+package "api" as API {}
+package "identity" as Identity {}
+package "catalog" as Catalog {}
+package "orders" as Orders {}
+package "analytics" as Analytics {}
+package "persistence" as Persistence {}
+package "integrations" as Integrations {}
+API ..> Identity
+API ..> Catalog
+API ..> Orders
+API ..> Analytics
+Orders ..> Catalog
+Catalog ..> Persistence
+Orders ..> Persistence
+Analytics ..> Persistence
+Orders ..> Integrations
+@enduml

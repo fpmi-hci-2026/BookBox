@@ -1,0 +1,28 @@
+classDiagram
+  class Book["Книга"]
+  class Book {
+    id: UUID
+    название: String
+    ISBN: String
+    год: Integer
+    цена: Decimal
+    остаток: Integer
+  }
+  class Publisher["Издательство"]
+  class Publisher {
+    id: UUID
+    название: String
+  }
+  class Genre["Жанр"]
+  class Genre {
+    id: UUID
+    название: String
+  }
+  class Author["Автор"]
+  class Author {
+    id: UUID
+    имя: String
+  }
+  Book "0..*" -- "1" Publisher
+  Book "0..*" -- "0..*" Genre
+  Book "0..*" -- "1..*" Author

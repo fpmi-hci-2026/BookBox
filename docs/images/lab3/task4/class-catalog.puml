@@ -1,0 +1,30 @@
+@startuml
+skinparam defaultFontName Arial
+title Классы каталога
+!pragma layout smetana
+skinparam classAttributeIconSize 0
+hide empty methods
+class "Книга" as Book {
+  id: UUID
+  название: String
+  ISBN: String
+  год: Integer
+  цена: Decimal
+  остаток: Integer
+}
+class "Издательство" as Publisher {
+  id: UUID
+  название: String
+}
+class "Жанр" as Genre {
+  id: UUID
+  название: String
+}
+class "Автор" as Author {
+  id: UUID
+  имя: String
+}
+Book "0..*" -- "1" Publisher
+Book "0..*" -- "0..*" Genre
+Book "0..*" -- "1..*" Author
+@enduml
