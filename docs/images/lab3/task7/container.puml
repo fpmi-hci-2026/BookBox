@@ -1,0 +1,41 @@
+@startuml container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Диаграмма контейнеров BookBox
+
+Person(guest, "Гость", "Просмотр каталога и отзывов")
+Person(buyer, "Покупатель", "Заказы, предзаказы, корзина")
+Person(admin, "Администратор", "Управление каталогом и заказами")
+Person(analyst, "Аналитик", "Отчёты по продажам")
+
+ContainerDb(db, "База данных", "PostgreSQL", "Хранение книг, заказов, пользователей")
+Container(payment, "Платёжный шлюз", "Внешняя система", "Обработка платежей")
+Container(email, "Email-сервис", "Внешняя система", "Отправка уведомлений")
+
+System_Boundary(bookbox, "BookBox") {
+    Container(web, "Веб-приложение", "React", "Веб-интерфейс для покупателей и администраторов")
+    Container(mobile, "Мобильное приложение", "React Native", "Мобильный интерфейс для покупателей")
+    Container(api, "API Gateway", "Node.js/Express", "Маршрутизация запросов, аутентификация")
+    Container(catalog_service, "Сервис каталога", "Node.js", "Управление книгами и поиск")
+    Container(order_service, "Сервис заказов", "Node.js", "Оформление и обработка заказов")
+    Container(analytics_service, "Сервис аналитики", "Node.js", "Статистика продаж и отчёты")
+    Container(message_queue, "Очередь сообщений", "RabbitMQ", "Асинхронное взаимодействие сервисов")
+}
+
+Rel(web, api, "REST API", "HTTPS")
+Rel(mobile, api, "REST API", "HTTPS")
+Rel(api, catalog_service, "Внутренний вызов", "HTTP")
+Rel(api, order_service, "Внутренний вызов", "HTTP")
+Rel(api, analytics_service, "Внутренний вызов", "HTTP")
+Rel(order_service, message_queue, "Публикует события")
+Rel(catalog_service, message_queue, "Публикует события")
+Rel(order_service, db, "JDBC", "Порт 5432")
+Rel(catalog_service, db, "JDBC", "Порт 5432")
+Rel(analytics_service, db, "JDBC", "Порт 5432")
+Rel(order_service, payment, "REST API", "HTTPS")
+Rel(order_service, email, "SMTP", "Порт 25")
+
+SHOW_LEGEND()
+@enduml

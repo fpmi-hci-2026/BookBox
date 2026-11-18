@@ -1,0 +1,52 @@
+@startuml deployment
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+LAYOUT_TOP_DOWN()
+LAYOUT_WITH_LEGEND()
+
+title Диаграмма развёртывания BookBox
+
+Deployment_Node(user_zone, "Устройства пользователей", "") {
+    Container(browser, "Веб-браузер", "Chrome/Firefox/Safari", "Веб-приложение")
+    Container(mobile_phone, "Мобильное устройство", "iOS/Android", "Мобильное приложение")
+}
+
+Deployment_Node(dmz, "DMZ", "") {
+    Container(cdn, "CDN", "CloudFlare", "Статический контент")
+}
+
+Deployment_Node(k8s, "Kubernetes Cluster", "") {
+    Container(api_gw, "API Gateway", "Node.js", "Маршрутизация")
+    Container(catalog, "Сервис каталога", "Node.js", "Книги")
+    Container(orders, "Сервис заказов", "Node.js", "Заказы")
+    Container(analytics, "Сервис аналитики", "Node.js", "Отчёты")
+    Container(rabbit, "RabbitMQ", "RabbitMQ", "Очередь")
+}
+
+Deployment_Node(db, "База данных", "PostgreSQL") {
+    ContainerDb(db_primary, "Primary", "PostgreSQL", "Основная БД")
+    ContainerDb(db_replica, "Replica", "PostgreSQL", "Реплика чтения")
+}
+
+Deployment_Node(ext_svc, "Внешние сервисы", "") {
+    Container(payment, "Платёжный шлюз", "Stripe/YooKassa", "Оплата")
+    Container(email, "Email-сервис", "SendGrid", "Уведомления")
+}
+
+Rel(browser, cdn, "HTTPS")
+Rel(mobile_phone, cdn, "HTTPS")
+Rel(cdn, api_gw, "HTTPS")
+Rel(api_gw, catalog, "HTTP")
+Rel(api_gw, orders, "HTTP")
+Rel(api_gw, analytics, "HTTP")
+Rel(catalog, rabbit, "AMQP")
+Rel(orders, rabbit, "AMQP")
+Rel(catalog, db_primary, "JDBC")
+Rel(orders, db_primary, "JDBC")
+Rel(analytics, db_replica, "JDBC")
+Rel(db_replica, db_primary, "Replication")
+Rel(orders, payment, "REST")
+Rel(orders, email, "SMTP")
+
+SHOW_LEGEND()
+@enduml

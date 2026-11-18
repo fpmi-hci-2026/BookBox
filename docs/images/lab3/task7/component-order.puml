@@ -1,0 +1,39 @@
+@startuml component-order
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Диаграмма компонентов сервиса заказов BookBox
+
+ContainerDb(db, "База данных", "PostgreSQL", "Хранение заказов и платежей")
+Container_Boundary(external, "Внешние системы") {
+    Container(payment, "Платёжный шлюз", "Внешняя система", "Обработка платежей")
+    Container(email, "Email-сервис", "Внешняя система", "Отправка уведомлений")
+}
+
+Container(order_service, "Сервис заказов", "Node.js", "Обработка заказов и оплат")
+
+Component(order_controller, "OrderController", "REST", "Обработка запросов создания и получения заказов")
+Component(cart_controller, "CartController", "REST", "Управление корзиной")
+Component(preorder_controller, "PreorderController", "REST", "Управление предзаказами")
+Component(order_service_logic, "OrderService", "Domain Logic", "Бизнес-логика заказов")
+Component(payment_service, "PaymentService", "Domain Logic", "Обработка платежей")
+Component(preorder_service, "PreorderService", "Domain Logic", "Бизнес-логика предзаказов")
+Component(order_repository, "OrderRepository", "Repository", "Доступ к данным заказов")
+Component(payment_repository, "PaymentRepository", "Repository", "Доступ к данным платежей")
+Component(message_producer, "MessageProducer", "Event Publisher", "Публикация событий в очередь")
+
+Rel(order_controller, order_service_logic, "Вызывает")
+Rel(cart_controller, order_service_logic, "Вызывает")
+Rel(preorder_controller, preorder_service, "Вызывает")
+Rel(order_service_logic, order_repository, "Использует")
+Rel(order_service_logic, payment_service, "Делегирует")
+Rel(order_service_logic, message_producer, "Публикует события")
+Rel(payment_service, payment_repository, "Использует")
+Rel(payment_service, payment, "REST API")
+Rel(order_service_logic, email, "SMTP")
+Rel(order_repository, db, "JDBC")
+Rel(payment_repository, db, "JDBC")
+
+SHOW_LEGEND()
+@enduml
