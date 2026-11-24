@@ -1,0 +1,160 @@
+@startuml
+hide circle
+skinparam linetype ortho
+title BookBox — физическая модель PostgreSQL (ЛР4)
+
+entity "accounts" as accounts {
+  * id : UUID <<PK>>
+  --
+  * email : VARCHAR(254) <<UK>>
+  * password_hash : TEXT
+  * display_name : VARCHAR(120)
+  phone : VARCHAR(32)
+  * created_at : TIMESTAMPTZ
+  * updated_at : TIMESTAMPTZ
+}
+entity "roles" as roles {
+  * code : VARCHAR(24) <<PK>>
+  * name : VARCHAR(80)
+}
+entity "account_roles" as account_roles {
+  * account_id : UUID <<PK, FK>>
+  * role_code : VARCHAR(24) <<PK, FK>>
+}
+entity "publishers" as publishers {
+  * id : UUID <<PK>>
+  * name : VARCHAR(200) <<UK>>
+  country : VARCHAR(100)
+  website : TEXT
+}
+entity "books" as books {
+  * id : UUID <<PK>>
+  publisher_id : UUID <<FK>>
+  isbn : VARCHAR(17) <<UK>>
+  * title : VARCHAR(300)
+  publication_year : SMALLINT
+  * price : NUMERIC(10,2)
+  * stock : INTEGER
+  * preorder_enabled : BOOLEAN
+  description : TEXT
+  cover_url : TEXT
+  * created_at : TIMESTAMPTZ
+}
+entity "authors" as authors {
+  * id : UUID <<PK>>
+  * name : VARCHAR(200)
+}
+entity "book_authors" as book_authors {
+  * book_id : UUID <<PK, FK>>
+  * author_id : UUID <<PK, FK>>
+}
+entity "genres" as genres {
+  * id : UUID <<PK>>
+  * name : VARCHAR(100) <<UK>>
+  description : TEXT
+}
+entity "book_genres" as book_genres {
+  * book_id : UUID <<PK, FK>>
+  * genre_id : UUID <<PK, FK>>
+}
+entity "carts" as carts {
+  * id : UUID <<PK>>
+  * account_id : UUID <<FK, UK>>
+  * created_at : TIMESTAMPTZ
+  * updated_at : TIMESTAMPTZ
+}
+entity "cart_items" as cart_items {
+  * cart_id : UUID <<PK, FK>>
+  * book_id : UUID <<PK, FK>>
+  * quantity : INTEGER
+}
+entity "favorites" as favorites {
+  * account_id : UUID <<PK, FK>>
+  * book_id : UUID <<PK, FK>>
+  * created_at : TIMESTAMPTZ
+}
+entity "customer_orders" as orders {
+  * id : UUID <<PK>>
+  * account_id : UUID <<FK>>
+  * status : VARCHAR(24)
+  * delivery_method : VARCHAR(40)
+  * delivery_city : VARCHAR(120)
+  * delivery_street : VARCHAR(200)
+  * delivery_house : VARCHAR(40)
+  delivery_apartment : VARCHAR(40)
+  recipient_name : VARCHAR(160)
+  * gift_wrap : BOOLEAN
+  * total : NUMERIC(10,2)
+  * created_at : TIMESTAMPTZ
+  confirmed_at : TIMESTAMPTZ
+  shipped_at : TIMESTAMPTZ
+}
+entity "order_items" as order_items {
+  * order_id : UUID <<PK, FK>>
+  * book_id : UUID <<PK, FK>>
+  * quantity : INTEGER
+  * unit_price : NUMERIC(10,2)
+}
+entity "payment_attempts" as payment_attempts {
+  * id : UUID <<PK>>
+  * order_id : UUID <<FK>>
+  * idempotency_key : UUID
+  * status : VARCHAR(20)
+  * amount : NUMERIC(10,2)
+  provider_reference : VARCHAR(200) <<UK>>
+  * created_at : TIMESTAMPTZ
+  completed_at : TIMESTAMPTZ
+}
+entity "preorders" as preorders {
+  * id : UUID <<PK>>
+  * account_id : UUID <<FK>>
+  * book_id : UUID <<FK>>
+  * status : VARCHAR(24)
+  expected_at : DATE
+  * created_at : TIMESTAMPTZ
+}
+entity "reviews" as reviews {
+  * id : UUID <<PK>>
+  * account_id : UUID <<FK>>
+  * book_id : UUID <<FK>>
+  * rating : SMALLINT
+  * body : TEXT
+  * moderation_status : VARCHAR(16)
+  * created_at : TIMESTAMPTZ
+  moderated_at : TIMESTAMPTZ
+}
+entity "notifications" as notifications {
+  * id : UUID <<PK>>
+  * account_id : UUID <<FK>>
+  preorder_id : UUID <<FK>>
+  * type : VARCHAR(40)
+  * title : VARCHAR(200)
+  * body : TEXT
+  * deduplication_key : VARCHAR(200) <<UK>>
+  * is_read : BOOLEAN
+  * created_at : TIMESTAMPTZ
+}
+
+accounts ||--o{ account_roles
+roles ||--o{ account_roles
+publishers ||--o{ books
+books ||--o{ book_authors
+authors ||--o{ book_authors
+books ||--o{ book_genres
+genres ||--o{ book_genres
+accounts ||--o| carts
+carts ||--o{ cart_items
+books ||--o{ cart_items
+accounts ||--o{ favorites
+books ||--o{ favorites
+accounts ||--o{ orders
+orders ||--|{ order_items
+books ||--o{ order_items
+orders ||--o{ payment_attempts
+accounts ||--o{ preorders
+books ||--o{ preorders
+accounts ||--o{ reviews
+books ||--o{ reviews
+accounts ||--o{ notifications
+preorders |o--o{ notifications
+@enduml
