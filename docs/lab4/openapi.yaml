@@ -1,0 +1,2892 @@
+openapi: 3.0.3
+info:
+  title: BookBox API
+  version: 1.0.0
+  description: |
+    Контракт API онлайн-магазина книг BookBox (ЛР4, задания 3–4).
+    Спецификация покрывает каталог, аккаунты, корзину, избранное, заказы,
+    оплату, предзаказы, уведомления, отзывы, администрирование и аналитику.
+
+    Формат ошибок — `application/problem+json` (RFC 7807). Денежные значения
+    передаются числом с двумя знаками после запятой, идентификаторы — UUID,
+    время — RFC 3339 в UTC. Аутентификация выполняется Bearer JWT, выданным
+    методом `POST /auth/login` или `POST /auth/register`.
+  contact:
+    name: BookBox team
+    url: https://github.com/fpmi-hci-2026/BookBox
+  license:
+    name: Educational project
+    url: https://github.com/fpmi-hci-2026/BookBox
+servers:
+  - url: https://api.bookbox.example/v1
+    description: Проектный адрес production API (заглушка, сервер ещё не развёрнут)
+  - url: http://localhost:4010
+    description: Локальный Mock-сервер Prism (маршруты без префикса /v1)
+tags:
+  - name: Catalog
+    description: Публичный каталог, карточка книги, справочники
+  - name: Auth
+    description: Регистрация, вход и профиль текущего аккаунта
+  - name: Cart
+    description: Корзина текущего покупателя
+  - name: Favorites
+    description: Избранное текущего покупателя
+  - name: Orders
+    description: Заказы, оплата и повторные попытки оплаты
+  - name: Preorders
+    description: Предзаказы на книги
+  - name: Notifications
+    description: Персональные уведомления
+  - name: Reviews
+    description: Отзывы покупателей и модерация
+  - name: Admin
+    description: Административные операции
+  - name: Analytics
+    description: Аналитика продаж и экспорт CSV
+security:
+  - bearerAuth: []
+paths:
+  /books:
+    get:
+      tags: [Catalog]
+      operationId: listBooks
+      summary: Получить каталог книг
+      description: |
+        Возвращает постраничный список книг. Поиск `q` выполняется по названию,
+        автору и ISBN. Фильтры можно комбинировать. Доступ не требует входа.
+      security: []
+      parameters:
+        - name: q
+          in: query
+          description: Текст поиска по названию, автору или ISBN
+          schema:
+            type: string
+            maxLength: 200
+          example: булгаков
+        - name: genreId
+          in: query
+          description: Идентификатор жанра
+          schema:
+            type: string
+            format: uuid
+          example: b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e
+        - name: publisherId
+          in: query
+          description: Идентификатор издательства
+          schema:
+            type: string
+            format: uuid
+          example: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+        - name: minPrice
+          in: query
+          description: Минимальная цена включительно
+          schema:
+            type: number
+            format: double
+            minimum: 0
+          example: 500
+        - name: maxPrice
+          in: query
+          description: Максимальная цена включительно
+          schema:
+            type: number
+            format: double
+            minimum: 0
+          example: 2000
+        - name: inStock
+          in: query
+          description: Только книги в наличии
+          schema:
+            type: boolean
+          example: true
+        - name: sort
+          in: query
+          description: Сортировка выдачи
+          schema:
+            type: string
+            enum: [relevance, price_asc, price_desc, title, newest]
+            default: relevance
+          example: price_asc
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Постраничный список книг
+          headers:
+            X-Total-Count:
+              description: Общее количество найденных книг
+              schema:
+                type: integer
+                minimum: 0
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookList'
+              examples:
+                default:
+                  $ref: '#/components/examples/BookListExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /books/{bookId}:
+    parameters:
+      - $ref: '#/components/parameters/BookId'
+    get:
+      tags: [Catalog]
+      operationId: getBook
+      summary: Получить карточку книги
+      security: []
+      responses:
+        '200':
+          description: Карточка книги
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDetail'
+              examples:
+                default:
+                  $ref: '#/components/examples/BookDetailExample'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /books/{bookId}/reviews:
+    parameters:
+      - $ref: '#/components/parameters/BookId'
+    get:
+      tags: [Reviews]
+      operationId: listBookReviews
+      summary: Получить опубликованные отзывы книги
+      description: Публичная выдача содержит только отзывы со статусом `published`.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Постраничный список отзывов и сводка оценок
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewList'
+              examples:
+                default:
+                  $ref: '#/components/examples/ReviewListExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      tags: [Reviews]
+      operationId: createBookReview
+      summary: Отправить отзыв о книге
+      description: |
+        Требует роль `buyer`. Отзыв создаётся со статусом `pending` и становится
+        публичным только после модерации. Повторный отзыв того же покупателя
+        на ту же книгу отклоняется с `409`.
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReviewRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/CreateReviewRequestExample'
+      responses:
+        '201':
+          description: Отзыв создан и ожидает модерации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+              examples:
+                default:
+                  $ref: '#/components/examples/ReviewPendingExample'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /genres:
+    get:
+      tags: [Catalog]
+      operationId: listGenres
+      summary: Получить справочник жанров
+      security: []
+      responses:
+        '200':
+          description: Список жанров
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreList'
+              examples:
+                default:
+                  $ref: '#/components/examples/GenreListExample'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /publishers:
+    get:
+      tags: [Catalog]
+      operationId: listPublishers
+      summary: Получить справочник издательств
+      security: []
+      responses:
+        '200':
+          description: Список издательств
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublisherList'
+              examples:
+                default:
+                  $ref: '#/components/examples/PublisherListExample'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /auth/register:
+    post:
+      tags: [Auth]
+      operationId: register
+      summary: Зарегистрировать аккаунт покупателя
+      description: |
+        Создаёт аккаунт с ролью `buyer` и сразу возвращает JWT. Email
+        нормализуется к нижнему регистру и должен быть уникальным.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/RegisterRequestExample'
+      responses:
+        '201':
+          description: Аккаунт создан, возвращены токен и профиль
+          headers:
+            Location:
+              description: Адрес созданного профиля
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/AuthResponseExample'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /auth/login:
+    post:
+      tags: [Auth]
+      operationId: login
+      summary: Войти в систему
+      description: |
+        Проверяет email и пароль. При неверных данных возвращает одинаковый
+        ответ `401`, не раскрывая, существует ли аккаунт.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/LoginRequestExample'
+      responses:
+        '200':
+          description: Аутентификация успешна
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/AuthResponseExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me:
+    get:
+      tags: [Auth]
+      operationId: getMe
+      summary: Получить профиль текущего аккаунта
+      responses:
+        '200':
+          description: Профиль текущего аккаунта
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                default:
+                  $ref: '#/components/examples/AccountExample'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      tags: [Auth]
+      operationId: updateMe
+      summary: Изменить профиль текущего аккаунта
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMeRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/UpdateMeRequestExample'
+      responses:
+        '200':
+          description: Профиль обновлён
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                default:
+                  $ref: '#/components/examples/AccountExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/cart:
+    get:
+      tags: [Cart]
+      operationId: getCart
+      summary: Получить корзину текущего покупателя
+      responses:
+        '200':
+          description: Текущая корзина
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                default:
+                  $ref: '#/components/examples/CartExample'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      tags: [Cart]
+      operationId: clearCart
+      summary: Очистить корзину
+      responses:
+        '204':
+          description: Корзина очищена
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/cart/items/{bookId}:
+    parameters:
+      - $ref: '#/components/parameters/BookId'
+    put:
+      tags: [Cart]
+      operationId: upsertCartItem
+      summary: Добавить книгу в корзину или изменить количество
+      description: |
+        Идемпотентно устанавливает количество книги в корзине. Если позиции нет,
+        она создаётся.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertCartItemRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/UpsertCartItemRequestExample'
+      responses:
+        '200':
+          description: Корзина обновлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                default:
+                  $ref: '#/components/examples/CartExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      tags: [Cart]
+      operationId: removeCartItem
+      summary: Удалить книгу из корзины
+      responses:
+        '204':
+          description: Позиция удалена
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/favorites:
+    get:
+      tags: [Favorites]
+      operationId: listFavorites
+      summary: Получить избранное текущего покупателя
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Список избранных книг
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavoriteList'
+              examples:
+                default:
+                  $ref: '#/components/examples/FavoriteListExample'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/favorites/{bookId}:
+    parameters:
+      - $ref: '#/components/parameters/BookId'
+    put:
+      tags: [Favorites]
+      operationId: addFavorite
+      summary: Добавить книгу в избранное
+      description: Идемпотентная операция. Повторный вызов не создаёт дубликат.
+      responses:
+        '204':
+          description: Книга добавлена в избранное
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      tags: [Favorites]
+      operationId: removeFavorite
+      summary: Удалить книгу из избранного
+      responses:
+        '204':
+          description: Книга удалена из избранного
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/orders:
+    get:
+      tags: [Orders]
+      operationId: listMyOrders
+      summary: Получить историю заказов текущего покупателя
+      parameters:
+        - name: status
+          in: query
+          description: Фильтр по статусу заказа
+          schema:
+            $ref: '#/components/schemas/OrderStatus'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Заказы текущего покупателя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+              examples:
+                default:
+                  $ref: '#/components/examples/OrderListExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      tags: [Orders]
+      operationId: createOrder
+      summary: Оформить заказ из корзины
+      description: |
+        Сервер повторно проверяет остатки и фиксирует цену каждой позиции.
+        Если хотя бы одной книги недостаточно, заказ не создаётся и возвращается
+        `409` со списком недоступных позиций. Корзина очищается только при
+        успешном создании заказа.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/CreateOrderRequestExample'
+      responses:
+        '201':
+          description: Заказ создан и ожидает оплаты
+          headers:
+            Location:
+              description: Адрес созданного заказа
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                default:
+                  $ref: '#/components/examples/OrderExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: |
+            Заказ не создан: не хватает остатка или корзина пуста.
+            В ответе перечислены недоступные позиции.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/StockConflictProblem'
+              examples:
+                insufficientStock:
+                  $ref: '#/components/examples/StockConflictExample'
+                emptyCart:
+                  value:
+                    type: https://api.bookbox.example/problems/empty-cart
+                    title: Корзина пуста
+                    status: 409
+                    code: empty_cart
+                    detail: Добавьте книги в корзину перед оформлением заказа.
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/orders/{orderId}:
+    parameters:
+      - $ref: '#/components/parameters/OrderId'
+    get:
+      tags: [Orders]
+      operationId: getMyOrder
+      summary: Получить детали своего заказа
+      description: Чужой заказ возвращает `404`, чтобы не раскрывать его существование.
+      responses:
+        '200':
+          description: Детали заказа
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                default:
+                  $ref: '#/components/examples/OrderExample'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/orders/{orderId}/payment-attempts:
+    parameters:
+      - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Orders]
+      operationId: createPaymentAttempt
+      summary: Создать попытку оплаты или повторить оплату
+      description: |
+        Создаёт попытку оплаты заказа. Заголовок `Idempotency-Key` обязателен:
+        повтор с тем же ключом возвращает существующую попытку с `200` и
+        заголовком `Idempotent-Replayed: true`, не создавая новую. Новый ключ
+        для того же заказа создаёт новую попытку, если заказ ещё не оплачен.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentAttemptRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/CreatePaymentAttemptRequestExample'
+      responses:
+        '201':
+          description: Попытка оплаты создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentAttempt'
+              examples:
+                default:
+                  $ref: '#/components/examples/PaymentAttemptPendingExample'
+        '200':
+          description: Повтор запроса с тем же Idempotency-Key; возвращена существующая попытка
+          headers:
+            Idempotent-Replayed:
+              description: Признак повторной выдачи существующей попытки
+              schema:
+                type: boolean
+                enum: [true]
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentAttempt'
+              examples:
+                default:
+                  $ref: '#/components/examples/PaymentAttemptSucceededExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /payments/{paymentAttemptId}/result:
+    parameters:
+      - $ref: '#/components/parameters/PaymentAttemptId'
+    post:
+      tags: [Orders]
+      operationId: receivePaymentResult
+      summary: Принять результат оплаты от платёжного провайдера
+      description: |
+        Webhook платёжного провайдера. Подпись передаётся в заголовке
+        `X-Provider-Signature`. Повторная доставка того же результата
+        обрабатывается идемпотентно и не меняет уже завершённую попытку.
+      security:
+        - providerSignature: []
+      parameters:
+        - name: X-Provider-Signature
+          in: header
+          required: true
+          description: HMAC-подпись тела запроса
+          schema:
+            type: string
+          example: sha256=8c1f0a9d4e2b7a6c5d3e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderResultRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/ProviderResultRequestExample'
+      responses:
+        '200':
+          description: Результат принят; попытка и заказ обновлены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentAttempt'
+              examples:
+                default:
+                  $ref: '#/components/examples/PaymentAttemptSucceededExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/preorders:
+    get:
+      tags: [Preorders]
+      operationId: listMyPreorders
+      summary: Получить предзаказы текущего покупателя
+      parameters:
+        - name: status
+          in: query
+          description: Фильтр по статусу предзаказа
+          schema:
+            $ref: '#/components/schemas/PreorderStatus'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Список предзаказов
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreorderList'
+              examples:
+                default:
+                  $ref: '#/components/examples/PreorderListExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      tags: [Preorders]
+      operationId: createPreorder
+      summary: Оформить предзаказ на книгу
+      description: |
+        Доступно только для книги с `preorderEnabled: true`. Повторный активный
+        предзаказ того же покупателя на ту же книгу возвращает `409`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePreorderRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/CreatePreorderRequestExample'
+      responses:
+        '201':
+          description: Предзаказ создан
+          headers:
+            Location:
+              description: Адрес созданного предзаказа
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Preorder'
+              examples:
+                default:
+                  $ref: '#/components/examples/PreorderExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/preorders/{preorderId}:
+    parameters:
+      - $ref: '#/components/parameters/PreorderId'
+    delete:
+      tags: [Preorders]
+      operationId: cancelPreorder
+      summary: Отменить предзаказ
+      responses:
+        '204':
+          description: Предзаказ отменён
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/notifications:
+    get:
+      tags: [Notifications]
+      operationId: listMyNotifications
+      summary: Получить уведомления текущего покупателя
+      parameters:
+        - name: unreadOnly
+          in: query
+          description: Только непрочитанные уведомления
+          schema:
+            type: boolean
+            default: false
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Список уведомлений
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationList'
+              examples:
+                default:
+                  $ref: '#/components/examples/NotificationListExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /me/notifications/{notificationId}:
+    parameters:
+      - $ref: '#/components/parameters/NotificationId'
+    patch:
+      tags: [Notifications]
+      operationId: markNotificationRead
+      summary: Отметить уведомление прочитанным
+      description: Идемпотентно устанавливает состояние прочтения.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNotificationRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/UpdateNotificationRequestExample'
+      responses:
+        '200':
+          description: Уведомление обновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+              examples:
+                default:
+                  $ref: '#/components/examples/NotificationExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /admin/books:
+    post:
+      tags: [Admin]
+      operationId: createBook
+      summary: Добавить книгу в каталог
+      description: Требует роль `admin`. ISBN должен быть уникальным.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBookRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/CreateBookRequestExample'
+      responses:
+        '201':
+          description: Книга создана
+          headers:
+            Location:
+              description: Адрес созданной книги
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDetail'
+              examples:
+                default:
+                  $ref: '#/components/examples/BookDetailExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /admin/books/{bookId}:
+    parameters:
+      - $ref: '#/components/parameters/BookId'
+    patch:
+      tags: [Admin]
+      operationId: updateBook
+      summary: Изменить данные или доступность книги
+      description: Требует роль `admin`. Передаются только изменяемые поля.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBookRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/UpdateBookRequestExample'
+      responses:
+        '200':
+          description: Книга обновлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDetail'
+              examples:
+                default:
+                  $ref: '#/components/examples/BookDetailExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /admin/orders/{orderId}/ship:
+    parameters:
+      - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Admin]
+      operationId: shipOrder
+      summary: Передать оплаченный заказ в доставку
+      description: |
+        Требует роль `admin`. Допустимый переход: `paid` или `processing` →
+        `shipped`. Повтор команды для уже отправленного заказа не создаёт
+        повторный переход и возвращает `200` с текущим состоянием.
+      responses:
+        '200':
+          description: Заказ отправлен или уже был отправлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                default:
+                  $ref: '#/components/examples/OrderShippedExample'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /admin/reviews:
+    get:
+      tags: [Admin]
+      operationId: listReviewsForModeration
+      summary: Получить отзывы для модерации
+      description: Требует роль `admin`. По умолчанию возвращает отзывы `pending`.
+      parameters:
+        - name: moderationStatus
+          in: query
+          description: Фильтр по состоянию модерации
+          schema:
+            type: string
+            enum: [pending, published, rejected]
+            default: pending
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: Список отзывов
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewList'
+              examples:
+                default:
+                  $ref: '#/components/examples/ReviewListExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /admin/reviews/{reviewId}:
+    parameters:
+      - $ref: '#/components/parameters/ReviewId'
+    patch:
+      tags: [Admin]
+      operationId: moderateReview
+      summary: Опубликовать или отклонить отзыв
+      description: Требует роль `admin`. Из `published` или `rejected` отзыв повторно не модерируется.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModerateReviewRequest'
+            examples:
+              default:
+                $ref: '#/components/examples/ModerateReviewRequestExample'
+      responses:
+        '200':
+          description: Состояние модерации обновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+              examples:
+                default:
+                  $ref: '#/components/examples/ReviewPublishedExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /analytics/sales:
+    get:
+      tags: [Analytics]
+      operationId: getSalesReport
+      summary: Получить агрегаты продаж за период
+      description: |
+        Требует роль `analyst` (администратору также разрешено). Период
+        обязателен, `from` не позже `to`, максимальная длина периода — 366 дней.
+      parameters:
+        - $ref: '#/components/parameters/DateFrom'
+        - $ref: '#/components/parameters/DateTo'
+        - name: groupBy
+          in: query
+          description: Группировка временного ряда
+          schema:
+            type: string
+            enum: [day, week, month]
+            default: day
+          example: day
+      responses:
+        '200':
+          description: Отчёт о продажах
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesReport'
+              examples:
+                default:
+                  $ref: '#/components/examples/SalesReportExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /analytics/sales/export:
+    get:
+      tags: [Analytics]
+      operationId: exportSalesCsv
+      summary: Выгрузить продажи за период в CSV
+      description: |
+        Возвращает тот же набор заказов и период, что и `GET /analytics/sales`
+        с той же группировкой. Требует роль `analyst` или `admin`.
+      parameters:
+        - $ref: '#/components/parameters/DateFrom'
+        - $ref: '#/components/parameters/DateTo'
+        - name: groupBy
+          in: query
+          schema:
+            type: string
+            enum: [day, week, month]
+            default: day
+      responses:
+        '200':
+          description: CSV-файл с продажами
+          headers:
+            Content-Disposition:
+              description: Имя файла выгрузки
+              schema:
+                type: string
+              example: attachment; filename="bookbox-sales-2026-11-01-2026-11-30.csv"
+          content:
+            text/csv:
+              schema:
+                type: string
+              example: |
+                date,orders,units,revenue
+                2026-11-01,12,18,23220.00
+                2026-11-02,15,21,27645.50
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT из ответа `/auth/login` или `/auth/register`.
+    providerSignature:
+      type: apiKey
+      in: header
+      name: X-Provider-Signature
+      description: HMAC-подпись тела webhook-запроса платёжного провайдера.
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Номер страницы, начиная с 1
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PageSize:
+      name: pageSize
+      in: query
+      description: Количество элементов на странице
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    BookId:
+      name: bookId
+      in: path
+      required: true
+      description: Идентификатор книги (UUID)
+      schema:
+        type: string
+        format: uuid
+      example: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+    OrderId:
+      name: orderId
+      in: path
+      required: true
+      description: Идентификатор заказа (UUID)
+      schema:
+        type: string
+        format: uuid
+      example: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+    PaymentAttemptId:
+      name: paymentAttemptId
+      in: path
+      required: true
+      description: Идентификатор попытки оплаты (UUID)
+      schema:
+        type: string
+        format: uuid
+      example: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+    PreorderId:
+      name: preorderId
+      in: path
+      required: true
+      description: Идентификатор предзаказа (UUID)
+      schema:
+        type: string
+        format: uuid
+      example: f6a7b8c9-d0e1-4f2a-9b3c-4d5e6f708192
+    NotificationId:
+      name: notificationId
+      in: path
+      required: true
+      description: Идентификатор уведомления (UUID)
+      schema:
+        type: string
+        format: uuid
+      example: a7b8c9d0-e1f2-4a3b-8c4d-5e6f708192a3
+    ReviewId:
+      name: reviewId
+      in: path
+      required: true
+      description: Идентификатор отзыва (UUID)
+      schema:
+        type: string
+        format: uuid
+      example: b8c9d0e1-f2a3-4b4c-9d5e-6f708192a3b4
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: |
+        Уникальный ключ запроса оплаты. Повтор с тем же ключом для того же
+        заказа возвращает ранее созданную попытку.
+      schema:
+        type: string
+        format: uuid
+      example: 1f0e9d8c-7b6a-4c5d-8e9f-0a1b2c3d4e5f
+    DateFrom:
+      name: from
+      in: query
+      required: true
+      description: Начало периода включительно (YYYY-MM-DD)
+      schema:
+        type: string
+        format: date
+      example: 2026-11-01
+    DateTo:
+      name: to
+      in: query
+      required: true
+      description: Конец периода включительно (YYYY-MM-DD)
+      schema:
+        type: string
+        format: date
+      example: 2026-11-30
+  responses:
+    BadRequest:
+      description: Некорректный запрос (например, неверный формат параметра)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            default:
+              $ref: '#/components/examples/BadRequestExample'
+    Unauthorized:
+      description: Аутентификация не пройдена или токен недействителен
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            default:
+              $ref: '#/components/examples/UnauthorizedExample'
+    Forbidden:
+      description: Недостаточно прав для операции
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            default:
+              $ref: '#/components/examples/ForbiddenExample'
+    NotFound:
+      description: Ресурс не найден или недоступен текущему аккаунту
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            default:
+              $ref: '#/components/examples/NotFoundExample'
+    Conflict:
+      description: Конфликт с текущим состоянием ресурса
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            default:
+              $ref: '#/components/examples/ConflictExample'
+    UnprocessableEntity:
+      description: Ошибка валидации полей запроса
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            default:
+              $ref: '#/components/examples/ValidationExample'
+    TooManyRequests:
+      description: Превышен лимит запросов
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            default:
+              $ref: '#/components/examples/TooManyRequestsExample'
+    InternalError:
+      description: Внутренняя ошибка сервера
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            default:
+              $ref: '#/components/examples/InternalErrorExample'
+  schemas:
+    Problem:
+      type: object
+      required: [type, title, status, code]
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+          minimum: 100
+          maximum: 599
+        detail:
+          type: string
+        code:
+          type: string
+          example: validation_failed
+        instance:
+          type: string
+          format: uri
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+    FieldError:
+      type: object
+      required: [field, message]
+      properties:
+        field:
+          type: string
+          example: delivery.city
+        message:
+          type: string
+          example: Поле обязательно
+    StockConflictProblem:
+      allOf:
+        - $ref: '#/components/schemas/Problem'
+        - type: object
+          properties:
+            unavailableItems:
+              type: array
+              items:
+                $ref: '#/components/schemas/UnavailableItem'
+    UnavailableItem:
+      type: object
+      required: [bookId, title, requested, available]
+      properties:
+        bookId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        requested:
+          type: integer
+          minimum: 1
+        available:
+          type: integer
+          minimum: 0
+    BookSummary:
+      type: object
+      required: [id, title, price, stock, preorderEnabled, publisher, authors, genres, rating]
+      properties:
+        id:
+          type: string
+          format: uuid
+        isbn:
+          type: string
+          nullable: true
+        title:
+          type: string
+          maxLength: 300
+        publicationYear:
+          type: integer
+          nullable: true
+          minimum: 1
+          maximum: 2100
+        price:
+          type: number
+          format: double
+          minimum: 0
+        stock:
+          type: integer
+          minimum: 0
+        preorderEnabled:
+          type: boolean
+        coverUrl:
+          type: string
+          nullable: true
+        publisher:
+          $ref: '#/components/schemas/PublisherRef'
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorRef'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenreRef'
+        rating:
+          $ref: '#/components/schemas/RatingSummary'
+    BookDetail:
+      allOf:
+        - $ref: '#/components/schemas/BookSummary'
+        - type: object
+          properties:
+            description:
+              type: string
+              nullable: true
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+    BookList:
+      type: object
+      required: [items, page, pageSize, total]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookSummary'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          minimum: 1
+        total:
+          type: integer
+          minimum: 0
+    PublisherRef:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    AuthorRef:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    GenreRef:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    RatingSummary:
+      type: object
+      required: [average, count]
+      properties:
+        average:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 5
+        count:
+          type: integer
+          minimum: 0
+    PublisherList:
+      type: object
+      required: [items, total]
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            required: [id, name]
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              country:
+                type: string
+                nullable: true
+              website:
+                type: string
+                nullable: true
+        total:
+          type: integer
+          minimum: 0
+    GenreList:
+      type: object
+      required: [items, total]
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            required: [id, name]
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              description:
+                type: string
+                nullable: true
+        total:
+          type: integer
+          minimum: 0
+    Account:
+      type: object
+      required: [id, email, displayName, roles, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        displayName:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        roles:
+          type: array
+          items:
+            type: string
+            enum: [buyer, admin, analyst]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    RegisterRequest:
+      type: object
+      required: [email, password, displayName]
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 128
+          description: Не возвращается в ответах API
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        phone:
+          type: string
+          maxLength: 32
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+    AuthResponse:
+      type: object
+      required: [accessToken, tokenType, expiresIn, account]
+      properties:
+        accessToken:
+          type: string
+        tokenType:
+          type: string
+          enum: [Bearer]
+        expiresIn:
+          type: integer
+          description: Время жизни токена в секундах
+          example: 3600
+        account:
+          $ref: '#/components/schemas/Account'
+    UpdateMeRequest:
+      type: object
+      minProperties: 1
+      properties:
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        phone:
+          type: string
+          maxLength: 32
+          nullable: true
+    Cart:
+      type: object
+      required: [id, items, totalQuantity, subtotal, updatedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+        totalQuantity:
+          type: integer
+          minimum: 0
+        subtotal:
+          type: number
+          format: double
+          minimum: 0
+        updatedAt:
+          type: string
+          format: date-time
+    CartItem:
+      type: object
+      required: [book, quantity, unitPrice, lineTotal]
+      properties:
+        book:
+          $ref: '#/components/schemas/BookSummary'
+        quantity:
+          type: integer
+          minimum: 1
+        unitPrice:
+          type: number
+          format: double
+          minimum: 0
+        lineTotal:
+          type: number
+          format: double
+          minimum: 0
+    UpsertCartItemRequest:
+      type: object
+      required: [quantity]
+      properties:
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 99
+    FavoriteList:
+      type: object
+      required: [items, page, pageSize, total]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookSummary'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          minimum: 1
+        total:
+          type: integer
+          minimum: 0
+    OrderStatus:
+      type: string
+      enum: [pending_payment, paid, processing, shipped, delivered, cancelled]
+    DeliveryInfo:
+      type: object
+      required: [method, city, street, house, recipientName]
+      properties:
+        method:
+          type: string
+          enum: [courier, pickup, post]
+        city:
+          type: string
+          maxLength: 120
+        street:
+          type: string
+          maxLength: 200
+        house:
+          type: string
+          maxLength: 40
+        apartment:
+          type: string
+          nullable: true
+          maxLength: 40
+        recipientName:
+          type: string
+          maxLength: 160
+    CreateOrderRequest:
+      type: object
+      required: [delivery, giftWrap]
+      properties:
+        delivery:
+          $ref: '#/components/schemas/DeliveryInfo'
+        giftWrap:
+          type: boolean
+          default: false
+    OrderItem:
+      type: object
+      required: [bookId, title, quantity, unitPrice, lineTotal]
+      properties:
+        bookId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+        unitPrice:
+          type: number
+          format: double
+          minimum: 0
+        lineTotal:
+          type: number
+          format: double
+          minimum: 0
+    Order:
+      type: object
+      required: [id, status, delivery, giftWrap, total, items, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        delivery:
+          $ref: '#/components/schemas/DeliveryInfo'
+        giftWrap:
+          type: boolean
+        total:
+          type: number
+          format: double
+          minimum: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        createdAt:
+          type: string
+          format: date-time
+        confirmedAt:
+          type: string
+          format: date-time
+          nullable: true
+        shippedAt:
+          type: string
+          format: date-time
+          nullable: true
+        latestPayment:
+          type: object
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/PaymentAttempt'
+    OrderList:
+      type: object
+      required: [items, page, pageSize, total]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          minimum: 1
+        total:
+          type: integer
+          minimum: 0
+    PaymentAttemptStatus:
+      type: string
+      enum: [pending, succeeded, declined, cancelled]
+    PaymentAttempt:
+      type: object
+      required: [id, orderId, status, amount, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        orderId:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/PaymentAttemptStatus'
+        amount:
+          type: number
+          format: double
+          minimum: 0
+        providerReference:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+    CreatePaymentAttemptRequest:
+      type: object
+      required: [method]
+      properties:
+        method:
+          type: string
+          enum: [card, sbp]
+        returnUrl:
+          type: string
+          format: uri
+          description: Куда вернуть покупателя после оплаты
+    ProviderResultRequest:
+      type: object
+      required: [status, providerReference, amount]
+      properties:
+        status:
+          type: string
+          enum: [succeeded, declined]
+        providerReference:
+          type: string
+          maxLength: 200
+        amount:
+          type: number
+          format: double
+          minimum: 0
+    PreorderStatus:
+      type: string
+      enum: [waiting, available, completed, cancelled]
+    Preorder:
+      type: object
+      required: [id, book, status, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        book:
+          $ref: '#/components/schemas/BookSummary'
+        status:
+          $ref: '#/components/schemas/PreorderStatus'
+        expectedAt:
+          type: string
+          format: date
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+    PreorderList:
+      type: object
+      required: [items, page, pageSize, total]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Preorder'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          minimum: 1
+        total:
+          type: integer
+          minimum: 0
+    CreatePreorderRequest:
+      type: object
+      required: [bookId]
+      properties:
+        bookId:
+          type: string
+          format: uuid
+    Notification:
+      type: object
+      required: [id, type, title, body, isRead, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          example: preorder_available
+        title:
+          type: string
+        body:
+          type: string
+        isRead:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        preorderId:
+          type: string
+          format: uuid
+          nullable: true
+    NotificationList:
+      type: object
+      required: [items, page, pageSize, total, unread]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          minimum: 1
+        total:
+          type: integer
+          minimum: 0
+        unread:
+          type: integer
+          minimum: 0
+    UpdateNotificationRequest:
+      type: object
+      required: [isRead]
+      properties:
+        isRead:
+          type: boolean
+    ModerationStatus:
+      type: string
+      enum: [pending, published, rejected]
+    Review:
+      type: object
+      required: [id, bookId, author, rating, body, moderationStatus, createdAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        bookId:
+          type: string
+          format: uuid
+        author:
+          type: object
+          required: [displayName]
+          properties:
+            displayName:
+              type: string
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        body:
+          type: string
+          maxLength: 2000
+        moderationStatus:
+          $ref: '#/components/schemas/ModerationStatus'
+        createdAt:
+          type: string
+          format: date-time
+        moderatedAt:
+          type: string
+          format: date-time
+          nullable: true
+    ReviewList:
+      type: object
+      required: [items, page, pageSize, total, summary]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+        page:
+          type: integer
+          minimum: 1
+        pageSize:
+          type: integer
+          minimum: 1
+        total:
+          type: integer
+          minimum: 0
+        summary:
+          type: object
+          required: [average, count, distribution]
+          properties:
+            average:
+              type: number
+              format: double
+              minimum: 0
+              maximum: 5
+            count:
+              type: integer
+              minimum: 0
+            distribution:
+              type: object
+              description: Количество отзывов по каждой оценке
+              additionalProperties:
+                type: integer
+                minimum: 0
+    CreateReviewRequest:
+      type: object
+      required: [rating, body]
+      properties:
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        body:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    ModerateReviewRequest:
+      type: object
+      required: [moderationStatus]
+      properties:
+        moderationStatus:
+          type: string
+          enum: [published, rejected]
+    CreateBookRequest:
+      type: object
+      required: [title, publisherId, price, stock]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 300
+        isbn:
+          type: string
+          maxLength: 17
+          nullable: true
+        publisherId:
+          type: string
+          format: uuid
+        authorIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        genreIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        publicationYear:
+          type: integer
+          minimum: 1
+          maximum: 2100
+          nullable: true
+        price:
+          type: number
+          format: double
+          minimum: 0
+        stock:
+          type: integer
+          minimum: 0
+        preorderEnabled:
+          type: boolean
+          default: false
+        description:
+          type: string
+          nullable: true
+        coverUrl:
+          type: string
+          nullable: true
+    UpdateBookRequest:
+      type: object
+      minProperties: 1
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 300
+        isbn:
+          type: string
+          maxLength: 17
+          nullable: true
+        publisherId:
+          type: string
+          format: uuid
+        authorIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        genreIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        publicationYear:
+          type: integer
+          minimum: 1
+          maximum: 2100
+          nullable: true
+        price:
+          type: number
+          format: double
+          minimum: 0
+        stock:
+          type: integer
+          minimum: 0
+        preorderEnabled:
+          type: boolean
+        description:
+          type: string
+          nullable: true
+        coverUrl:
+          type: string
+          nullable: true
+    SalesReport:
+      type: object
+      required: [period, totals, series, topBooks]
+      properties:
+        period:
+          type: object
+          required: [from, to]
+          properties:
+            from:
+              type: string
+              format: date
+            to:
+              type: string
+              format: date
+        totals:
+          type: object
+          required: [orders, units, revenue, averageOrderValue]
+          properties:
+            orders:
+              type: integer
+              minimum: 0
+            units:
+              type: integer
+              minimum: 0
+            revenue:
+              type: number
+              format: double
+              minimum: 0
+            averageOrderValue:
+              type: number
+              format: double
+              minimum: 0
+        series:
+          type: array
+          items:
+            type: object
+            required: [bucket, orders, units, revenue]
+            properties:
+              bucket:
+                type: string
+                format: date
+              orders:
+                type: integer
+                minimum: 0
+              units:
+                type: integer
+                minimum: 0
+              revenue:
+                type: number
+                format: double
+                minimum: 0
+        topBooks:
+          type: array
+          items:
+            type: object
+            required: [bookId, title, units, revenue]
+            properties:
+              bookId:
+                type: string
+                format: uuid
+              title:
+                type: string
+              units:
+                type: integer
+                minimum: 0
+              revenue:
+                type: number
+                format: double
+                minimum: 0
+  examples:
+    BookDetailExample:
+      value:
+        id: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+        isbn: 978-5-04-118123-4
+        title: Мастер и Маргарита
+        publicationYear: 2024
+        price: 1290.00
+        stock: 12
+        preorderEnabled: false
+        coverUrl: https://cdn.bookbox.example/covers/master-i-margarita.jpg
+        description: Роман Михаила Булгакова о визите дьявола в Москву 1930-х годов.
+        publisher:
+          id: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+          name: Эксмо
+        authors:
+          - id: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+            name: Михаил Булгаков
+        genres:
+          - id: b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e
+            name: Роман
+          - id: c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f
+            name: Мистика
+        rating:
+          average: 4.8
+          count: 126
+        createdAt: 2026-09-01T09:00:00Z
+        updatedAt: 2026-11-20T14:30:00Z
+    BookListExample:
+      value:
+        items:
+          - id: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+            isbn: 978-5-04-118123-4
+            title: Мастер и Маргарита
+            publicationYear: 2024
+            price: 1290.00
+            stock: 12
+            preorderEnabled: false
+            coverUrl: https://cdn.bookbox.example/covers/master-i-margarita.jpg
+            publisher:
+              id: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+              name: Эксмо
+            authors:
+              - id: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                name: Михаил Булгаков
+            genres:
+              - id: b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e
+                name: Роман
+            rating:
+              average: 4.8
+              count: 126
+          - id: 4a3c7d2f-9b5e-4d8f-8c2b-3e6f907182b3
+            isbn: 978-5-389-12345-6
+            title: Дюна
+            publicationYear: 2021
+            price: 1590.00
+            stock: 5
+            preorderEnabled: false
+            coverUrl: https://cdn.bookbox.example/covers/dune.jpg
+            publisher:
+              id: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+              name: Эксмо
+            authors:
+              - id: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+                name: Фрэнк Герберт
+            genres:
+              - id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                name: Фантастика
+            rating:
+              average: 4.7
+              count: 98
+        page: 1
+        pageSize: 20
+        total: 2
+    PublisherListExample:
+      value:
+        items:
+          - id: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+            name: Эксмо
+            country: Россия
+            website: https://eksmo.ru
+          - id: 9b1c3d5e-7f9a-4b2c-8d4e-6f8a0b2c4d6e
+            name: АСТ
+            country: Россия
+            website: https://ast.ru
+        total: 2
+    GenreListExample:
+      value:
+        items:
+          - id: b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e
+            name: Роман
+            description: Крупное прозаическое произведение
+          - id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+            name: Фантастика
+            description: Литература о вымышленных мирах и технологиях
+        total: 2
+    AccountExample:
+      value:
+        id: c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f
+        email: anna@example.com
+        displayName: Анна Смирнова
+        phone: +7 999 123-45-67
+        roles: [buyer]
+        createdAt: 2026-10-01T10:00:00Z
+        updatedAt: 2026-11-24T18:15:00Z
+    AuthResponseExample:
+      value:
+        accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjM2Q0ZTVmNi1hN2I4LTRjOWQtMGUxZi0yYTNiNGM1ZDZlN2YiLCJyb2xlcyI6WyJidXllciJdfQ.mock-signature
+        tokenType: Bearer
+        expiresIn: 3600
+        account:
+          id: c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f
+          email: anna@example.com
+          displayName: Анна Смирнова
+          phone: +7 999 123-45-67
+          roles: [buyer]
+          createdAt: 2026-10-01T10:00:00Z
+          updatedAt: 2026-11-24T18:15:00Z
+    RegisterRequestExample:
+      value:
+        email: anna@example.com
+        password: CorrectHorse42
+        displayName: Анна Смирнова
+        phone: +7 999 123-45-67
+    LoginRequestExample:
+      value:
+        email: anna@example.com
+        password: CorrectHorse42
+    UpdateMeRequestExample:
+      value:
+        displayName: Анна Смирнова
+        phone: +7 999 765-43-21
+    CartExample:
+      value:
+        id: 1b2c3d4e-5f6a-4b7c-8d9e-0f1a2b3c4d5e
+        items:
+          - book:
+              id: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+              isbn: 978-5-04-118123-4
+              title: Мастер и Маргарита
+              publicationYear: 2024
+              price: 1290.00
+              stock: 12
+              preorderEnabled: false
+              coverUrl: https://cdn.bookbox.example/covers/master-i-margarita.jpg
+              publisher:
+                id: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+                name: Эксмо
+              authors:
+                - id: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                  name: Михаил Булгаков
+              genres:
+                - id: b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e
+                  name: Роман
+              rating:
+                average: 4.8
+                count: 126
+            quantity: 2
+            unitPrice: 1290.00
+            lineTotal: 2580.00
+        totalQuantity: 2
+        subtotal: 2580.00
+        updatedAt: 2026-11-24T18:20:00Z
+    UpsertCartItemRequestExample:
+      value:
+        quantity: 2
+    FavoriteListExample:
+      value:
+        items:
+          - id: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+            isbn: 978-5-04-118123-4
+            title: Мастер и Маргарита
+            publicationYear: 2024
+            price: 1290.00
+            stock: 12
+            preorderEnabled: false
+            coverUrl: https://cdn.bookbox.example/covers/master-i-margarita.jpg
+            publisher:
+              id: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+              name: Эксмо
+            authors:
+              - id: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                name: Михаил Булгаков
+            genres:
+              - id: b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e
+                name: Роман
+            rating:
+              average: 4.8
+              count: 126
+        page: 1
+        pageSize: 20
+        total: 1
+    CreateOrderRequestExample:
+      value:
+        delivery:
+          method: courier
+          city: Москва
+          street: Тверская
+          house: '12'
+          apartment: '34'
+          recipientName: Анна Смирнова
+        giftWrap: true
+    OrderExample:
+      value:
+        id: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+        status: pending_payment
+        delivery:
+          method: courier
+          city: Москва
+          street: Тверская
+          house: '12'
+          apartment: '34'
+          recipientName: Анна Смирнова
+        giftWrap: true
+        total: 2580.00
+        items:
+          - bookId: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+            title: Мастер и Маргарита
+            quantity: 2
+            unitPrice: 1290.00
+            lineTotal: 2580.00
+        createdAt: 2026-11-24T18:25:00Z
+        confirmedAt: null
+        shippedAt: null
+    OrderShippedExample:
+      value:
+        id: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+        status: shipped
+        delivery:
+          method: courier
+          city: Москва
+          street: Тверская
+          house: '12'
+          apartment: '34'
+          recipientName: Анна Смирнова
+        giftWrap: true
+        total: 2580.00
+        items:
+          - bookId: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+            title: Мастер и Маргарита
+            quantity: 2
+            unitPrice: 1290.00
+            lineTotal: 2580.00
+        createdAt: 2026-11-24T18:25:00Z
+        confirmedAt: 2026-11-24T18:27:00Z
+        shippedAt: 2026-11-25T09:10:00Z
+        latestPayment:
+          id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+          orderId: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+          status: succeeded
+          amount: 2580.00
+          providerReference: pay_9f8e7d6c5b4a
+          createdAt: 2026-11-24T18:26:00Z
+          completedAt: 2026-11-24T18:27:00Z
+    OrderListExample:
+      value:
+        items:
+          - id: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+            status: pending_payment
+            delivery:
+              method: courier
+              city: Москва
+              street: Тверская
+              house: '12'
+              apartment: '34'
+              recipientName: Анна Смирнова
+            giftWrap: true
+            total: 2580.00
+            items:
+              - bookId: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+                title: Мастер и Маргарита
+                quantity: 2
+                unitPrice: 1290.00
+                lineTotal: 2580.00
+            createdAt: 2026-11-24T18:25:00Z
+            confirmedAt: null
+            shippedAt: null
+        page: 1
+        pageSize: 20
+        total: 1
+    StockConflictExample:
+      value:
+        type: https://api.bookbox.example/problems/insufficient-stock
+        title: Недостаточно книг на складе
+        status: 409
+        code: insufficient_stock
+        detail: Остаток изменился. Уменьшите количество или удалите недоступные книги.
+        unavailableItems:
+          - bookId: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+            title: Мастер и Маргарита
+            requested: 2
+            available: 1
+    CreatePaymentAttemptRequestExample:
+      value:
+        method: card
+        returnUrl: https://bookbox.example/orders/d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+    PaymentAttemptPendingExample:
+      value:
+        id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+        orderId: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+        status: pending
+        amount: 2580.00
+        providerReference: null
+        createdAt: 2026-11-24T18:26:00Z
+        completedAt: null
+    PaymentAttemptSucceededExample:
+      value:
+        id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+        orderId: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+        status: succeeded
+        amount: 2580.00
+        providerReference: pay_9f8e7d6c5b4a
+        createdAt: 2026-11-24T18:26:00Z
+        completedAt: 2026-11-24T18:27:00Z
+    ProviderResultRequestExample:
+      value:
+        status: succeeded
+        providerReference: pay_9f8e7d6c5b4a
+        amount: 2580.00
+    PreorderExample:
+      value:
+        id: f6a7b8c9-d0e1-4f2a-9b3c-4d5e6f708192
+        book:
+          id: 4a3c7d2f-9b5e-4d8f-8c2b-3e6f907182b3
+          isbn: 978-5-389-12345-6
+          title: Дюна
+          publicationYear: 2021
+          price: 1590.00
+          stock: 0
+          preorderEnabled: true
+          coverUrl: https://cdn.bookbox.example/covers/dune.jpg
+          publisher:
+            id: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+            name: Эксмо
+          authors:
+            - id: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+              name: Фрэнк Герберт
+          genres:
+            - id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+              name: Фантастика
+          rating:
+            average: 4.7
+            count: 98
+        status: waiting
+        expectedAt: 2026-12-15
+        createdAt: 2026-11-24T18:30:00Z
+    PreorderListExample:
+      value:
+        items:
+          - id: f6a7b8c9-d0e1-4f2a-9b3c-4d5e6f708192
+            book:
+              id: 4a3c7d2f-9b5e-4d8f-8c2b-3e6f907182b3
+              isbn: 978-5-389-12345-6
+              title: Дюна
+              publicationYear: 2021
+              price: 1590.00
+              stock: 0
+              preorderEnabled: true
+              coverUrl: https://cdn.bookbox.example/covers/dune.jpg
+              publisher:
+                id: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+                name: Эксмо
+              authors:
+                - id: d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f70
+                  name: Фрэнк Герберт
+              genres:
+                - id: e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7081
+                  name: Фантастика
+              rating:
+                average: 4.7
+                count: 98
+            status: waiting
+            expectedAt: 2026-12-15
+            createdAt: 2026-11-24T18:30:00Z
+        page: 1
+        pageSize: 20
+        total: 1
+    CreatePreorderRequestExample:
+      value:
+        bookId: 4a3c7d2f-9b5e-4d8f-8c2b-3e6f907182b3
+    NotificationExample:
+      value:
+        id: a7b8c9d0-e1f2-4a3b-8c4d-5e6f708192a3
+        type: preorder_available
+        title: Книга поступила в продажу
+        body: Дюна теперь доступна для заказа.
+        isRead: true
+        createdAt: 2026-11-24T18:35:00Z
+        preorderId: f6a7b8c9-d0e1-4f2a-9b3c-4d5e6f708192
+    NotificationListExample:
+      value:
+        items:
+          - id: a7b8c9d0-e1f2-4a3b-8c4d-5e6f708192a3
+            type: preorder_available
+            title: Книга поступила в продажу
+            body: Дюна теперь доступна для заказа.
+            isRead: false
+            createdAt: 2026-11-24T18:35:00Z
+            preorderId: f6a7b8c9-d0e1-4f2a-9b3c-4d5e6f708192
+        page: 1
+        pageSize: 20
+        total: 1
+        unread: 1
+    UpdateNotificationRequestExample:
+      value:
+        isRead: true
+    ReviewPendingExample:
+      value:
+        id: b8c9d0e1-f2a3-4b4c-9d5e-6f708192a3b4
+        bookId: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+        author:
+          displayName: Анна Смирнова
+        rating: 5
+        body: Одна из лучших книг, которые я читала.
+        moderationStatus: pending
+        createdAt: 2026-11-24T18:40:00Z
+        moderatedAt: null
+    ReviewPublishedExample:
+      value:
+        id: b8c9d0e1-f2a3-4b4c-9d5e-6f708192a3b4
+        bookId: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+        author:
+          displayName: Анна Смирнова
+        rating: 5
+        body: Одна из лучших книг, которые я читала.
+        moderationStatus: published
+        createdAt: 2026-11-24T18:40:00Z
+        moderatedAt: 2026-11-25T08:00:00Z
+    ReviewListExample:
+      value:
+        items:
+          - id: b8c9d0e1-f2a3-4b4c-9d5e-6f708192a3b4
+            bookId: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+            author:
+              displayName: Анна Смирнова
+            rating: 5
+            body: Одна из лучших книг, которые я читала.
+            moderationStatus: published
+            createdAt: 2026-11-24T18:40:00Z
+            moderatedAt: 2026-11-25T08:00:00Z
+        page: 1
+        pageSize: 20
+        total: 1
+        summary:
+          average: 4.8
+          count: 126
+          distribution:
+            '1': 1
+            '2': 2
+            '3': 5
+            '4': 18
+            '5': 100
+    CreateReviewRequestExample:
+      value:
+        rating: 5
+        body: Одна из лучших книг, которые я читала.
+    ModerateReviewRequestExample:
+      value:
+        moderationStatus: published
+    CreateBookRequestExample:
+      value:
+        title: Тихий Дон
+        isbn: 978-5-17-123456-7
+        publisherId: 7c9e2d4a-1b3f-4e5a-8c6d-9f0a1b2c3d4e
+        authorIds:
+          - a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+        genreIds:
+          - b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e
+        publicationYear: 2025
+        price: 1450.00
+        stock: 8
+        preorderEnabled: false
+        description: Роман-эпопея Михаила Шолохова.
+        coverUrl: https://cdn.bookbox.example/covers/tihiy-don.jpg
+    UpdateBookRequestExample:
+      value:
+        price: 1390.00
+        stock: 10
+        preorderEnabled: true
+    SalesReportExample:
+      value:
+        period:
+          from: 2026-11-01
+          to: 2026-11-30
+        totals:
+          orders: 27
+          units: 39
+          revenue: 50865.50
+          averageOrderValue: 1883.91
+        series:
+          - bucket: 2026-11-01
+            orders: 12
+            units: 18
+            revenue: 23220.00
+          - bucket: 2026-11-02
+            orders: 15
+            units: 21
+            revenue: 27645.50
+        topBooks:
+          - bookId: 3f2b6c1e-8a4d-4c7e-9b1a-2d5e8f7a6c01
+            title: Мастер и Маргарита
+            units: 24
+            revenue: 30960.00
+          - bookId: 4a3c7d2f-9b5e-4d8f-8c2b-3e6f907182b3
+            title: Дюна
+            units: 15
+            revenue: 23850.00
+    BadRequestExample:
+      value:
+        type: https://api.bookbox.example/problems/bad-request
+        title: Некорректный запрос
+        status: 400
+        code: bad_request
+        detail: Параметр from должен быть датой в формате YYYY-MM-DD.
+    UnauthorizedExample:
+      value:
+        type: https://api.bookbox.example/problems/unauthorized
+        title: Требуется аутентификация
+        status: 401
+        code: unauthorized
+        detail: Передайте действующий Bearer-токен.
+    ForbiddenExample:
+      value:
+        type: https://api.bookbox.example/problems/forbidden
+        title: Недостаточно прав
+        status: 403
+        code: forbidden
+        detail: Для этой операции нужна роль admin.
+    NotFoundExample:
+      value:
+        type: https://api.bookbox.example/problems/not-found
+        title: Ресурс не найден
+        status: 404
+        code: not_found
+        detail: Ресурс не существует или недоступен текущему аккаунту.
+    ConflictExample:
+      value:
+        type: https://api.bookbox.example/problems/conflict
+        title: Конфликт состояния
+        status: 409
+        code: conflict
+        detail: Операция невозможна в текущем состоянии ресурса.
+    ValidationExample:
+      value:
+        type: https://api.bookbox.example/problems/validation-failed
+        title: Ошибка валидации
+        status: 422
+        code: validation_failed
+        detail: Проверьте обязательные поля и допустимые значения.
+        errors:
+          - field: delivery.city
+            message: Поле обязательно
+          - field: giftWrap
+            message: Ожидается логическое значение
+    TooManyRequestsExample:
+      value:
+        type: https://api.bookbox.example/problems/too-many-requests
+        title: Слишком много запросов
+        status: 429
+        code: too_many_requests
+        detail: Повторите запрос позже.
+    InternalErrorExample:
+      value:
+        type: https://api.bookbox.example/problems/internal-error
+        title: Внутренняя ошибка сервера
+        status: 500
+        code: internal_error
+        detail: Повторите запрос позже или обратитесь в поддержку.

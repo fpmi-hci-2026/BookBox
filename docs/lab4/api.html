@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookBox API — интерактивная документация</title>
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui.css">
+  <style>
+    body { margin: 0; }
+    .bookbox-note {
+      max-width: 1180px;
+      margin: 16px auto 0;
+      padding: 12px 16px;
+      border: 1px solid #d8dee9;
+      border-radius: 8px;
+      font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: #2e3440;
+      background: #f8fafc;
+    }
+    .bookbox-note a { color: #0b6bcb; }
+    .bookbox-note code { background: #e5e9f0; padding: 2px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="bookbox-note">
+    Контракт <a href="openapi.yaml">OpenAPI 3.0.3</a> проекта BookBox.
+    Локальный Mock-сервер: <code>npm run mock:api</code>, проверка:
+    <code>npm run test:api</code>. Материалы задания:
+    <a href="routes.md">маршруты</a> и <a href="mock-testing.md">Mock-проверка</a>.
+  </div>
+  <div id="swagger-ui"></div>
+  <script src="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui-bundle.js" crossorigin></script>
+  <script>
+    window.addEventListener('load', function () {
+      window.ui = SwaggerUIBundle({
+        url: './openapi.yaml',
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        displayRequestDuration: true,
+        tryItOutEnabled: true,
+        presets: [SwaggerUIBundle.presets.apis],
+        plugins: [SwaggerUIBundle.plugins.DownloadUrl]
+      });
+    });
+  </script>
+</body>
+</html>

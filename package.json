@@ -1,0 +1,13 @@
+{
+  "name": "bookbox",
+  "private": true,
+  "type": "module",
+  "description": "Документация и Mock-проверка API BookBox",
+  "scripts": {
+    "mock:api": "prism mock docs/lab4/openapi.yaml --port 4010",
+    "test:api": "node scripts/lab4/run-mock-tests.mjs"
+  },
+  "devDependencies": {
+    "@stoplight/prism-cli": "^5.16.0"
+  }
+}
