@@ -8,10 +8,10 @@
 
 | Задание | Владелец | Состояние | Результат |
 |---|---|---|---|
-| 1. Модель требований и реестр Use Case | Назар / вместе с Codex | Выполнено | [Требования и трассировка](requirements.md) |
-| 2. Логическая и физическая модели БД | Назар / вместе с Codex | Выполнено | [Логическая модель](logical-model.md), [Физическая ERD](physical-model.md), [SQL PostgreSQL](schema.sql) |
-| 3. Маршруты и OpenAPI | Второй разработчик | Выполнено | [Маршруты](routes.md), [OpenAPI 3.0.3](openapi.yaml), [Swagger UI](api.html) |
-| 4. Mock-сервер и проверка API | Второй разработчик | Выполнено | [Mock-проверка](mock-testing.md), [протокол](mock-test-results.json) |
+| 1. Модель требований и реестр Use Case | Назар | Выполнено | [Требования и трассировка](requirements.md) |
+| 2. Логическая и физическая модели БД | Назар | Выполнено | [Логическая модель](logical-model.md), [Физическая ERD](physical-model.md), [SQL PostgreSQL](schema.sql) |
+| 3. Маршруты и OpenAPI | Тимофей | Выполнено | [Маршруты](routes.md), [OpenAPI 3.0.3](openapi.yaml), [Swagger UI](api.html) |
+| 4. Mock-сервер и проверка API | Тимофей | Выполнено | [Mock-проверка](mock-testing.md), [протокол](mock-test-results.json) |
 
 ## Полный набор артефактов
 
